@@ -45,7 +45,7 @@
     <div class="login-logo">
         <a href="{{ url('/home') }}"><img src={{ URL::asset('/public/img/budget.jpg') }} style="width: 50%; height: 50%;" class="img-circle" alt="Boldogház" ></a>
         </br>
-        <a><h1>Budget</a>
+        <a><h1>{{ config('app.name') }}</a>
     </div>
 
     <!-- /.login-logo -->

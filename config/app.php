@@ -177,6 +177,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
         \InfyOm\GeneratorBuilder\GeneratorBuilderServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
     ],
 
@@ -234,6 +235,7 @@ return [
         'Flash' => Laracasts\Flash\Flash::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+        'Image'        => Intervention\Image\Facades\Image::class,
 
     ],
 

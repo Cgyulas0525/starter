@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Gate;
 use Auth;
 
 use App\Http\Controllers\DashboardController;
+use App\Classes\SWAlertClass;
+use App\Classes\imageUrl;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->booting(function() {
             $loader = AliasLoader::getInstance();
             $loader->alias('DashboardController', DashboardController::class);
+            $loader->alias('imageUrl', imageUrl::class);
+            $loader->alias('SWAlertClass', SWAlertClass::class);
         });
     }
 

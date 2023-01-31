@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\imageUrl;
 use App\Http\Requests\CreateUsersRequest;
 use App\Http\Requests\UpdateUsersRequest;
 use App\Repositories\UsersRepository;
@@ -15,6 +16,7 @@ use Response;
 use Auth;
 use DB;
 use DataTables;
+
 
 class UsersController extends AppBaseController
 {
@@ -85,6 +87,14 @@ class UsersController extends AppBaseController
     {
         $input = $request->all();
 
+        $file = $request->file('image_url');
+        $imageUrl = new imageUrl($file);
+
+        if (!empty($file)){
+            $input['image_url'] = $imageUrl->pictureUpload();
+            $input['password'] = md5($input['password']);
+        }
+
         $users = $this->usersRepository->create($input);
 
         return redirect(route('users.index'));
@@ -141,8 +151,16 @@ class UsersController extends AppBaseController
         if (empty($users)) {
             return redirect(route('users.index'));
         }
+        $input = $request->all();
 
-        $users = $this->usersRepository->update($request->all(), $id);
+        $file = $request->file('image_url');
+        $imageUrl = new imageUrl($file);
+
+        if (!empty($file)){
+            $input['image_url'] = $imageUrl->kepFeltolt($file);
+        }
+
+        $users = $this->usersRepository->update($input, $id);
 
         return redirect(route('users.index'));
     }

@@ -75,7 +75,6 @@ class Users extends Model
         'email_verified_at' => 'nullable',
         'password' => 'required|string|max:191',
         'remember_token' => 'nullable|string|max:100',
-        'image_url' => 'nullable|string|max:191',
         'usertypes_id' => 'nullable|integer',
         'commit' => 'nullable|string|max:500',
         'created_at' => 'nullable',

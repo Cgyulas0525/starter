@@ -5,7 +5,9 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>{{ $users->name }}</h1>
+                    <h1>{{ $users->name }}
+                        <img src={{ URL::asset($users->image_url) }} class="user-image img-circle elevation-2" style="width:100px; height: 100px;" alt="User Image">
+                    </h1>
                 </div>
             </div>
         </div>
@@ -17,7 +19,7 @@
 
         <div class="card">
 
-            {!! Form::model($users, ['route' => ['users.update', $users->id], 'method' => 'patch']) !!}
+            {!! Form::model($users, ['route' => ['users.update', $users->id], 'method' => 'patch', 'files'=> true]) !!}
 
             <div class="card-body">
                 <div class="row">
