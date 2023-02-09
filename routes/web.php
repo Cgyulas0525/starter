@@ -17,11 +17,11 @@ use App\Http\Controllers\DestroysController;
 |
 */
 
-Route::get('/', function () {
-    return view('frontend');
-});
+//Route::get('/', function () {
+//    return view('frontend');
+//});
 
-Route::get('/admin', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 
