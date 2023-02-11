@@ -43,7 +43,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><img src={{ URL::asset('/public/img/budget.jpg') }} style="width: 50%; height: 50%;" class="img-circle" alt="Boldogház" ></a>
+        <a href="{{ url('/home') }}"><img src={{ URL::asset('/public/img/eger.jpg') }} style="width: 50%; height: 50%;" class="img-circle" alt="Boldogház" ></a>
         </br>
         <a><h1>{{ config('app.name') }}</a>
     </div>
@@ -52,15 +52,15 @@
     <div class="card-body login-card-body">
         <p class="login-box-msg">Bejelentkezés</p>
 
-        <form method="post" action="{{ url('/login') }}">
+        <form method="post" action="{{ url('myLogin') }}">
             {!! csrf_field() !!}
 
-            <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
-                <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
+            <div class="form-group has-feedback {{ $errors->has('name') ? ' has-error' : '' }}">
+                <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Név">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                @if ($errors->has('email'))
+                @if ($errors->has('name'))
                     <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
+                    <strong>{{ $errors->first('name') }}</strong>
                 </span>
                 @endif
             </div>

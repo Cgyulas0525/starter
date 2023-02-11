@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DestroysController;
+use App\Http\Controllers\MyloginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,8 @@ Auth::routes();
 Route::get('/home', [
     HomeController::class, 'index'
 ])->name('home');
+
+Route::post('myLogin', [MyloginController::class, 'myLogin'])->name('myLogin');
 
 Route::get('index', [DashboardController::class, 'index'])->name('dashboard');
 
