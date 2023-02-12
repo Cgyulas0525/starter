@@ -5,7 +5,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name') }}</title>
-    <link rel="icon" href={{ URL::asset('/public/img/budget.jpg')}}/>
+    <link rel="icon" href={{ URL::asset('/public/img/eger.jpg')}}/>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
     <!-- Font Awesome -->
@@ -126,13 +126,7 @@
     </div>
 
     <!-- Main Footer -->
-    <footer class="main-footer">
-        <div class="float-right d-none d-sm-block">
-            <b>Version</b> 1.0.1
-        </div>
-        <strong>Copyright &copy; 2022 - <a href="#">PriestAgo</a>.</strong> All rights
-        reserved.
-    </footer>
+    @include('layouts.footer')
     @include('sweetalert::alert')
 
 </div>

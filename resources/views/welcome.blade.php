@@ -43,7 +43,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><img src={{ URL::asset('/public/img/budget.jpg') }} style="width: 50%; height: 50%;" class="img-circle" alt="Boldogház" ></a>
+        <a href="{{ url('/home') }}"><img src={{ URL::asset('/public/img/eger.jpg') }} style="width: 50%; height: 50%;" class="img-circle" alt="Boldogház" ></a>
         </br>
         <a><h1>{{ config('app.name') }}</a>
     </div>
@@ -55,14 +55,26 @@
         <form method="post" action="{{ url('/login') }}">
             {!! csrf_field() !!}
 
-            <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
-                <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                @if ($errors->has('email'))
-                    <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
-                </span>
-                @endif
+{{--            <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">--}}
+{{--                <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">--}}
+{{--                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>--}}
+{{--                @if ($errors->has('email'))--}}
+{{--                    <span class="help-block">--}}
+{{--                    <strong>{{ $errors->first('email') }}</strong>--}}
+{{--                </span>--}}
+{{--                @endif--}}
+{{--            </div>--}}
+
+
+            <div class="form-group has-feedback{{ $errors->has('username') ? ' has-error' : '' }}">
+                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+
+                @error('username')
+                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
+
             </div>
 
             <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">

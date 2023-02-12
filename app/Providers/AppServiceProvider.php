@@ -10,6 +10,7 @@ use Auth;
 use App\Http\Controllers\DashboardController;
 use App\Classes\SWAlertClass;
 use App\Classes\imageUrl;
+use App\Classes\ToolsClass;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
             $loader->alias('DashboardController', DashboardController::class);
             $loader->alias('imageUrl', imageUrl::class);
             $loader->alias('SWAlertClass', SWAlertClass::class);
+            $loader->alias('ToolsClass', ToolsClass::class);
         });
     }
 

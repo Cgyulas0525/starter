@@ -45,3 +45,9 @@ Route::resource('usertypes', App\Http\Controllers\UsertypesController::class);
 
 
 Route::resource('users', App\Http\Controllers\UsersController::class);
+
+
+Route::resource('partnerTypes', App\Http\Controllers\PartnerTypesController::class);
+
+
+Route::resource('detailTypes', App\Http\Controllers\DetailTypesController::class);

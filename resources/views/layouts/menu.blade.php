@@ -7,13 +7,26 @@
 </li>
 
 <li class="nav-item has-treeview">
-    <a href="#" class="nav-link {{ Request::is('cimlets*') ||
-                                   Request::is('paymentMethods*') ||
+    <a href="#" class="nav-link {{ Request::is('detailTypes*') ||
                                    Request::is('partnerTypes*') ? 'active' : '' }}">
         <i class="fas fa-university"></i>
         <p>Szótár<i class="right fas fa-angle-left"></i></p>
     </a>
     <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{ route('partnerTypes.index') }}"
+               class="nav-link {{ Request::is('partnerTypes*') ? 'active' : '' }}">
+                <i class="fas fa-hands-helping"></i>
+                <p>Partner típus</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('detailTypes.index') }}"
+               class="nav-link {{ Request::is('detailTypes*') ? 'active' : '' }}">
+                <i class="fas fa-share-alt-square"></i>
+                <p>Űrlap sor típus</p>
+            </a>
+        </li>
     </ul>
 </li>
 <li class="nav-item has-treeview">
@@ -51,6 +64,8 @@
         </ul>
     </li>
 @endcannot
+
+
 
 
 
