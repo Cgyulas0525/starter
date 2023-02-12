@@ -1,4 +1,4 @@
-create table failed_jobs
+create table eger.failed_jobs
 (
 	id bigint unsigned auto_increment
 		primary key,

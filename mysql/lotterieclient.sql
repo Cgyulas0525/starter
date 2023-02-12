@@ -1,4 +1,4 @@
-create table lotterieclient
+create table eger.lotterieclient
 (
 	id int auto_increment,
 	lotterie_id int not null,
@@ -11,6 +11,6 @@ create table lotterieclient
 		unique (id)
 );
 
-alter table lotterieclient
+alter table eger.lotterieclient
 	add primary key (id);
 

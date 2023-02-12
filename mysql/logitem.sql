@@ -1,4 +1,4 @@
-create table logitem
+create table eger.logitem
 (
 	id int auto_increment,
 	client_id int not null,
@@ -16,17 +16,17 @@ create table logitem
 charset=utf32;
 
 create index logitem__customeruser_index
-	on logitem (client_id, user_id, eventdatetime);
+	on eger.logitem (client_id, user_id, eventdatetime);
 
 create index logitem__eventdatetime_index
-	on logitem (eventdatetime);
+	on eger.logitem (eventdatetime);
 
 create index logitem__user_index
-	on logitem (user_id, eventdatetime);
+	on eger.logitem (user_id, eventdatetime);
 
 create index logitem_partnercontact_id_eventdatetime_index
-	on logitem (partnercontact_id, eventdatetime);
+	on eger.logitem (partnercontact_id, eventdatetime);
 
-alter table logitem
+alter table eger.logitem
 	add primary key (id);
 

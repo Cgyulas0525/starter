@@ -1,4 +1,4 @@
-create table clients
+create table eger.clients
 (
 	id int auto_increment,
 	name varchar(100) not null,
@@ -29,26 +29,26 @@ create table clients
 );
 
 create index clients_activ_id_index
-	on clients (active, id);
+	on eger.clients (active, id);
 
 create index clients_birthday_id_index
-	on clients (birthday, id);
+	on eger.clients (birthday, id);
 
 create index clients_email_index
-	on clients (email);
+	on eger.clients (email);
 
 create index clients_name_id_index
-	on clients (name, id);
+	on eger.clients (name, id);
 
 create index clients_password_index
-	on clients (password);
+	on eger.clients (password);
 
 create index clients_postcode_settlement_id_address_index
-	on clients (postcode, settlement_id, address);
+	on eger.clients (postcode, settlement_id, address);
 
 create index clients_validated_id_index
-	on clients (validated, id);
+	on eger.clients (validated, id);
 
-alter table clients
+alter table eger.clients
 	add primary key (id);
 
