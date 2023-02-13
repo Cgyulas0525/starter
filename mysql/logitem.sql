@@ -16,17 +16,17 @@ create table eger.logitem
 charset=utf32;
 
 create index logitem__customeruser_index
-	on eger.logitem (client_id, user_id, eventdatetime);
+	on eger.logitems (client_id, user_id, eventdatetime);
 
 create index logitem__eventdatetime_index
-	on eger.logitem (eventdatetime);
+	on eger.logitems (eventdatetime);
 
 create index logitem__user_index
-	on eger.logitem (user_id, eventdatetime);
+	on eger.logitems (user_id, eventdatetime);
 
 create index logitem_partnercontact_id_eventdatetime_index
-	on eger.logitem (partnercontact_id, eventdatetime);
+	on eger.logitems (partnercontact_id, eventdatetime);
 
-alter table eger.logitem
+alter table eger.logitems
 	add primary key (id);
 

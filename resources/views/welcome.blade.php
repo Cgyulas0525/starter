@@ -55,17 +55,6 @@
         <form method="post" action="{{ url('/login') }}">
             {!! csrf_field() !!}
 
-{{--            <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">--}}
-{{--                <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email">--}}
-{{--                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>--}}
-{{--                @if ($errors->has('email'))--}}
-{{--                    <span class="help-block">--}}
-{{--                    <strong>{{ $errors->first('email') }}</strong>--}}
-{{--                </span>--}}
-{{--                @endif--}}
-{{--            </div>--}}
-
-
             <div class="form-group has-feedback{{ $errors->has('username') ? ' has-error' : '' }}">
                 <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
 

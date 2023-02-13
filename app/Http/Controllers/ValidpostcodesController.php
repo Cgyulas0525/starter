@@ -30,7 +30,7 @@ class ValidpostcodesController extends AppBaseController
     {
         return Datatables::of($data)
             ->addIndexColumn()
-            ->addColumn('settlementName', function($data) { return $data->settlement->name; })
+//            ->addColumn('settlementName', function($data) { return $data->settlement->name; })
             ->addColumn('action', function($row){
                 $btn = '';
                 if ($row->active == 1) {
@@ -40,6 +40,8 @@ class ValidpostcodesController extends AppBaseController
                     $btn = $btn.'<a href="' . route('beforeActivation', [$row->id, 'Validpostcodes', 'validpostcodes']) . '"
                                          class="btn btn-danger btn-sm deleteProduct" title="Aktiválás"><i class="fas fa-user-alt-slash"></i></a>';
                 }
+                $btn = $btn.'<a href="' . route('validpostcodes.edit', [$row->id]) . '"
+                             class="edit btn btn-success btn-sm editProduct" title="Módosítás"><i class="fa fa-paint-brush"></i></a>';
                 return $btn;
             })
             ->rawColumns(['action'])
@@ -60,7 +62,39 @@ class ValidpostcodesController extends AppBaseController
 
             if ($request->ajax()) {
 
-                $data = $this->validpostcodesRepository->all();
+                $data = DB::table('validpostcodes as t1')
+                    ->join('settlements as t2', 't2.id', '=', 't1.settlement_id')
+                    ->select('t1.*', 't2.name as settlementName')
+                    ->whereNull('t1.deleted_at')
+                    ->where( 't1.active', 1)
+                    ->get();
+                return $this->dwData($data);
+
+            }
+
+            return view('validpostcodes.index');
+        }
+    }
+
+    public function validPostCodesIndex(Request $request, $active = null)
+    {
+        if( Auth::check() ){
+
+            if ($request->ajax()) {
+
+                $data = DB::table('validpostcodes as t1')
+                            ->join('settlements as t2', 't2.id', '=', 't1.settlement_id')
+                            ->select('t1.*', 't2.name as settlementName')
+                            ->whereNull('t1.deleted_at')
+                            ->where( function($query) use ($active) {
+                                if (is_null($active) || $active == -9999 ) {
+                                    $query->whereNotNull('t1.active');
+                                } else {
+                                    $query->where('t1.active', '=', $active);
+                                }
+                            })
+                            ->get();
+
                 return $this->dwData($data);
 
             }

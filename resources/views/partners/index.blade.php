@@ -2,7 +2,6 @@
 
 @section('css')
     <link rel="stylesheet" href="pubic/css/app.css">
-    @include('layouts.datatables_css')
     @include('layouts.costumcss')
 @endsection
 
@@ -16,7 +15,7 @@
                         <div class="form-group col-sm-12">
                             <div class="row">
                                 <div class="col-sm-2">
-                                    <h4>{{ __('Érvényességi körzetek') }}</h4>
+                                    <h4>{{ __('Partnerek') }}</h4>
                                 </div>
                                 <div class="mylabel col-sm-1">
                                     {!! Form::label('active', 'Aktív:') !!}
@@ -28,7 +27,6 @@
                             </div>
                         </div>
                     </section>
-
                     @include('flash::message')
                     <div class="clearfix"></div>
                     <div class="box box-primary">
@@ -44,32 +42,29 @@
 @endsection
 
 @section('scripts')
-    @include('layouts.datatables_js')
+    <script src="{{ asset('/public/js/ajaxsetup.js') }} " type="text/javascript"></script>
 
     <script type="text/javascript">
         $(function () {
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+            ajaxSetup();
 
             var table = $('.indextable').DataTable({
                 serverSide: true,
                 scrollY: 390,
                 scrollX: true,
-                order: [[1, 'asc']],
                 paging: false,
-                buttons: [],
-                selected: false,
-                ajax: "{{ route('validpostcodes.index') }}",
+                order: [[1, 'asc']],
+                ajax: "{{ route('partners.index') }}",
                 columns: [
-                    {title: '<a class="btn btn-primary" title="Felvitel" href="{!! route('validpostcodes.create') !!}"><i class="fa fa-plus-square"></i></a>',
+                    {title: '<a class="btn btn-primary" title="Felvitel" href="{!! route('partners.create') !!}"><i class="fa fa-plus-square"></i></a>',
                         data: 'action', sClass: "text-center", width: '200px', name: 'action', orderable: false, searchable: false},
-                    {title: "{{ __('Név')}}", data: 'settlementName', name: 'settlementName'},
-                    {title: "{{ __('Irányító szám')}}", data: 'postcode', name: 'postcode'},
+                    {title: 'Név', data: 'name', name: 'name'},
+                    {title: 'Típus', data: 'partnerTypesName', name: 'partnerTypesName'},
+                    {title: 'Email', data: 'email', name: 'email'},
+                    {title: 'Telefon', data: 'phonenumber', name: 'phonenumber'},
                 ],
+                buttons: [],
                 fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
                     if (aData.active == 0) {
                         $('td', nRow).css('background-color', 'lightgray');
@@ -79,7 +74,7 @@
             });
 
             $('#active').change(function () {
-                let url = '{{ route('validPostCodesIndex', [":active"]) }}';
+                let url = '{{ route('partnersIndex', [":active"]) }}';
                 url = url.replace(':active', $('#active').val());
                 table.ajax.url(url).load();
             })

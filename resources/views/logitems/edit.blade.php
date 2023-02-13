@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>{{ $validpostcodes->settlement->name }}, Irányító szám: {{ $validpostcodes->postcode }}</h1>
+                    <h1>{{ $logitems->name }}</h1>
                 </div>
             </div>
         </div>
@@ -17,17 +17,17 @@
 
         <div class="card">
 
-            {!! Form::model($validpostcodes, ['route' => ['validpostcodes.update', $validpostcodes->id], 'method' => 'patch']) !!}
+            {!! Form::model($logitems, ['route' => ['logitems.update', $logitems->id], 'method' => 'patch']) !!}
 
             <div class="card-body">
                 <div class="row">
-                    @include('validpostcodes.fields')
+                    @include('logitems.fields')
                 </div>
             </div>
 
             <div class="card-footer">
                 {!! Form::submit(__('Ment'), ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('validpostcodes.index') }}" class="btn btn-default">{{ __('Kilép') }}</a>
+                <a href="{{ route('logitems.index') }}" class="btn btn-default">{{ __('Kilép') }}</a>
             </div>
 
            {!! Form::close() !!}

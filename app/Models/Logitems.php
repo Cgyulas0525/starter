@@ -1,0 +1,83 @@
+<?php
+
+namespace App\Models;
+
+use Eloquent as Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+/**
+ * Class Logitems
+ * @package App\Models
+ * @version February 14, 2023, 6:25 am UTC
+ *
+ * @property integer $logitemtype_id
+ * @property integer $client_id
+ * @property integer $user_id
+ * @property integer $partnercontact_id
+ * @property string $datatable
+ * @property string|\Carbon\Carbon $eventdatetime
+ * @property string $remoteaddress
+ */
+class Logitems extends Model
+{
+    use SoftDeletes;
+
+    use HasFactory;
+
+    public $table = 'logitems';
+    
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
+
+
+    protected $dates = ['deleted_at'];
+
+
+
+    public $fillable = [
+        'logitemtype_id',
+        'client_id',
+        'user_id',
+        'partnercontact_id',
+        'datatable',
+        'eventdatetime',
+        'remoteaddress'
+    ];
+
+    /**
+     * The attributes that should be casted to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'id' => 'integer',
+        'logitemtype_id' => 'integer',
+        'client_id' => 'integer',
+        'user_id' => 'integer',
+        'partnercontact_id' => 'integer',
+        'datatable' => 'string',
+        'eventdatetime' => 'datetime',
+        'remoteaddress' => 'string'
+    ];
+
+    /**
+     * Validation rules
+     *
+     * @var array
+     */
+    public static $rules = [
+        'logitemtype_id' => 'required|integer',
+        'client_id' => 'required|integer',
+        'user_id' => 'required|integer',
+        'partnercontact_id' => 'required|integer',
+        'datatable' => 'required|string|max:100',
+        'eventdatetime' => 'required',
+        'remoteaddress' => 'nullable|string|max:100',
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable',
+        'deleted_at' => 'nullable'
+    ];
+
+    
+}

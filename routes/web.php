@@ -8,6 +8,9 @@ use App\Http\Controllers\DestroysController;
 use App\Http\Controllers\MyApiController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ChangeActiveController;
+use App\Http\Controllers\PartnersController;
+use App\Http\Controllers\ValidpostcodesController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,9 +33,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [
-    HomeController::class, 'index'
-])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('index', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -57,6 +58,17 @@ Route::resource('partnerTypes', App\Http\Controllers\PartnerTypesController::cla
 Route::resource('detailTypes', App\Http\Controllers\DetailTypesController::class);
 
 Route::resource('validpostcodes', App\Http\Controllers\ValidpostcodesController::class);
+Route::get('validPostCodesIndex/{active?}', [ValidpostcodesController::class, 'validPostCodesIndex'])->name('validPostCodesIndex');
 
 Route::get('insertValidPostcodesRecord', [MyApiController::class, 'insertValidPostcodesRecord'])->name('insertValidPostcodesRecord');
 
+
+
+Route::resource('partners', App\Http\Controllers\PartnersController::class);
+Route::get('partnersIndex/{active?}', [PartnersController::class, 'partnersIndex'])->name('partnersIndex');
+
+
+Route::resource('logitemtypes', App\Http\Controllers\LogitemtypesController::class);
+
+
+Route::resource('logitems', App\Http\Controllers\LogitemsController::class);

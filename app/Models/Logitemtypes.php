@@ -7,21 +7,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Class Settlements
+ * Class Logitemtypes
  * @package App\Models
- * @version January 3, 2023, 2:33 pm UTC
+ * @version February 14, 2023, 6:09 am UTC
  *
  * @property string $name
  * @property string $description
  */
-class Settlements extends Model
+class Logitemtypes extends Model
 {
     use SoftDeletes;
 
     use HasFactory;
 
-    public $table = 'settlements';
-
+    public $table = 'logitemtypes';
+    
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -43,7 +43,6 @@ class Settlements extends Model
     protected $casts = [
         'id' => 'integer',
         'name' => 'string',
-        'postcode' => 'integer',
         'description' => 'string'
     ];
 
@@ -54,20 +53,11 @@ class Settlements extends Model
      */
     public static $rules = [
         'name' => 'required|string|max:100',
-        'postcode' => 'nullable|integer',
         'description' => 'nullable|string|max:500',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
     ];
 
-    public function validpostcodes() {
-        return $this->hasMany(Validpostcodes::class);
-    }
-
-    public function partners() {
-        return $this->hasMany(Partners::class);
-    }
-
-
+    
 }

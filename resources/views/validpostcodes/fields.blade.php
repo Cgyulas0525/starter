@@ -1,15 +1,16 @@
 <!-- Settlement Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('settlement_id', __('Település:')) !!}
-    {!! Form::select('settlement_id', SettlementsClass::distinctSettlments(), null,
-              ['class'=>'select2 form-control', 'id' => 'settlement_id', 'required' => true,
-              'readonly' => isset($validpostcodes) ? ($validpostcodes->active == 1 ? false : true)  : false]) !!}
-{{--    {!! Form::label('postcode', __('Irányítószám:')) !!}--}}
-{{--    {!! Form::number('postcode', null, ['class' => 'form-control', 'id' => 'postcode', 'required' => true]) !!}--}}
+    @if (!isset($validpostcodes))
+        {!! Form::label('settlement_id', __('Település:')) !!}
+        {!! Form::select('settlement_id', SettlementsClass::distinctSettlments(), null,
+                  ['class'=>'select2 form-control', 'id' => 'settlement_id', 'required' => true,
+                  'readonly' => isset($validpostcodes) ? ($validpostcodes->active == 1 ? false : true)  : false]) !!}
+    @endif
     {!! Form::label('description', __('Megjegyzés:')) !!}
     {!! Form::textarea('description', null, ['class' => 'form-control','maxlength' => 500,'rows' => 4]) !!}
-    {!! Form::hidden('active', __('Active:')) !!}
-    {!! Form::hidden('active', null, ['class' => 'form-control']) !!}
+
+    {!! Form::hidden('postcode', isset($validpostcodes) ? $validpostcodes->postcode : null, ['class' => 'form-control', 'id' => 'postcode', 'required' => true]) !!}
+    {!! Form::hidden('active', isset($validpostcodes) ? $validpostcodes->avtive : null, ['class' => 'form-control']) !!}
 </div>
 
 @section('scripts')
@@ -60,6 +61,4 @@
 
         });
     </script>
-
-
 @endsection

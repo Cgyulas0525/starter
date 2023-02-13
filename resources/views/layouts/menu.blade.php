@@ -8,6 +8,7 @@
 
 <li class="nav-item has-treeview">
     <a href="#" class="nav-link {{ Request::is('detailTypes*') ||
+                                   Request::is('logitemtypes*') ||
                                    Request::is('partnerTypes*') ? 'active' : '' }}">
         <i class="fas fa-university"></i>
         <p>{{ __('Szótár') }}<i class="right fas fa-angle-left"></i></p>
@@ -27,7 +28,21 @@
                 <p>{{ __('Űrlap sor típus') }}</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('logitemtypes.index') }}"
+               class="nav-link {{ Request::is('logitemtypes*') ? 'active' : '' }}">
+                <i class="fas fa-sign-in-alt"></i>
+                <p>{{ __('Log típusok') }}</p>
+            </a>
+        </li>
     </ul>
+</li>
+<li class="nav-item">
+    <a href="{{ route('partners.index') }}"
+       class="nav-link {{ Request::is('partners*') ? 'active' : '' }}">
+        <i class="fas fa-handshake"></i>
+        <p>{{ __('Partnerek') }}</p>
+    </a>
 </li>
 <li class="nav-item has-treeview">
     <a href="#" class="nav-link ">
@@ -101,3 +116,15 @@
     </li>
 
 @endcannot
+
+
+
+
+<li class="nav-item">
+    <a href="{{ route('logitems.index') }}"
+       class="nav-link {{ Request::is('logitems*') ? 'active' : '' }}">
+        <p>{{ __('Logitems') }}</p>
+    </a>
+</li>
+
+
