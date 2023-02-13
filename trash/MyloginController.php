@@ -27,7 +27,7 @@ class MyloginController extends Controller
             return back();
         }
 
-        $user = Users::where('name', $name)
+        $user = Users::where('username', $name)
             ->where('password', md5($password))
             ->first();
 

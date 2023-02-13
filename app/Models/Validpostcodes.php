@@ -7,20 +7,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Class Settlements
+ * Class Validpostcodes
  * @package App\Models
- * @version January 3, 2023, 2:33 pm UTC
+ * @version February 13, 2023, 9:58 am UTC
  *
- * @property string $name
+ * @property integer $settlement_id
+ * @property integer $postcode
+ * @property integer $active
  * @property string $description
  */
-class Settlements extends Model
+class Validpostcodes extends Model
 {
     use SoftDeletes;
 
     use HasFactory;
 
-    public $table = 'settlements';
+    public $table = 'validpostcodes';
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
@@ -31,7 +33,9 @@ class Settlements extends Model
 
 
     public $fillable = [
-        'name',
+        'settlement_id',
+        'postcode',
+        'active',
         'description'
     ];
 
@@ -42,8 +46,9 @@ class Settlements extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'name' => 'string',
+        'settlement_id' => 'integer',
         'postcode' => 'integer',
+        'active' => 'integer',
         'description' => 'string'
     ];
 
@@ -53,17 +58,17 @@ class Settlements extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required|string|max:100',
-        'postcode' => 'nullable|integer',
+        'settlement_id' => 'required|integer',
+        'postcode' => 'required|integer',
+        'active' => 'required|integer',
         'description' => 'nullable|string|max:500',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
     ];
 
-    public function validpostcodes() {
-        return $this->hasMany(Validpostcodes::class);
+    public function settlement() {
+        return $this->belongsTo(Settlements::class);
     }
-
 
 }

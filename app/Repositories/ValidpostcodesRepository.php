@@ -2,29 +2,25 @@
 
 namespace App\Repositories;
 
-use App\Models\Users;
+use App\Models\Validpostcodes;
 use App\Repositories\BaseRepository;
 
 /**
- * Class UsersRepository
+ * Class ValidpostcodesRepository
  * @package App\Repositories
- * @version January 25, 2023, 9:24 am UTC
+ * @version February 13, 2023, 9:58 am UTC
 */
 
-class UsersRepository extends BaseRepository
+class ValidpostcodesRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
-        'username',
-        'email',
-        'email_verified_at',
-        'password',
-        'remember_token',
-        'image_url',
-        'usertypes_id',
-        'commit'
+        'settlement_id',
+        'postcode',
+        'active',
+        'description'
     ];
 
     /**
@@ -42,6 +38,6 @@ class UsersRepository extends BaseRepository
      **/
     public function model()
     {
-        return Users::class;
+        return Validpostcodes::class;
     }
 }

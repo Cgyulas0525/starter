@@ -2,7 +2,7 @@ create table users
 (
 	id bigint unsigned auto_increment
 		primary key,
-	name varchar(191) not null,
+	username varchar(191) not null,
 	email varchar(191) not null,
 	email_verified_at timestamp null,
 	password varchar(191) not null,
@@ -19,7 +19,7 @@ create table users
 engine=MyISAM collate=utf8mb4_unicode_ci;
 
 create index idx_users_name
-	on users (name);
+	on users (username);
 
 create index status_id
 	on users (usertypes_id);

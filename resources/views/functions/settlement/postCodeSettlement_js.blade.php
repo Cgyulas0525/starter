@@ -7,9 +7,8 @@
             url:"{{url('postalcodeSettlementsDDDW')}}",
             data: { postalcode: postalCode },
             success:function(res){
+                $("#settlement").empty();
                 if(res){
-                    $("#settlement").empty();
-                    console.log(res[0].settlement);
                     if (res.length == 1) {
                         $("#settlement").append('<option value="'+(res[0].settlement)+'">'+(res[0].settlement)+'</option>');
                     } else {
@@ -18,8 +17,6 @@
                             $("#settlement").append('<option value="'+value.id+'">'+value.id+'</option>');
                         });
                     }
-                }else{
-                    $("#settlement").empty();
                 }
             }
         });

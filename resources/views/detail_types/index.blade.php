@@ -2,7 +2,6 @@
 
 @section('css')
     <link rel="stylesheet" href="pubic/css/app.css">
-    @include('layouts.datatables_css')
     @include('layouts.costumcss')
 @endsection
 
@@ -30,7 +29,6 @@
 @endsection
 
 @section('scripts')
-    @include('layouts.datatables_js')
 
     <script type="text/javascript">
         $(function () {

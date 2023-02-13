@@ -2,7 +2,6 @@
 
 @section('css')
     <link rel="stylesheet" href="pubic/css/app.css">
-    @include('layouts.datatables_css')
     @include('layouts.costumcss')
 @endsection
 
@@ -13,7 +12,7 @@
             <div class="box-body">
                 <div class="col-lg-12 col-md-12 col-xs-12">
                     <section class="content-header">
-                        <h4>Partner típus</h4>
+                        <h4>{{ __('Partner típus') }}</h4>
                     </section>
                     @include('flash::message')
                     <div class="clearfix"></div>
@@ -30,7 +29,6 @@
 @endsection
 
 @section('scripts')
-    @include('layouts.datatables_js')
 
     <script type="text/javascript">
         $(function () {

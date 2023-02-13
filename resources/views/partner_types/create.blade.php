@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Partner típus</h1>
+                    <h1>{{ __('Partner típus') }}</h1>
                 </div>
             </div>
         </div>
@@ -28,8 +28,8 @@
             </div>
 
             <div class="card-footer">
-                {!! Form::submit('Ment', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('partnerTypes.index') }}" class="btn btn-default">Kilép</a>
+                {!! Form::submit(__('Ment'), ['class' => 'btn btn-primary']) !!}
+                <a href="{{ route('partnerTypes.index') }}" class="btn btn-default">{{ __('Kilép') }}</a>
             </div>
 
             {!! Form::close() !!}

@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 use App\Classes\SWAlertClass;
 use App\Classes\imageUrl;
 use App\Classes\ToolsClass;
+use App\Classes\SettlementsClass;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
             $loader->alias('imageUrl', imageUrl::class);
             $loader->alias('SWAlertClass', SWAlertClass::class);
             $loader->alias('ToolsClass', ToolsClass::class);
+            $loader->alias('SettlementsClass', SettlementsClass::class);
         });
     }
 

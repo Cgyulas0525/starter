@@ -22,4 +22,8 @@ class SettlementsClass
     {
         return Settlements::where('postcode', $postcode)->select('name', 'id')->orderBy('name')->get();
     }
+
+    public static function distinctSettlments() {
+        return [" "] + Settlements::distinct('name')->orderBy('name')->pluck('name', 'name')->toArray();
+    }
 }

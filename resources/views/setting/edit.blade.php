@@ -5,7 +5,9 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>{{ $usertypes->name }}</h1>
+                    <h1>
+                        {{ __('Email beállítások') }}
+                    </h1>
                 </div>
             </div>
         </div>
@@ -17,17 +19,15 @@
 
         <div class="card">
 
-            {!! Form::model($usertypes, ['route' => ['usertypes.update', $usertypes->id], 'method' => 'patch']) !!}
-
             <div class="card-body">
                 <div class="row">
-                    @include('usertypes.fields')
+                    @include('setting.fields')
                 </div>
             </div>
 
             <div class="card-footer">
-                {!! Form::submit(__('Ment'), ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('usertypes.index') }}" class="btn btn-default">{{ __('Kilép') }}</a>
+                {!! Form::submit(__('Ment'), ['class' => 'btn btn-primary', 'id' => 'saveBtn']) !!}
+                <a href="{{ route('dashboard') }}" class="btn btn-default">{{ __('Kilép') }}</a>
             </div>
 
            {!! Form::close() !!}

@@ -22,17 +22,17 @@ class UsersFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
-        'email' => $this->faker->word,
-        'email_verified_at' => $this->faker->date('Y-m-d H:i:s'),
-        'password' => $this->faker->word,
-        'remember_token' => $this->faker->word,
-        'image_url' => $this->faker->word,
-        'usertypes_id' => $this->faker->randomDigitNotNull,
-        'commit' => $this->faker->word,
-        'created_at' => $this->faker->date('Y-m-d H:i:s'),
-        'updated_at' => $this->faker->date('Y-m-d H:i:s'),
-        'deleted_at' => $this->faker->date('Y-m-d H:i:s')
+            'username' => $this->faker->word,
+            'email' => $this->faker->word,
+            'email_verified_at' => $this->faker->date('Y-m-d H:i:s'),
+            'password' => $this->faker->word,
+            'remember_token' => $this->faker->word,
+            'image_url' => $this->faker->word,
+            'usertypes_id' => $this->faker->randomDigitNotNull,
+            'commit' => $this->faker->word,
+            'created_at' => $this->faker->date('Y-m-d H:i:s'),
+            'updated_at' => $this->faker->date('Y-m-d H:i:s'),
+            'deleted_at' => $this->faker->date('Y-m-d H:i:s')
         ];
     }
 }

@@ -1,0 +1,189 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\CreateValidpostcodesRequest;
+use App\Http\Requests\UpdateValidpostcodesRequest;
+use App\Repositories\ValidpostcodesRepository;
+use App\Http\Controllers\AppBaseController;
+
+use App\Models\Validpostcodes;
+
+use Illuminate\Http\Request;
+use Flash;
+use Response;
+use Auth;
+use DB;
+use DataTables;
+
+class ValidpostcodesController extends AppBaseController
+{
+    /** @var ValidpostcodesRepository $validpostcodesRepository*/
+    private $validpostcodesRepository;
+
+    public function __construct(ValidpostcodesRepository $validpostcodesRepo)
+    {
+        $this->validpostcodesRepository = $validpostcodesRepo;
+    }
+
+    public function dwData($data)
+    {
+        return Datatables::of($data)
+            ->addIndexColumn()
+            ->addColumn('settlementName', function($data) { return $data->settlement->name; })
+            ->addColumn('action', function($row){
+                $btn = '';
+                if ($row->active == 1) {
+                    $btn = $btn.'<a href="' . route('beforeActivation', [$row->id, 'Validpostcodes', 'validpostcodes']) . '"
+                                         class="btn btn-warning btn-sm deleteProduct" title="Deaktiválás"><i class="fas fa-user-check"></i></a>';
+                } else {
+                    $btn = $btn.'<a href="' . route('beforeActivation', [$row->id, 'Validpostcodes', 'validpostcodes']) . '"
+                                         class="btn btn-danger btn-sm deleteProduct" title="Aktiválás"><i class="fas fa-user-alt-slash"></i></a>';
+                }
+                return $btn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+
+    /**
+     * Display a listing of the Validpostcodes.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+        if( Auth::check() ){
+
+            if ($request->ajax()) {
+
+                $data = $this->validpostcodesRepository->all();
+                return $this->dwData($data);
+
+            }
+
+            return view('validpostcodes.index');
+        }
+    }
+
+    /**
+     * Show the form for creating a new Validpostcodes.
+     *
+     * @return Response
+     */
+    public function create()
+    {
+        return view('validpostcodes.create');
+    }
+
+    /**
+     * Store a newly created Validpostcodes in storage.
+     *
+     * @param CreateValidpostcodesRequest $request
+     *
+     * @return Response
+     */
+    public function store(CreateValidpostcodesRequest $request)
+    {
+        $input = $request->all();
+
+        $validpostcodes = $this->validpostcodesRepository->create($input);
+
+        return redirect(route('validpostcodes.index'));
+    }
+
+    /**
+     * Display the specified Validpostcodes.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+        $validpostcodes = $this->validpostcodesRepository->find($id);
+
+        if (empty($validpostcodes)) {
+            return redirect(route('validpostcodes.index'));
+        }
+
+        return view('validpostcodes.show')->with('validpostcodes', $validpostcodes);
+    }
+
+    /**
+     * Show the form for editing the specified Validpostcodes.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $validpostcodes = $this->validpostcodesRepository->find($id);
+
+        if (empty($validpostcodes)) {
+            return redirect(route('validpostcodes.index'));
+        }
+
+        return view('validpostcodes.edit')->with('validpostcodes', $validpostcodes);
+    }
+
+    /**
+     * Update the specified Validpostcodes in storage.
+     *
+     * @param int $id
+     * @param UpdateValidpostcodesRequest $request
+     *
+     * @return Response
+     */
+    public function update($id, UpdateValidpostcodesRequest $request)
+    {
+        $validpostcodes = $this->validpostcodesRepository->find($id);
+
+        if (empty($validpostcodes)) {
+            return redirect(route('validpostcodes.index'));
+        }
+
+        $validpostcodes = $this->validpostcodesRepository->update($request->all(), $id);
+
+        return redirect(route('validpostcodes.index'));
+    }
+
+    /**
+     * Remove the specified Validpostcodes from storage.
+     *
+     * @param int $id
+     *
+     * @throws \Exception
+     *
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        $validpostcodes = $this->validpostcodesRepository->find($id);
+
+        if (empty($validpostcodes)) {
+            return redirect(route('validpostcodes.index'));
+        }
+
+        $this->validpostcodesRepository->delete($id);
+
+        return redirect(route('validpostcodes.index'));
+    }
+
+        /*
+         * Dropdown for field select
+         *
+         * return array
+         */
+        public static function DDDW() : array
+        {
+            return [" "] + validpostcodes::orderBy('name')->pluck('name', 'id')->toArray();
+        }
+}
+
+
+

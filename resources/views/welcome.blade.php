@@ -50,7 +50,7 @@
 
     <!-- /.login-logo -->
     <div class="card-body login-card-body">
-        <p class="login-box-msg">Bejelentkezés</p>
+        <p class="login-box-msg">{{ __('Bejelentkezés') }}</p>
 
         <form method="post" action="{{ url('/login') }}">
             {!! csrf_field() !!}
@@ -91,20 +91,21 @@
                 <div class="col-8">
                     <div class="checkbox icheck">
                         <label>
-                            <input type="checkbox" name="remember"> Emlékezz rám!
+                            <input type="checkbox" name="remember"> {{ __('Emlékezz rám!') }}
                         </label>
                     </div>
                 </div>
                 <!-- /.col -->
                 <div class="col-4">
-                    <button type="submit" class="btn btn-primary btn-block btn-flat">Belép</button>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">{{ __('Belép') }}</button>
                 </div>
                 <!-- /.col -->
             </div>
         </form>
 
-        <a href="{{ url('/password/reset') }}">Elfelejtette jelszavát?</a><br>
-        <a href="{{ url('/register') }}" class="text-center">Regisztráció</a>
+        <a href="{{ url('/password/reset') }}">{{ __('Elfelejtette jelszavát?') }}</a><br>
+{{--        <a href="{{ url('/register') }}" class="text-center">{{ __('Regisztráció') }}</a>--}}
+{{--        <a href="{{ url('/register') }}" class="text-center">{{ __('Regisztráció BBBB') }}</a>--}}
 
     </div>
     <!-- /.login-box-body -->
