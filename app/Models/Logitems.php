@@ -26,7 +26,7 @@ class Logitems extends Model
     use HasFactory;
 
     public $table = 'logitems';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -68,10 +68,10 @@ class Logitems extends Model
      */
     public static $rules = [
         'logitemtype_id' => 'required|integer',
-        'client_id' => 'required|integer',
-        'user_id' => 'required|integer',
-        'partnercontact_id' => 'required|integer',
-        'datatable' => 'required|string|max:100',
+        'client_id' => 'nullable|integer',
+        'user_id' => 'nullable|integer',
+        'partnercontact_id' => 'nullable|integer',
+        'datatable' => 'nullable|string|max:100',
         'eventdatetime' => 'required',
         'remoteaddress' => 'nullable|string|max:100',
         'created_at' => 'nullable',
@@ -79,5 +79,5 @@ class Logitems extends Model
         'deleted_at' => 'nullable'
     ];
 
-    
+
 }

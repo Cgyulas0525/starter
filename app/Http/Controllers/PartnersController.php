@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\imageUrl;
+use App\Classes\SettlementsClass;
 use App\Http\Requests\CreatePartnersRequest;
 use App\Http\Requests\UpdatePartnersRequest;
 use App\Repositories\PartnersRepository;
@@ -119,6 +121,13 @@ class PartnersController extends AppBaseController
     {
         $input = $request->all();
 
+        $file = $request->file('logourl');
+        $imageUrl = new imageUrl($file);
+
+        if (!empty($file)){
+            $input['logourl'] = $imageUrl->pictureUpload();
+        }
+
         $partners = $this->partnersRepository->create($input);
 
         return redirect(route('partners.index'));
@@ -175,8 +184,16 @@ class PartnersController extends AppBaseController
         if (empty($partners)) {
             return redirect(route('partners.index'));
         }
+        $input = $request->all();
 
-        $partners = $this->partnersRepository->update($request->all(), $id);
+        $file = $request->file('logourl');
+        $imageUrl = new imageUrl($file);
+
+        if (!empty($file)){
+            $input['logourl'] = $imageUrl->kepFeltolt($file);
+        }
+
+        $partners = $this->partnersRepository->update($input, $id);
 
         return redirect(route('partners.index'));
     }
@@ -203,15 +220,20 @@ class PartnersController extends AppBaseController
         return redirect(route('partners.index'));
     }
 
-        /*
-         * Dropdown for field select
-         *
-         * return array
-         */
-        public static function DDDW() : array
-        {
-            return [" "] + partners::orderBy('name')->pluck('name', 'id')->toArray();
-        }
+    /*
+     * Dropdown for field select
+     *
+     * return array
+     */
+    public static function DDDW() : array
+    {
+        return [" "] + partners::orderBy('name')->pluck('name', 'id')->toArray();
+    }
+
+    public function postcodeSettlementDDDW(Request $request) {
+        return SettlementsClass::postcodeSettlementDDDW($request->get('postcode'));
+    }
+
 }
 
 

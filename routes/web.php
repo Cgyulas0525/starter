@@ -10,7 +10,6 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ChangeActiveController;
 use App\Http\Controllers\PartnersController;
 use App\Http\Controllers\ValidpostcodesController;
-use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +60,7 @@ Route::resource('validpostcodes', App\Http\Controllers\ValidpostcodesController:
 Route::get('validPostCodesIndex/{active?}', [ValidpostcodesController::class, 'validPostCodesIndex'])->name('validPostCodesIndex');
 
 Route::get('insertValidPostcodesRecord', [MyApiController::class, 'insertValidPostcodesRecord'])->name('insertValidPostcodesRecord');
+Route::get('postcodeSettlementDDDW',[PartnersController::class, 'postcodeSettlementDDDW'])->name('postcodeSettlementDDDW');
 
 
 

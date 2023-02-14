@@ -6,37 +6,40 @@
     </a>
 </li>
 
-<li class="nav-item has-treeview">
-    <a href="#" class="nav-link {{ Request::is('detailTypes*') ||
-                                   Request::is('logitemtypes*') ||
-                                   Request::is('partnerTypes*') ? 'active' : '' }}">
-        <i class="fas fa-university"></i>
-        <p>{{ __('Szótár') }}<i class="right fas fa-angle-left"></i></p>
-    </a>
-    <ul class="nav nav-treeview">
-        <li class="nav-item">
-            <a href="{{ route('partnerTypes.index') }}"
-               class="nav-link {{ Request::is('partnerTypes*') ? 'active' : '' }}">
-                <i class="fas fa-hands-helping"></i>
-                <p>{{ __('Partner típus') }}</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('detailTypes.index') }}"
-               class="nav-link {{ Request::is('detailTypes*') ? 'active' : '' }}">
-                <i class="fas fa-share-alt-square"></i>
-                <p>{{ __('Űrlap sor típus') }}</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('logitemtypes.index') }}"
-               class="nav-link {{ Request::is('logitemtypes*') ? 'active' : '' }}">
-                <i class="fas fa-sign-in-alt"></i>
-                <p>{{ __('Log típusok') }}</p>
-            </a>
-        </li>
-    </ul>
-</li>
+@can('fejlesztő')
+    <li class="nav-item has-treeview">
+        <a href="#" class="nav-link {{ Request::is('detailTypes*') ||
+                                       Request::is('logitemtypes*') ||
+                                       Request::is('partnerTypes*') ? 'active' : '' }}">
+            <i class="fas fa-university"></i>
+            <p>{{ __('Szótár') }}<i class="right fas fa-angle-left"></i></p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ route('partnerTypes.index') }}"
+                   class="nav-link {{ Request::is('partnerTypes*') ? 'active' : '' }}">
+                    <i class="fas fa-hands-helping"></i>
+                    <p>{{ __('Partner típus') }}</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('detailTypes.index') }}"
+                   class="nav-link {{ Request::is('detailTypes*') ? 'active' : '' }}">
+                    <i class="fas fa-share-alt-square"></i>
+                    <p>{{ __('Űrlap sor típus') }}</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('logitemtypes.index') }}"
+                   class="nav-link {{ Request::is('logitemtypes*') ? 'active' : '' }}">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <p>{{ __('Log típusok') }}</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+@endcan
+
 <li class="nav-item">
     <a href="{{ route('partners.index') }}"
        class="nav-link {{ Request::is('partners*') ? 'active' : '' }}">
@@ -114,17 +117,16 @@
             </li>
         </ul>
     </li>
-
 @endcannot
 
 
 
 
-<li class="nav-item">
-    <a href="{{ route('logitems.index') }}"
-       class="nav-link {{ Request::is('logitems*') ? 'active' : '' }}">
-        <p>{{ __('Logitems') }}</p>
-    </a>
-</li>
+{{--<li class="nav-item">--}}
+{{--    <a href="{{ route('logitems.index') }}"--}}
+{{--       class="nav-link {{ Request::is('logitems*') ? 'active' : '' }}">--}}
+{{--        <p>{{ __('Logitems') }}</p>--}}
+{{--    </a>--}}
+{{--</li>--}}
 
 

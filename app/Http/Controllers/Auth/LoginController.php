@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Users;
 use App\Providers\RouteServiceProvider;
+use http\Env\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
-use App\Models\Logitems;
-use Illuminate\Http\Request;
+use App\Events\LoginHistory;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -48,4 +48,19 @@ class LoginController extends Controller
         return 'username';
     }
 
+    public function myLogin(Request $request)
+    {
+//        $request->validate([
+//            'username' => 'required',
+//            'password' => 'required',
+//        ]);
+//
+//        $credentials = $request->only('username', 'password');
+//        if (Auth::attempt($credentials)) {
+//
+//            return redirect()->route('partnerTypes.index');
+//        }
+//
+//        return redirect("login")->withSuccess('Oppes! You have entered invalid credentials');
+    }
 }
