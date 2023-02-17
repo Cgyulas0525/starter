@@ -19,16 +19,40 @@ class ChangeActiveController extends Controller
     public function Activation($id, $table, $route) {
         $route .= '.index';
         $model_name = 'App\Models\\'.$table;
-        $partner = $model_name::find($id);
+        $record = $model_name::find($id);
 
-        if (empty($partner)) {
+        if (empty($record)) {
             return redirect(route($route));
         }
 
-        $partner->active = $partner->active == 0 ? 1 : 0;
-        $partner->save();
+        $record->active = $record->active == 0 ? 1 : 0;
+        $record->save();
 
         return redirect(route($route));
     }
+
+    public function beforeActivationWithParam($table, $id, $route, $param = null) {
+        $view = 'layouts.show';
+        $model_name = 'App\Models\\'.$table;
+        $record = $model_name::find($id);
+
+        SWAlertClass::choice($id, 'Biztosan változtatni akarja az aktívitás jelzőt?', '/'.$route. '/' . $param, 'Kilép', '/ActivationWithParam/'.$table.'/'.$id.'/'.$route. '/'.$param, 'Váltás');
+        return view($view)->with('table', $record);
+    }
+
+    public function ActivationWithParam($table, $id, $route, $param) {
+        $model_name = 'App\Models\\'.$table;
+        $record = $model_name::find($id);
+
+        if (empty($record)) {
+            return redirect(route($route, $param));
+        }
+
+        $record->active = $record->active == 0 ? 1 : 0;
+        $record->save();
+
+        return redirect(route($route,  $param));
+    }
+
 
 }

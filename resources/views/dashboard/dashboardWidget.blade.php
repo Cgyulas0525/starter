@@ -1,0 +1,31 @@
+<div class="row">
+    @include('dashboard.dashboardWidgetItem', ['title' => 'Űrlap',
+                                                'route' => 'partners.index',
+                                                'icon' => 'ion ion-stats-bars',
+                                                'box' => 'small-box bg-success',
+                                                'label' => date('Y'),
+                                                'endlabel' => 'ft',
+                                                'function' => number_format(0,0,",",".") ])
+    @include('dashboard.dashboardWidgetItem', ['title' => 'Voucher',
+                                                'route' => 'partners.index',
+                                                'icon' => 'ion-pie-graph',
+                                                'box' => 'small-box bg-danger',
+                                                'label' => date('Y'),
+                                                'endlabel' => 'ft',
+                                                'function' => number_format(0,0,",",".") ])
+    @include('dashboard.dashboardWidgetItem', ['title' => 'Partner',
+                                                'route' => 'partners.index',
+                                                'icon' => 'ion ion-person-add',
+                                                'box' => 'small-box bg-warning',
+                                                'label' => 'Össz',
+                                                'endlabel' => 'db',
+                                                'function' => number_format(App\Models\Partners::count(),0,",",".") ])
+    @include('dashboard.dashboardWidgetItem', ['title' => 'Sorsolás',
+                                                'route' => 'partners.index',
+                                                'icon' => 'ion ion-bag',
+                                                'box' => 'small-box bg-info',
+                                                'label' => date('Y'),
+                                                'endlabel' => 'darab',
+                                                'function' => number_format(0,0,",",".") ])
+</div>
+

@@ -30,14 +30,12 @@
 
 @section('scripts')
 
+    @include('functions.js.ajaxsetup')
+
     <script type="text/javascript">
         $(function () {
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+            $.ajaxSetup();
 
             var table = $('.indextable').DataTable({
                 serverSide: true,

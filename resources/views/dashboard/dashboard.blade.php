@@ -9,11 +9,13 @@
 @section('content')
     <div class="content">
         @include('dashboard.dashboardHeader')
+        @include('dashboard.dashboardWidget')
+        @include('dashboard.dashboardClient')
     </div>
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('/public/js/ajaxsetup.js') }} " type="text/javascript"></script>
+    @include('functions.js.ajaxsetup')
 
     <script type="text/javascript">
         $(function () {

@@ -85,7 +85,7 @@ class Partners extends Model
      */
     public static $rules = [
         'name' => 'required|string|max:100',
-        'partnertype_id' => 'nullable|integer',
+        'partnertype_id' => 'required|integer',
         'taxnumber' => 'nullable|string|max:15',
         'bankaccount' => 'nullable|string|max:30',
         'postcode' => 'nullable|integer',
@@ -101,6 +101,8 @@ class Partners extends Model
         'deleted_at' => 'nullable'
     ];
 
+    protected $appends = ['fullAddress'];
+
     public function settlement() {
         return $this->belongsTo(Settlements::class);
     }
@@ -108,5 +110,16 @@ class Partners extends Model
     public function partnertype() {
         return $this->belongsTo(PartnerTypes::class);
     }
+
+    public function getFullAddressAttribute() {
+        return ((!empty($this->postcode) ? $this->postcode : "") . " " .
+               (!empty($this->settlement_id) ? $this->settlement->name : ""). " "
+               (!empty($this->address) ? $this->address : ""));
+    }
+
+    public function partnercontact() {
+        return $this->hasMany(Partnercontacts::class);
+    }
+
 
 }

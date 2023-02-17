@@ -388,6 +388,11 @@
         margin-top: 7px;
     }
 
+    .mylabel-left {
+        margin-top: 7px;
+        text-align: left;
+    }
+
     .mylabel8{
         margin-top: 7px;
         font-size: 1em;

@@ -69,5 +69,9 @@ class Settlements extends Model
         return $this->hasMany(Partners::class);
     }
 
+    public function clients() {
+        return $this->hasMany(Clients::class);
+    }
+
 
 }

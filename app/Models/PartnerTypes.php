@@ -21,7 +21,7 @@ class PartnerTypes extends Model
     use HasFactory;
 
     public $table = 'partnertypes';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -59,5 +59,9 @@ class PartnerTypes extends Model
         'deleted_at' => 'nullable'
     ];
 
-    
+    public function partner() {
+        return $this->hasMany(Partners::class);
+    }
+
+
 }

@@ -19,7 +19,7 @@
                                     <h4>{{ __('Érvényességi körzetek') }}</h4>
                                 </div>
                                 <div class="mylabel col-sm-1">
-                                    {!! Form::label('active', 'Aktív:') !!}
+                                    <h5 class="text-right">{{ __('Aktív:') }}</h5>
                                 </div>
                                 <div class="col-sm-2">
                                     {!! Form::select('active', ToolsClass::yesNoDDDW(), 1,
@@ -44,16 +44,13 @@
 @endsection
 
 @section('scripts')
-    @include('layouts.datatables_js')
+
+    @include('functions.js.ajaxsetup')
 
     <script type="text/javascript">
         $(function () {
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+            $.ajaxSetup();
 
             var table = $('.indextable').DataTable({
                 serverSide: true,

@@ -29,7 +29,7 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('/public/js/ajaxsetup.js') }} " type="text/javascript"></script>
+    @include('functions.js.ajaxsetup')
 
     <script type="text/javascript">
         $(function () {
@@ -48,6 +48,10 @@
                     {title: '<a class="btn btn-primary" title="Felvitel" href="{!! route('users.create') !!}"><i class="fa fa-plus-square"></i></a>',
                         data: 'action', sClass: "text-center", width: '200px', name: 'action', orderable: false, searchable: false},
                     {title: "{{ __('Név')}}", data: 'username', name: 'username'},
+                    {title: '', data: "image_url", sClass: "text-center", "render": function (data) {
+                            return '<img src="' + data + '" style="height:50px;width:50px;object-fit:cover;"/>';
+                        }
+                    },
                 ]
             });
 

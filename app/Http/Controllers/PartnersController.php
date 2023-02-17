@@ -33,10 +33,18 @@ class PartnersController extends AppBaseController
         return Datatables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                $btn = '<a href="' . route('partners.edit', [$row->id]) . '"
+                $btn = '';
+                if ($row->active == 1) {
+                    $btn = $btn.'<a href="' . route('partners.edit', [$row->id]) . '"
                              class="edit btn btn-success btn-sm editProduct" title="Módosítás"><i class="fa fa-paint-brush"></i></a>';
-                $btn = $btn.'<a href="' . route('beforeDestroys', ['Partners', $row->id, 'partners']) . '"
-                                 class="btn btn-danger btn-sm deleteProduct" title="Törlés"><i class="fa fa-trash"></i></a>';
+                    $btn = $btn.'<a href="' . route('partnerContactEdit', [$row->id]) . '"
+                             class="edit btn btn-info btn-sm editProduct" title="Felhasználók"><i class="fas fa-users"></i></a>';
+                    $btn = $btn.'<a href="' . route('beforeActivation', [$row->id, 'Partners', 'partners']) . '"
+                                         class="btn btn-warning btn-sm deleteProduct" title="Deaktiválás"><i class="fas fa-user-check"></i></a>';
+                } else {
+                    $btn = $btn.'<a href="' . route('beforeActivation', [$row->id, 'Partners', 'partners']) . '"
+                                         class="btn btn-danger btn-sm deleteProduct" title="Aktiválás"><i class="fas fa-user-alt-slash"></i></a>';
+                }
                 return $btn;
             })
             ->rawColumns(['action'])
@@ -60,7 +68,7 @@ class PartnersController extends AppBaseController
                 $data = DB::table('partners as t1')
                     ->join('partnertypes as t2', 't2.id', '=', 't1.partnertype_id')
                     ->join('settlements as t3', 't3.id', '=', 't1.settlement_id')
-                    ->select('t1.*', 't2.name as partnerTypesName', 't3.name as settlementName')
+                    ->select('t1.*', DB::raw('concat(t1.postcode, " ", t3.name, " ", t1.address) as fulladdress'), 't2.name as partnerTypesName', 't3.name as settlementName')
                     ->whereNull('t1.deleted_at')
                     ->where('t1.active', 1)
                     ->get();
@@ -81,7 +89,7 @@ class PartnersController extends AppBaseController
                 $data = DB::table('partners as t1')
                     ->join('partnertypes as t2', 't2.id', '=', 't1.partnertype_id')
                     ->join('settlements as t3', 't3.id', '=', 't1.settlement_id')
-                    ->select('t1.*', 't2.name as partnerTypesName', 't3.name as settlementName')
+                    ->select('t1.*', DB::raw('concat(t1.postcode, " ", t3.name, " ", t1.address) as fulladdress'), 't2.name as partnerTypesName', 't3.name as settlementName')
                     ->whereNull('t1.deleted_at')
                     ->where( function($query) use ($active) {
                         if (is_null($active) || $active == -9999 ) {
@@ -121,10 +129,10 @@ class PartnersController extends AppBaseController
     {
         $input = $request->all();
 
-        $file = $request->file('logourl');
-        $imageUrl = new imageUrl($file);
+        $file = $request->file('logo_url');
 
         if (!empty($file)){
+            $imageUrl = new imageUrl($file);
             $input['logourl'] = $imageUrl->pictureUpload();
         }
 
@@ -170,6 +178,24 @@ class PartnersController extends AppBaseController
     }
 
     /**
+     * Show the form for editing the specified Partners.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function partnerContactEdit($id)
+    {
+        $partners = $this->partnersRepository->find($id);
+
+        if (empty($partners)) {
+            return redirect(route('partners.index'));
+        }
+
+        return view('partners.partnerContactsEdit')->with('partners', $partners);
+    }
+
+    /**
      * Update the specified Partners in storage.
      *
      * @param int $id
@@ -186,11 +212,11 @@ class PartnersController extends AppBaseController
         }
         $input = $request->all();
 
-        $file = $request->file('logourl');
-        $imageUrl = new imageUrl($file);
+        $file = $request->file('logo_url');
 
         if (!empty($file)){
-            $input['logourl'] = $imageUrl->kepFeltolt($file);
+            $imageUrl = new imageUrl($file);
+            $input['logourl'] = $imageUrl->pictureUpload();
         }
 
         $partners = $this->partnersRepository->update($input, $id);

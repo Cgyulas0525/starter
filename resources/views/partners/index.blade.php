@@ -18,7 +18,7 @@
                                     <h4>{{ __('Partnerek') }}</h4>
                                 </div>
                                 <div class="mylabel col-sm-1">
-                                    {!! Form::label('active', 'Aktív:') !!}
+                                    <h5 class="text-right">{{ __('Aktív:') }}</h5>
                                 </div>
                                 <div class="col-sm-2">
                                     {!! Form::select('active', ToolsClass::yesNoDDDW(), 1,
@@ -42,7 +42,8 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('/public/js/ajaxsetup.js') }} " type="text/javascript"></script>
+
+    @include('functions.js.ajaxsetup')
 
     <script type="text/javascript">
         $(function () {
@@ -61,8 +62,14 @@
                         data: 'action', sClass: "text-center", width: '200px', name: 'action', orderable: false, searchable: false},
                     {title: 'Név', data: 'name', name: 'name'},
                     {title: 'Típus', data: 'partnerTypesName', name: 'partnerTypesName'},
+                    {title: 'Cím', data: 'fulladdress', name: 'fulladdress'},
                     {title: 'Email', data: 'email', name: 'email'},
                     {title: 'Telefon', data: 'phonenumber', name: 'phonenumber'},
+                    {title: '', data: "logourl", sClass: "text-center", "render": function (data) {
+                            return '<img src="' + data + '" style="height:50px;width:50px;object-fit:cover;"/>';
+                        }
+                    },
+
                 ],
                 buttons: [],
                 fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {

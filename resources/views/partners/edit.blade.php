@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>{{ $partners->name }}</h1>
+                    <h1>{{ $partners->name }} <img height="40" src={{ URL::asset($partners->logourl)}}/></h1>
                 </div>
             </div>
         </div>

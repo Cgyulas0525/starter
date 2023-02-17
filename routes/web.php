@@ -10,6 +10,9 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\ChangeActiveController;
 use App\Http\Controllers\PartnersController;
 use App\Http\Controllers\ValidpostcodesController;
+use App\Http\Controllers\PartnercontactsController;
+use App\Http\Controllers\VouchertypesController;
+use App\Http\Controllers\ClientsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +46,10 @@ Route::get('beforeDestroys/{table}/{id}/{route}', [DestroysController::class, 'b
 Route::get('beforeDestroysWithParam/{table}/{id}/{route}/{param}', [DestroysController::class, 'beforeDestroysWithParam'])->name('beforeDestroysWithParam');
 
 Route::get('beforeActivation/{id}/{table}/{route}', [ChangeActiveController::class, 'beforeActivation'])->name('beforeActivation');
+Route::get('beforeActivationWithParam/{table}/{id}/{route}/{param}', [ChangeActiveController::class, 'beforeActivationWithParam'])->name('beforeActivationWithParam');
+
 Route::get('Activation/{id}/{table}/{route}', [ChangeActiveController::class, 'Activation'])->name('Activation');
+Route::get('ActivationWithParam/{table}/{id}/{route}/{param}', [ChangeActiveController::class, 'ActivationWithParam'])->name('ActivationWithParam');
 
 Route::get('settingIndex', [SettingController::class, 'index'])->name('settingIndex');
 Route::get('communicationIndex', [SettingController::class, 'communicationIndex'])->name('communicationIndex');
@@ -62,13 +68,23 @@ Route::get('validPostCodesIndex/{active?}', [ValidpostcodesController::class, 'v
 Route::get('insertValidPostcodesRecord', [MyApiController::class, 'insertValidPostcodesRecord'])->name('insertValidPostcodesRecord');
 Route::get('postcodeSettlementDDDW',[PartnersController::class, 'postcodeSettlementDDDW'])->name('postcodeSettlementDDDW');
 
-
-
 Route::resource('partners', App\Http\Controllers\PartnersController::class);
 Route::get('partnersIndex/{active?}', [PartnersController::class, 'partnersIndex'])->name('partnersIndex');
+Route::get('partnerContactEdit/{id}', [PartnersController::class, 'partnerContactEdit'])->name('partnerContactEdit');
 
+
+Route::resource('partnercontacts', App\Http\Controllers\PartnercontactsController::class);
+Route::get('partnerContactsIndex/{partner}/{active?}', [PartnercontactsController::class, 'partnerContactsIndex'])->name('partnerContactsIndex');
+Route::get('partnerContactCreate/{id}', [PartnercontactsController::class, 'partnerContactCreate'])->name('partnerContactCreate');
 
 Route::resource('logitemtypes', App\Http\Controllers\LogitemtypesController::class);
 
-
 Route::resource('logitems', App\Http\Controllers\LogitemsController::class);
+
+
+Route::resource('vouchertypes', App\Http\Controllers\VouchertypesController::class);
+Route::get('vouchertypesIndex/{local?}', [VouchertypesController::class, 'vouchertypesIndex'])->name('vouchertypesIndex');
+
+
+Route::resource('clients', App\Http\Controllers\ClientsController::class);
+Route::get('clientsIndex/{active?}', [ClientsController::class, 'clientsIndex'])->name('clientsIndex');

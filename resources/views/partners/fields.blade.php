@@ -13,15 +13,15 @@
 <!-- Partnertype Id Field -->
 <div class="form-group col-sm-4">
     {!! Form::label('partnertype_id', __('Típus:')) !!}
-    {!! Form::select('partnertypes_id', App\Http\Controllers\PartnerTypesController::DDDW(), null,
-                ['class'=>'select2 form-control', 'id' => 'partnertypes_id', 'required' => true, 'readonly' => isset($partners) ? ($partners->active == 1 ? false : true)  : false]) !!}
+    {!! Form::select('partnertype_id', App\Http\Controllers\PartnerTypesController::DDDW(), null,
+                ['class'=>'select2 form-control', 'id' => 'partnertype_id', 'required' => true, 'readonly' => isset($partners) ? ($partners->active == 1 ? false : true)  : false]) !!}
 </div>
 
 
 <!-- Taxnumber Field -->
 <div class="form-group col-sm-4">
     {!! Form::label('taxnumber', __('Adószám:')) !!}
-    {!! Form::text('taxnumber', null, ['class' => 'form-control','maxlength' => 15, 'required' => true, 'data-inputmask'=>"'mask': '99999999-9-99'", 'readonly' => isset($partners) ? ($partners->active == 1 ? false : true)  : false]) !!}
+    {!! Form::text('taxnumber', null, ['class' => 'form-control','maxlength' => 15, 'data-inputmask'=>"'mask': '99999999-9-99'", 'readonly' => isset($partners) ? ($partners->active == 1 ? false : true)  : false]) !!}
 </div>
 
 
@@ -77,7 +77,7 @@
                 </div>
                 <div class="mylabel col-sm-4">
                     <label class="image__file-upload">{{ __('Válasszon') }}
-                        {!! Form::file('logourl',['class'=>'d-none']) !!}
+                        {!! Form::file('logo_url',['class'=>'d-none']) !!}
                     </label>
                 </div>
             </div>
@@ -92,13 +92,14 @@
     {!! Form::label('description', __('Megjegyzés:')) !!}
     {!! Form::textarea('description', null, ['class' => 'form-control','maxlength' => 500,'rows' => 7]) !!}
     {!! Form::hidden('active', __('Active:')) !!}
-    {!! Form::hidden('active', null, ['class' => 'form-control']) !!}
+    {!! Form::hidden('active', isset($partner) ? $partners->active : 1, ['class' => 'form-control']) !!}
+    {!! Form::hidden('logourl', isset($partner) ? $partners->logourl : '', ['class' => 'form-control']) !!}
 </div>
 
 @section('scripts')
-    <script src="{{ asset('/public/js/ajaxsetup.js') }} " type="text/javascript"></script>
-    <script src="{{ asset('/public/js/required.js') }} " type="text/javascript"></script>
-    <script src="{{ asset('/public/js/sweetalert.js') }} " type="text/javascript"></script>
+    @include('functions.js.ajaxsetup')
+    @include('functions.js.required')
+    @include('functions.js.sweetalert')
 
     <script type="text/javascript">
         $(function () {

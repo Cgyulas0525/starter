@@ -14,9 +14,11 @@
 </div>
 
 @section('scripts')
-    <script src="{{ asset('/public/js/ajaxsetup.js') }} " type="text/javascript"></script>
-    <script src="{{ asset('/public/js/required.js') }} " type="text/javascript"></script>
-    <script src="{{ asset('/public/js/sweetalert.js') }} " type="text/javascript"></script>
+
+    @include('functions.js.ajaxsetup')
+    @include('functions.js.required')
+    @include('functions.js.sweetalert')
+
     <script type="text/javascript">
         $(function () {
 

@@ -49,9 +49,9 @@
 
 
 @section('scripts')
-    <script src="{{ asset('/public/js/ajaxsetup.js') }} " type="text/javascript"></script>
-    <script src="{{ asset('/public/js/required.js') }} " type="text/javascript"></script>
-    <script src="{{ asset('/public/js/sweetalert.js') }} " type="text/javascript"></script>
+    <script src="{{ asset('/public/jsfiles/ajaxsetup.js') }} " type="text/javascript"></script>
+    <script src="{{ asset('/public/jsfiles/required.js') }} " type="text/javascript"></script>
+    <script src="{{ asset('/public/jsfiles/sweetalert.js') }} " type="text/javascript"></script>
     <script type="text/javascript">
         $(function () {
 

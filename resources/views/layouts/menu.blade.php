@@ -10,6 +10,7 @@
     <li class="nav-item has-treeview">
         <a href="#" class="nav-link {{ Request::is('detailTypes*') ||
                                        Request::is('logitemtypes*') ||
+                                       Request::is('vouchertypes*') ||
                                        Request::is('partnerTypes*') ? 'active' : '' }}">
             <i class="fas fa-university"></i>
             <p>{{ __('Szótár') }}<i class="right fas fa-angle-left"></i></p>
@@ -36,6 +37,13 @@
                     <p>{{ __('Log típusok') }}</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('vouchertypes.index') }}"
+                   class="nav-link {{ Request::is('vouchertypes*') ? 'active' : '' }}">
+                    <i class="fas fa-check-square"></i>
+                    <p>{{ __('Voucher típusok') }}</p>
+                </a>
+            </li>
         </ul>
     </li>
 @endcan
@@ -45,6 +53,13 @@
        class="nav-link {{ Request::is('partners*') ? 'active' : '' }}">
         <i class="fas fa-handshake"></i>
         <p>{{ __('Partnerek') }}</p>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{{ route('clients.index') }}"
+       class="nav-link {{ Request::is('clients*') ? 'active' : '' }}">
+        <i class="fas fa-user-cog"></i>
+        <p>{{ __('Ügyfelek') }}</p>
     </a>
 </li>
 <li class="nav-item has-treeview">
@@ -128,5 +143,6 @@
 {{--        <p>{{ __('Logitems') }}</p>--}}
 {{--    </a>--}}
 {{--</li>--}}
+
 
 
