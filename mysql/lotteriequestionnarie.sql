@@ -1,4 +1,4 @@
-create table eger.lotteriequestionnarie
+create table lotteriequestionnarie
 (
 	id int auto_increment,
 	lotterie_id int not null,
@@ -12,11 +12,11 @@ create table eger.lotteriequestionnarie
 );
 
 create index lotteriequestionnarie_lotterie_id_questionnarie_id_index
-	on eger.lotteriequestionnarie (lotterie_id, questionnarie_id);
+	on lotteriequestionnarie (lotterie_id, questionnarie_id);
 
 create index lotteriequestionnarie_questionnarie_id_lotterie_id_index
-	on eger.lotteriequestionnarie (questionnarie_id, lotterie_id);
+	on lotteriequestionnarie (questionnarie_id, lotterie_id);
 
-alter table eger.lotteriequestionnarie
+alter table lotteriequestionnarie
 	add primary key (id);
 

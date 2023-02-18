@@ -22,3 +22,6 @@ fields_sample.json
 /storage/app/
 /storage/debugbar/
 /storage/framework/
+/plugins
+/dist
+/asset/vendor

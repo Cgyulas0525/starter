@@ -28,14 +28,14 @@
                                     <h5 class="text-right">{{ __('Validált:') }}</h5>
                                 </div>
                                 <div class="col-sm-1">
-                                    {!! Form::select('validated', ToolsClass::yesNoDDDW(), 1,
+                                    {!! Form::select('validated', ToolsClass::yesNoAllSelect(), 2,
                                             ['class'=>'select2 form-control', 'id' => 'validated']) !!}
                                 </div>
                                 <div class="mylabel col-sm-1">
                                     <h5 class="text-right">{{ __('Helyi lakos:') }}</h5>
                                 </div>
                                 <div class="col-sm-1">
-                                    {!! Form::select('local', ToolsClass::yesNoDDDW(), 1,
+                                    {!! Form::select('local', ToolsClass::yesNoAllSelect(), 2,
                                             ['class'=>'select2 form-control', 'id' => 'local']) !!}
                                 </div>
                             </div>
@@ -92,10 +92,27 @@
 
             });
 
-            $('#active').change(function () {
-                let url = '{{ route('clientsIndex', [":active"]) }}';
+            function changeTableUrl() {
+                let url = '{{ route('clientsIndex', [":active", ":validated", ":local"]) }}';
                 url = url.replace(':active', $('#active').val());
+                url = url.replace(':validated', $('#validated').val());
+                url = url.replace(':local', $('#local').val());
+
+                console.log(url);
+
                 table.ajax.url(url).load();
+            }
+
+            $('#active').change(function () {
+                changeTableUrl();
+            })
+
+            $('#validated').change(function () {
+                changeTableUrl();
+            })
+
+            $('#local').change(function () {
+                changeTableUrl();
             })
 
 

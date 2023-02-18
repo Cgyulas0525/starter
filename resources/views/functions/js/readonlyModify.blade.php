@@ -1,5 +1,5 @@
 <script type="text/javascript">
-function RequiredBackgroundModify(selector) {
+function ReadonlyBackgroundModify(selector) {
     var divs = document.querySelectorAll(selector);
     for (var k in divs) {
         if(divs[k].readOnly){

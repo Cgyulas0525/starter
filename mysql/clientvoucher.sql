@@ -1,4 +1,4 @@
-create table eger.clientvoucher
+create table clientvoucher
 (
 	id int auto_increment,
 	client_id int not null,
@@ -14,17 +14,17 @@ create table eger.clientvoucher
 );
 
 create index clientvoucher_client_id_voucher_id_index
-	on eger.clientvoucher (client_id, voucher_id);
+	on clientvoucher (client_id, voucher_id);
 
 create index clientvoucher_used_client_id_voucher_id_index
-	on eger.clientvoucher (used, client_id, voucher_id);
+	on clientvoucher (used, client_id, voucher_id);
 
 create index clientvoucher_used_voucher_id_client_id_index
-	on eger.clientvoucher (used, voucher_id, client_id);
+	on clientvoucher (used, voucher_id, client_id);
 
 create index clientvoucher_voucher_id_client_id_index
-	on eger.clientvoucher (voucher_id, client_id);
+	on clientvoucher (voucher_id, client_id);
 
-alter table eger.clientvoucher
+alter table clientvoucher
 	add primary key (id);
 

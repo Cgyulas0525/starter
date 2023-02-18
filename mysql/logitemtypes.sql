@@ -1,19 +1,17 @@
-create table detailtypes
+create table logitemtypes
 (
 	id int auto_increment,
 	name varchar(100) not null,
-	listing int default 0 not null,
 	description varchar(500) null,
 	created_at timestamp null,
 	updated_at timestamp null,
 	deleted_at timestamp null,
-	constraint detailtypes_id_uindex
-		unique (id)
+	constraint logitemtypes_id_uindex
+		unique (id),
+	constraint logitemtypes_name_uindex
+		unique (name)
 );
 
-create index detailtypes_name_id_index
-	on detailtypes (name, id);
-
-alter table detailtypes
+alter table logitemtypes
 	add primary key (id);
 

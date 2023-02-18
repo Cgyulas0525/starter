@@ -14,22 +14,22 @@
             <div class="card-footer p-0">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a href="#" class="nav-link text-black text-bold">
+                        <a href="{{ route('clients.index') }}" class="nav-link text-black text-bold">
                             Összesen <span class="float-right badge bg-primary">{{ App\Models\Clients::count() }}</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link text-black text-bold">
+                        <a href="{{ route('clients.index') }}" class="nav-link text-black text-bold">
                             Aktív <span class="float-right badge bg-info">{{ App\Models\Clients::where('active', 1)->get()->count() }}</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link text-black text-bold">
+                        <a href="{{ route('clients.index') }}" class="nav-link text-black text-bold">
                             Inaktív <span class="float-right badge bg-success">{{ App\Models\Clients::where('active', 0)->get()->count() }}</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link text-red text-bold">
+                        <a href="{{ route('clients.index') }}" class="nav-link text-red text-bold">
                             Validálandó <span class="float-right badge bg-danger">{{ App\Models\Clients::where('active', 1)->where('validated', 0)->get()->count() }}</span>
                         </a>
                     </li>

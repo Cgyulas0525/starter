@@ -2,6 +2,7 @@ create table vouchertypes
 (
 	id int auto_increment,
 	name varchar(200) not null,
+	local int default 0 not null,
 	localfund int default 0 not null,
 	localreplay int default 0 not null,
 	otherfund int default 0 not null,

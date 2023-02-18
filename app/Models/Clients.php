@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Classes\ToolsClass;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 /**
  * Class Clients
@@ -135,7 +137,7 @@ class Clients extends Model
         'deleted_at' => 'nullable'
     ];
 
-    protected $appends = ['fullAddress'];
+    protected $appends = ['fullAddress', 'genderName', 'activeName', 'localName', 'validatedName'];
 
     public function settlement() {
         return $this->belongsTo(Settlements::class);
@@ -143,8 +145,23 @@ class Clients extends Model
 
     public function getFullAddressAttribute() {
         return ((!empty($this->postcode) ? $this->postcode : "") . " " .
-            (!empty($this->settlement_id) ? $this->settlement->name : ""). " "
+            (!empty($this->settlement_id) ? $this->settlement->name : ""). " " .
             (!empty($this->address) ? $this->address : ""));
     }
 
+    public function getGenderNameAttribute() {
+        return !empty($this->gender) ? ToolsClass::getGenderName($this->gender) : "";
+    }
+
+    public function getActiveNameAttribute() {
+        return ($this->active == 0) ? "Nem" : "Igen";
+    }
+
+    public function getLocalNameAttribute() {
+        return ($this->local == 0) ? "Nem" : "Igen";
+    }
+
+    public function getValidatedNameAttribute() {
+        return !empty($this->validated) ? ToolsClass::yesNo($this->validated) : "";
+    }
 }

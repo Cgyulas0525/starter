@@ -1,4 +1,4 @@
-create table eger.clientquestionnaries
+create table clientquestionnaries
 (
 	id int auto_increment,
 	client_id int not null,
@@ -16,11 +16,11 @@ create table eger.clientquestionnaries
 );
 
 create index clientquestionnarie_questionnarie_id_client_id_index
-	on eger.clientquestionnaries (questionnarie_id, client_id);
+	on clientquestionnaries (questionnarie_id, client_id);
 
 create index clientquestionnarie_retrieved_id_index
-	on eger.clientquestionnaries (retrieved, id);
+	on clientquestionnaries (retrieved, id);
 
-alter table eger.clientquestionnaries
+alter table clientquestionnaries
 	add primary key (id);
 

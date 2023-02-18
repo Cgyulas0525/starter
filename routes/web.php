@@ -51,6 +51,9 @@ Route::get('beforeActivationWithParam/{table}/{id}/{route}/{param}', [ChangeActi
 Route::get('Activation/{id}/{table}/{route}', [ChangeActiveController::class, 'Activation'])->name('Activation');
 Route::get('ActivationWithParam/{table}/{id}/{route}/{param}', [ChangeActiveController::class, 'ActivationWithParam'])->name('ActivationWithParam');
 
+Route::get('beforeValidation/{id}/{table}/{route}', [ChangeActiveController::class, 'beforeValidation'])->name('beforeValidation');
+Route::get('Validation/{id}/{table}/{route}', [ChangeActiveController::class, 'Validation'])->name('Validation');
+
 Route::get('settingIndex', [SettingController::class, 'index'])->name('settingIndex');
 Route::get('communicationIndex', [SettingController::class, 'communicationIndex'])->name('communicationIndex');
 
@@ -87,4 +90,4 @@ Route::get('vouchertypesIndex/{local?}', [VouchertypesController::class, 'vouche
 
 
 Route::resource('clients', App\Http\Controllers\ClientsController::class);
-Route::get('clientsIndex/{active?}', [ClientsController::class, 'clientsIndex'])->name('clientsIndex');
+Route::get('clientsIndex/{active?}/{validated?}/{local?}', [ClientsController::class, 'clientsIndex'])->name('clientsIndex');

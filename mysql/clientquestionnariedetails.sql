@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 create table clientquestionnariedetails
-=======
-create table eger.clientquestionnariedetails
->>>>>>> origin/master
 (
 	id int auto_increment,
 	clientquestionnarie_id int not null,
@@ -17,20 +13,11 @@ create table eger.clientquestionnariedetails
 );
 
 create index clientquestionnariedetails_cq_index
-<<<<<<< HEAD
 	on clientquestionnariedetails (clientquestionnarie_id, questionnariedetail_id, id);
 
 create index clientquestionnariedetails_qc_index
 	on clientquestionnariedetails (questionnariedetail_id, clientquestionnarie_id);
 
 alter table clientquestionnariedetails
-=======
-	on eger.clientquestionnariedetails (clientquestionnarie_id, questionnariedetail_id, id);
-
-create index clientquestionnariedetails_qc_index
-	on eger.clientquestionnariedetails (questionnariedetail_id, clientquestionnarie_id);
-
-alter table eger.clientquestionnariedetails
->>>>>>> origin/master
 	add primary key (id);
 

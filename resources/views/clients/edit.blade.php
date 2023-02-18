@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>{{ $clients->name }}</h1>
+                    <h1>{{ $clients->name }} Aktív: {{ $clients->activeName }}  Helyi lakos: {{ $clients->localName }} Validált: {{ $clients->validatedName }}</h1>
                 </div>
             </div>
         </div>

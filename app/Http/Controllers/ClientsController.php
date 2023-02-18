@@ -31,10 +31,21 @@ class ClientsController extends AppBaseController
         return Datatables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                $btn = '<a href="' . route('clients.edit', [$row->id]) . '"
-                             class="edit btn btn-success btn-sm editProduct" title="Módosítás"><i class="fa fa-paint-brush"></i></a>';
-//                $btn = $btn.'<a href="' . route('beforeDestroys', ['Clients', $row["id"], 'clients']) . '"
-//                                 class="btn btn-danger btn-sm deleteProduct" title="Törlés"><i class="fa fa-trash"></i></a>';
+                $btn = '';
+                if ($row->validated == 0)  {
+                    $btn = $btn.'<a href="' . route('beforeValidation', [$row->id, 'Clients', 'clients']) . '"
+                                         class="btn btn-danger btn-sm deleteProduct" title="Validálás"><i class="fas fa-user-edit"></i></a>';
+                } else {
+                    if ($row->active == 1) {
+                        $btn = '<a href="' . route('clients.edit', [$row->id]) . '"
+                                 class="edit btn btn-success btn-sm editProduct" title="Módosítás"><i class="fa fa-paint-brush"></i></a>';
+                        $btn = $btn.'<a href="' . route('beforeActivation', [$row->id, 'Clients', 'clients']) . '"
+                                             class="btn btn-warning btn-sm deleteProduct" title="Deaktiválás"><i class="fas fa-user-check"></i></a>';
+                    } else {
+                        $btn = $btn.'<a href="' . route('beforeActivation', [$row->id, 'Clients', 'clients']) . '"
+                                             class="btn btn-danger btn-sm deleteProduct" title="Aktiválás"><i class="fas fa-user-alt-slash"></i></a>';
+                    }
+                }
                 return $btn;
             })
             ->rawColumns(['action'])
@@ -69,7 +80,7 @@ class ClientsController extends AppBaseController
         }
     }
 
-    public function clientsIndex(Request $request, $active = null)
+    public function clientsIndex(Request $request, $active = null, $validated = null, $local = null)
     {
         if( Auth::check() ){
 
@@ -84,6 +95,20 @@ class ClientsController extends AppBaseController
                             $query->whereNotNull('t1.active');
                         } else {
                             $query->where('t1.active', '=', $active);
+                        }
+                    })
+                    ->where( function($query) use ($validated) {
+                        if (is_null($validated) || $validated == 2 ) {
+                            $query->whereNotNull('t1.validated');
+                        } else {
+                            $query->where('t1.validated', '=', $validated);
+                        }
+                    })
+                    ->where( function($query) use ($local) {
+                        if (is_null($local) || $local == 2 ) {
+                            $query->whereNotNull('t1.local');
+                        } else {
+                            $query->where('t1.local', '=', $local);
                         }
                     })
                     ->get();
@@ -200,15 +225,15 @@ class ClientsController extends AppBaseController
         return redirect(route('clients.index'));
     }
 
-        /*
-         * Dropdown for field select
-         *
-         * return array
-         */
-        public static function DDDW() : array
-        {
-            return [" "] + clients::orderBy('name')->pluck('name', 'id')->toArray();
-        }
+    /*
+     * Dropdown for field select
+     *
+     * return array
+     */
+    public static function DDDW() : array
+    {
+        return [" "] + clients::orderBy('name')->pluck('name', 'id')->toArray();
+    }
 }
 
 

@@ -2,7 +2,7 @@ create table partners
 (
 	id int auto_increment,
 	name varchar(100) not null,
-	partnertype_id int null,
+	partnertype_id int not null,
 	taxnumber varchar(15) null,
 	bankaccount varchar(30) null,
 	postcode int null,

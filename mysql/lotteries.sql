@@ -1,4 +1,4 @@
-create table eger.lotteries
+create table lotteries
 (
 	id int auto_increment,
 	name varchar(200) not null,
@@ -13,11 +13,11 @@ create table eger.lotteries
 );
 
 create index lotteries_lotteriedate_name_index
-	on eger.lotteries (lotteriedate, name);
+	on lotteries (lotteriedate, name);
 
 create index lotteries_name_index
-	on eger.lotteries (name);
+	on lotteries (name);
 
-alter table eger.lotteries
+alter table lotteries
 	add primary key (id);
 
