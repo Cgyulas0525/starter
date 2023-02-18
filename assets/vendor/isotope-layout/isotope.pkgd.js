@@ -2273,7 +2273,7 @@ return Outlayer;
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
     // AMD
-    define( 'isotope-layout/js/item',[
+    define( 'isotope-layout/jsfiles/item',[
         'outlayer/outlayer'
       ],
       factory );
@@ -2351,7 +2351,7 @@ return Item;
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
     // AMD
-    define( 'isotope-layout/js/layout-mode',[
+    define( 'isotope-layout/jsfiles/layout-mode',[
         'get-size/get-size',
         'outlayer/outlayer'
       ],
@@ -2751,7 +2751,7 @@ return Item;
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
     // AMD
-    define( 'isotope-layout/js/layout-modes/masonry',[
+    define( 'isotope-layout/jsfiles/layout-modes/masonry',[
         '../layout-mode',
         'masonry-layout/masonry'
       ],
@@ -2824,7 +2824,7 @@ return Item;
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
     // AMD
-    define( 'isotope-layout/js/layout-modes/fit-rows',[
+    define( 'isotope-layout/jsfiles/layout-modes/fit-rows',[
         '../layout-mode'
       ],
       factory );
@@ -2893,7 +2893,7 @@ return FitRows;
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
     // AMD
-    define( 'isotope-layout/js/layout-modes/vertical',[
+    define( 'isotope-layout/jsfiles/layout-modes/vertical',[
         '../layout-mode'
       ],
       factory );
@@ -2959,12 +2959,12 @@ return Vertical;
         'get-size/get-size',
         'desandro-matches-selector/matches-selector',
         'fizzy-ui-utils/utils',
-        'isotope-layout/js/item',
-        'isotope-layout/js/layout-mode',
+        'isotope-layout/jsfiles/item',
+        'isotope-layout/jsfiles/layout-mode',
         // include default layout modes
-        'isotope-layout/js/layout-modes/masonry',
-        'isotope-layout/js/layout-modes/fit-rows',
-        'isotope-layout/js/layout-modes/vertical'
+        'isotope-layout/jsfiles/layout-modes/masonry',
+        'isotope-layout/jsfiles/layout-modes/fit-rows',
+        'isotope-layout/jsfiles/layout-modes/vertical'
       ],
       function( Outlayer, getSize, matchesSelector, utils, Item, LayoutMode ) {
         return factory( window, Outlayer, getSize, matchesSelector, utils, Item, LayoutMode );
@@ -2977,12 +2977,12 @@ return Vertical;
       require('get-size'),
       require('desandro-matches-selector'),
       require('fizzy-ui-utils'),
-      require('isotope-layout/js/item'),
-      require('isotope-layout/js/layout-mode'),
+      require('isotope-layout/jsfiles/item'),
+      require('isotope-layout/jsfiles/layout-mode'),
       // include default layout modes
-      require('isotope-layout/js/layout-modes/masonry'),
-      require('isotope-layout/js/layout-modes/fit-rows'),
-      require('isotope-layout/js/layout-modes/vertical')
+      require('isotope-layout/jsfiles/layout-modes/masonry'),
+      require('isotope-layout/jsfiles/layout-modes/fit-rows'),
+      require('isotope-layout/jsfiles/layout-modes/vertical')
     );
   } else {
     // browser global

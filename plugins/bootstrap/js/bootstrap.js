@@ -3633,7 +3633,7 @@
     };
 
     _proto.setContent = function setContent() {
-      var $tip = $(this.getTipElement()); // We use append for html objects to maintain js events
+      var $tip = $(this.getTipElement()); // We use append for html objects to maintain jsfiles events
 
       this.setElementContent($tip.find(Selector$7.TITLE), this.getTitle());
 

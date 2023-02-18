@@ -1528,7 +1528,7 @@ function getAlpha(string) {
 // generators
 function hexString(rgba, a) {
    var a = (a !== undefined && rgba.length === 3) ? a : rgba[3];
-   return "#" + hexDouble(rgba[0]) 
+   return "#" + hexDouble(rgba[0])
               + hexDouble(rgba[1])
               + hexDouble(rgba[2])
               + (
@@ -10282,7 +10282,7 @@ helpers$1.scaleMerge = mergeScaleConfig;
 
 var core_helpers = function() {
 
-	// -- Basic js utility methods
+	// -- Basic jsfiles utility methods
 
 	helpers$1.where = function(collection, filterCallback) {
 		if (helpers$1.isArray(collection) && Array.prototype.filter) {

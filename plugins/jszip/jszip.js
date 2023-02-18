@@ -1016,7 +1016,7 @@ exports.generateWorker = function (zip, options, comment) {
 'use strict';
 
 /**
- * Representation a of zip file in js
+ * Representation a of zip file in jsfiles
  * @constructor
  */
 function JSZip() {
@@ -3459,8 +3459,8 @@ exports.prepareContent = function(name, inputData, isBinary, isOptimizedBinarySt
 
     // if inputData is already a promise, this flatten it.
     var promise = external.Promise.resolve(inputData).then(function(data) {
-        
-        
+
+
         var isBlob = support.blob && (data instanceof Blob || ['[object File]', '[object Blob]'].indexOf(Object.prototype.toString.call(data)) !== -1);
 
         if (isBlob && typeof FileReader !== "undefined") {
@@ -3947,7 +3947,7 @@ ZipEntry.prototype = {
         // should be something, preparing the extra reader
         var extraReader = readerFor(this.extraFields[0x0001].value);
 
-        // I really hope that these 64bits integer can fit in 32 bits integer, because js
+        // I really hope that these 64bits integer can fit in 32 bits integer, because jsfiles
         // won't let us have more.
         if (this.uncompressedSize === utils.MAX_VALUE_32BITS) {
             this.uncompressedSize = extraReader.readInt(8);
@@ -4851,7 +4851,7 @@ Deflate.prototype.push = function (data, mode) {
 /**
  * Deflate#onData(chunk) -> Void
  * - chunk (Uint8Array|Array|String): ouput data. Type of array depends
- *   on js engine support. When string output requested, each chunk
+ *   on jsfiles engine support. When string output requested, each chunk
  *   will be string.
  *
  * By default, stores data blocks in `chunks[]` property and glue
@@ -5269,7 +5269,7 @@ Inflate.prototype.push = function (data, mode) {
 /**
  * Inflate#onData(chunk) -> Void
  * - chunk (Uint8Array|Array|String): ouput data. Type of array depends
- *   on js engine support. When string output requested, each chunk
+ *   on jsfiles engine support. When string output requested, each chunk
  *   will be string.
  *
  * By default, stores data blocks in `chunks[]` property and glue
@@ -7777,7 +7777,7 @@ function GZheader() {
                        // but leave for few code modifications
 
   //
-  // Setup limits is not necessary because in js we should not preallocate memory
+  // Setup limits is not necessary because in jsfiles we should not preallocate memory
   // for inflate use constant limit in 65536 bytes
   //
 
@@ -8314,7 +8314,7 @@ function InflateState() {
   this.work = new utils.Buf16(288); /* work area for code table building */
 
   /*
-   because we don't have pointers in js, we use lencode and distcode directly
+   because we don't have pointers in jsfiles, we use lencode and distcode directly
    as buffers so we don't need codes
   */
   //this.codes = new utils.Buf32(ENOUGH);       /* space for code tables */
@@ -8810,7 +8810,7 @@ function inflate(strm, flush) {
         do {
           // TODO: 2 or 1 bytes?
           len = input[next + copy++];
-          /* use constant limit because in js we should not preallocate memory */
+          /* use constant limit because in jsfiles we should not preallocate memory */
           if (state.head && len &&
               (state.length < 65536 /*state.head.name_max*/)) {
             state.head.name += String.fromCharCode(len);
@@ -8836,7 +8836,7 @@ function inflate(strm, flush) {
         copy = 0;
         do {
           len = input[next + copy++];
-          /* use constant limit because in js we should not preallocate memory */
+          /* use constant limit because in jsfiles we should not preallocate memory */
           if (state.head && len &&
               (state.length < 65536 /*state.head.comm_max*/)) {
             state.head.comment += String.fromCharCode(len);

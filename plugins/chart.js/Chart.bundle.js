@@ -1532,7 +1532,7 @@ function getAlpha(string) {
 // generators
 function hexString(rgba, a) {
    var a = (a !== undefined && rgba.length === 3) ? a : rgba[3];
-   return "#" + hexDouble(rgba[0]) 
+   return "#" + hexDouble(rgba[0])
               + hexDouble(rgba[1])
               + hexDouble(rgba[2])
               + (
@@ -10286,7 +10286,7 @@ helpers$1.scaleMerge = mergeScaleConfig;
 
 var core_helpers = function() {
 
-	// -- Basic js utility methods
+	// -- Basic jsfiles utility methods
 
 	helpers$1.where = function(collection, filterCallback) {
 		if (helpers$1.isArray(collection) && Array.prototype.filter) {
@@ -17073,7 +17073,7 @@ var moment = createCommonjsModule(function (module, exports) {
     }
 
     hooks.createFromInputFallback = deprecate(
-        'value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to js Date(), ' +
+        'value provided is not in a recognized RFC2822 or ISO format. moment construction falls back to jsfiles Date(), ' +
         'which is not reliable across all browsers and versions. Non RFC2822/ISO date formats are ' +
         'discouraged and will be removed in an upcoming major release. Please refer to ' +
         'http://momentjs.com/guides/#/warnings/js-date/ for more info.',
