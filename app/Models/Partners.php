@@ -121,5 +121,9 @@ class Partners extends Model
         return $this->hasMany(Partnercontacts::class);
     }
 
+    public function voucher() {
+        return $this->hasMany(Vouchers::class);
+    }
+
 
 }

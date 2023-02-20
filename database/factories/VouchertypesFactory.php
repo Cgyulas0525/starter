@@ -26,8 +26,6 @@ class VouchertypesFactory extends Factory
         'local' => $this->faker->randomDigitNotNull,
         'localfund' => $this->faker->randomDigitNotNull,
         'localreplay' => $this->faker->randomDigitNotNull,
-        'otherfund' => $this->faker->randomDigitNotNull,
-        'otherreplay' => $this->faker->randomDigitNotNull,
         'description' => $this->faker->word,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s'),

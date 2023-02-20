@@ -62,6 +62,14 @@
         <p>{{ __('Ügyfelek') }}</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="{{ route('vouchers.index') }}"
+       class="nav-link {{ Request::is('vouchers*') ? 'active' : '' }}">
+        <i class="fas fa-ticket-alt"></i>
+        <p>{{ __('Voucher-ek') }}</p>
+    </a>
+</li>
+
 <li class="nav-item has-treeview">
     <a href="#" class="nav-link ">
         <i class="nav-icon fas fa-chart-pie"></i>
@@ -134,15 +142,9 @@
     </li>
 @endcannot
 
-
-
-
 {{--<li class="nav-item">--}}
 {{--    <a href="{{ route('logitems.index') }}"--}}
 {{--       class="nav-link {{ Request::is('logitems*') ? 'active' : '' }}">--}}
 {{--        <p>{{ __('Logitems') }}</p>--}}
 {{--    </a>--}}
 {{--</li>--}}
-
-
-

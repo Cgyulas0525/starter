@@ -13,6 +13,7 @@ use App\Http\Controllers\ValidpostcodesController;
 use App\Http\Controllers\PartnercontactsController;
 use App\Http\Controllers\VouchertypesController;
 use App\Http\Controllers\ClientsController;
+use App\Http\Controllers\VouchersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,3 +92,8 @@ Route::get('vouchertypesIndex/{local?}', [VouchertypesController::class, 'vouche
 
 Route::resource('clients', App\Http\Controllers\ClientsController::class);
 Route::get('clientsIndex/{active?}/{validated?}/{local?}', [ClientsController::class, 'clientsIndex'])->name('clientsIndex');
+
+
+Route::resource('vouchers', App\Http\Controllers\VouchersController::class);
+Route::get('vouchersIndex/{active?}/{partner?}', [VouchersController::class, 'vouchersIndex'])->name('vouchersIndex');
+

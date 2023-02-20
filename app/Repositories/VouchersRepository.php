@@ -2,26 +2,32 @@
 
 namespace App\Repositories;
 
-use App\Models\Vouchertypes;
+use App\Models\Vouchers;
 use App\Repositories\BaseRepository;
 
 /**
- * Class VouchertypesRepository
+ * Class VouchersRepository
  * @package App\Repositories
- * @version February 16, 2023, 10:06 am UTC
+ * @version February 20, 2023, 2:16 pm UTC
 */
 
-class VouchertypesRepository extends BaseRepository
+class VouchersRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
         'name',
-        'local',
-        'localfund',
-        'localreplay',
-        'description'
+        'vouchertype_id',
+        'partner_id',
+        'content',
+        'validityfrom',
+        'validityto',
+        'qrcode',
+        'discount',
+        'discountpercent',
+        'usednumber',
+        'active'
     ];
 
     /**
@@ -39,6 +45,6 @@ class VouchertypesRepository extends BaseRepository
      **/
     public function model()
     {
-        return Vouchertypes::class;
+        return Vouchers::class;
     }
 }

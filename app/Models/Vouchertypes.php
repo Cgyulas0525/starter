@@ -26,7 +26,7 @@ class Vouchertypes extends Model
     use HasFactory;
 
     public $table = 'vouchertypes';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -40,8 +40,6 @@ class Vouchertypes extends Model
         'local',
         'localfund',
         'localreplay',
-        'otherfund',
-        'otherreplay',
         'description'
     ];
 
@@ -56,8 +54,6 @@ class Vouchertypes extends Model
         'local' => 'integer',
         'localfund' => 'integer',
         'localreplay' => 'integer',
-        'otherfund' => 'integer',
-        'otherreplay' => 'integer',
         'description' => 'string'
     ];
 
@@ -71,13 +67,14 @@ class Vouchertypes extends Model
         'local' => 'required|integer',
         'localfund' => 'required|integer',
         'localreplay' => 'required|integer',
-        'otherfund' => 'required|integer',
-        'otherreplay' => 'required|integer',
         'description' => 'nullable|string|max:500',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
     ];
 
-    
+    public function voucher() {
+        return $this->hasMany(Vouchers::class);
+    }
+
 }
