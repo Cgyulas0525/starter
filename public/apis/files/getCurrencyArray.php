@@ -1,6 +1,6 @@
 <?php
 
-require PATH_INC . "/utility.php";
+//require PATH_INC . "/utility.php";
 require PATH_MODEL . "/mySQLDatabase.php";
 require PATH_MODEL .'/api.php';
 require PATH_MODEL . "/apimodel.php";
@@ -55,7 +55,6 @@ class getCurrencyArray
         $this->apimodel->insert();
         $this->apimodel->id = $this->apimodel->selectId();
 
-
         for ( $i = 0; $i < count($values); $i++) {
 
             $arrayValues = array_values($values[$i]);
@@ -68,6 +67,7 @@ class getCurrencyArray
                 $this->dbEvent();
             }
         }
+
         $this->apimodel->updateErrornumber();
     }
 

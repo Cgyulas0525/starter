@@ -14,6 +14,9 @@ use App\Http\Controllers\PartnercontactsController;
 use App\Http\Controllers\VouchertypesController;
 use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\VouchersController;
+use App\Http\Controllers\QuestionnairesController;
+use App\Http\Controllers\LotteriesController;
+use App\Http\Controllers\QuestionnairedetailsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,7 +79,6 @@ Route::resource('partners', App\Http\Controllers\PartnersController::class);
 Route::get('partnersIndex/{active?}', [PartnersController::class, 'partnersIndex'])->name('partnersIndex');
 Route::get('partnerContactEdit/{id}', [PartnersController::class, 'partnerContactEdit'])->name('partnerContactEdit');
 
-
 Route::resource('partnercontacts', App\Http\Controllers\PartnercontactsController::class);
 Route::get('partnerContactsIndex/{partner}/{active?}', [PartnercontactsController::class, 'partnerContactsIndex'])->name('partnerContactsIndex');
 Route::get('partnerContactCreate/{id}', [PartnercontactsController::class, 'partnerContactCreate'])->name('partnerContactCreate');
@@ -85,15 +87,23 @@ Route::resource('logitemtypes', App\Http\Controllers\LogitemtypesController::cla
 
 Route::resource('logitems', App\Http\Controllers\LogitemsController::class);
 
-
 Route::resource('vouchertypes', App\Http\Controllers\VouchertypesController::class);
 Route::get('vouchertypesIndex/{local?}', [VouchertypesController::class, 'vouchertypesIndex'])->name('vouchertypesIndex');
-
 
 Route::resource('clients', App\Http\Controllers\ClientsController::class);
 Route::get('clientsIndex/{active?}/{validated?}/{local?}', [ClientsController::class, 'clientsIndex'])->name('clientsIndex');
 
-
 Route::resource('vouchers', App\Http\Controllers\VouchersController::class);
 Route::get('vouchersIndex/{active?}/{partner?}', [VouchersController::class, 'vouchersIndex'])->name('vouchersIndex');
 
+Route::resource('questionnaires', App\Http\Controllers\QuestionnairesController::class);
+Route::get('questionnairesIndex/{active?}/{basicpackage?}', [QuestionnairesController::class, 'questionnairesIndex'])->name('questionnairesIndex');
+Route::get('questionnairesEdit/{id}', [QuestionnairesController::class, 'questionnairesEdit'])->name('questionnairesEdit');
+
+Route::resource('lotteries', App\Http\Controllers\LotteriesController::class);
+Route::get('lotteriesIndex/{active?}', [LotteriesController::class, 'lotteriesIndex'])->name('lotteriesIndex');
+
+
+Route::resource('questionnairedetails', App\Http\Controllers\QuestionnairedetailsController::class);
+Route::get('qdIndex/{id}', [QuestionnairedetailsController::class, 'qdIndex'])->name('qdIndex');
+Route::get('qdCreate/{id}', [QuestionnairedetailsController::class, 'qdCreate'])->name('qdCreate');

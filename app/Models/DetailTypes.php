@@ -69,5 +69,8 @@ class DetailTypes extends Model
         return $this->listing == 1 ? 'Igen' : 'Nem';
     }
 
+    public function questionnairedetail() {
+        return $this->hasMany(Questionnairedetails::class);
+    }
 
 }

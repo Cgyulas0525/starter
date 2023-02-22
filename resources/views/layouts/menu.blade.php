@@ -69,6 +69,20 @@
         <p>{{ __('Voucher-ek') }}</p>
     </a>
 </li>
+<li class="nav-item">
+    <a href="{{ route('questionnaires.index') }}"
+       class="nav-link {{ Request::is('questionnaires*') ? 'active' : '' }}">
+        <i class="fas fa-question-circle"></i>
+        <p>{{ __('Űrlapok') }}</p>
+    </a>
+</li>
+<li class="nav-item">
+    <a href="{{ route('lotteries.index') }}"
+       class="nav-link {{ Request::is('lotteries*') ? 'active' : '' }}">
+        <i class="fas fa-money-check-alt"></i>
+        <p>{{ __('Sorsolások') }}</p>
+    </a>
+</li>
 
 <li class="nav-item has-treeview">
     <a href="#" class="nav-link ">
@@ -148,3 +162,12 @@
 {{--        <p>{{ __('Logitems') }}</p>--}}
 {{--    </a>--}}
 {{--</li>--}}
+
+{{--<li class="nav-item">--}}
+{{--    <a href="{{ route('questionnairedetails.index') }}"--}}
+{{--       class="nav-link {{ Request::is('questionnairedetails*') ? 'active' : '' }}">--}}
+{{--        <p>{{ __('Questionnairedetails') }}</p>--}}
+{{--    </a>--}}
+{{--</li>--}}
+
+

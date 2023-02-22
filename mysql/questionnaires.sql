@@ -3,9 +3,9 @@ create table questionnaires
 	id int auto_increment,
 	name varchar(200) not null,
 	validityfrom date not null,
-	validitato date not null,
+	validityto date null,
 	active int default 0 not null,
-	basicpackage int default 0 not null,
+	basicpackage int default 0 null,
 	description varchar(500) null,
 	created_at timestamp null,
 	updated_at timestamp null,
@@ -19,7 +19,7 @@ create table questionnaires
 );
 
 create index questionnaires_validityfrom_validitato_id_index
-	on questionnaires (validityfrom, validitato, id);
+	on questionnaires (validityfrom, validityto, id);
 
 alter table questionnaires
 	add primary key (id);

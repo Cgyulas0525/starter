@@ -5,8 +5,6 @@ create table vouchertypes
 	local int default 0 not null,
 	localfund int default 0 not null,
 	localreplay int default 0 not null,
-	otherfund int default 0 not null,
-	otherreplay int default 0 not null,
 	description varchar(500) null,
 	created_at timestamp null,
 	updated_at timestamp null,
