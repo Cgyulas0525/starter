@@ -155,6 +155,17 @@ class QuestionnairedetailsController extends AppBaseController
         return view('questionnairedetails.edit')->with('questionnairedetails', $questionnairedetails);
     }
 
+    public function qdEdit($id)
+    {
+        $questionnairedetails = $this->questionnairedetailsRepository->find($id);
+
+        if (empty($questionnairedetails)) {
+            return redirect(route('questionnairedetails.index'));
+        }
+
+        return view('questionnairedetails.edit')->with('questionnairedetails', $questionnairedetails);
+    }
+
     /**
      * Update the specified Questionnairedetails in storage.
      *

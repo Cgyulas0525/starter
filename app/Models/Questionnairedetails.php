@@ -91,4 +91,9 @@ class Questionnairedetails extends Model
         return $this->belongsTo(DetailTypes::class);
     }
 
+    public function questionnairedetailitem() {
+        return $this->hasMany(Questionnairedetailitems::class);
+    }
+
+
 }

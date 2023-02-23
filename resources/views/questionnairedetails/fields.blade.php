@@ -1,6 +1,9 @@
+@section('css')
+    <link rel="stylesheet" href="pubic/css/app.css">
+    @include('layouts.costumcss')
+@endsection
+
 {!! Form::hidden('questionnaire_id', isset($questionnairedetails) ? $questionnairedetails->questionnaire_id : $questionnaire->id, ['class' => 'form-control','id'=>'questionnaire_id', 'readonly' => true]) !!}
-
-
 <!-- Name Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('name', __('Név:')) !!}
@@ -35,7 +38,16 @@
 </div>
 @if (isset($questionnairedetails))
     @if ($questionnairedetails->detailtype->listing == 1)
-        <h1>Tételek</h1>
+        <div class="form-group col-sm-6 ">
+            <div class="clearfix"></div>
+            <div class="box box-primary mt-3">
+                <h4>{{ __('Tételek') }}</h4>
+                <div class="box-body"  >
+                    <table class="table table-hover table-bordered indextable w-100"></table>
+                </div>
+            </div>
+            <div class="text-center"></div>
+        </div>
     @endif
 @endif
 
@@ -51,6 +63,22 @@
             ajaxSetup();
 
             RequiredBackgroundModify('.form-control')
+
+            var table = $('.indextable').DataTable({
+                serverSide: true,
+                scrollY: 390,
+                scrollX: true,
+                order: [[1, 'asc']],
+                paging: false,
+                buttons: [],
+                ajax: "{{ route('qdiIndex', $questionnairedetails->id) }}",
+                columns: [
+                    {title: '<a class="btn btn-primary" title="Felvitel" href="{!! route('qdiCreate', ['id' => $questionnairedetails->id ]) !!}"><i class="fa fa-plus-square"></i></a>',
+                        data: 'action', sClass: "text-center", width: '200px', name: 'action', orderable: false, searchable: false},
+                    {title: "{{ __('Érték')}}", data: 'value', name: 'value'},
+                ]
+            });
+
 
         });
     </script>

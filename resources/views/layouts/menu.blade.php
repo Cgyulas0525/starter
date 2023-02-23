@@ -170,4 +170,11 @@
 {{--    </a>--}}
 {{--</li>--}}
 
+{{--<li class="nav-item">--}}
+{{--    <a href="{{ route('questionnairedetailitems.index') }}"--}}
+{{--       class="nav-link {{ Request::is('questionnairedetailitems*') ? 'active' : '' }}">--}}
+{{--        <p>{{ __('Questionnairedetailitems') }}</p>--}}
+{{--    </a>--}}
+{{--</li>--}}
+
 

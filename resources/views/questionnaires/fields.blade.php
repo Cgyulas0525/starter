@@ -47,6 +47,7 @@
     @include('functions.js.ajaxsetup')
     @include('functions.js.required')
     @include('functions.js.sweetalert')
+    @include('functions.js.dtControl')
 
     <script type="text/javascript">
         $(function () {
@@ -80,25 +81,57 @@
                 dateCheck();
             });
 
+            function trueFalse(value) {
+                return (value == 0) ? 'Hamis' : 'Igaz';
+            }
+
+            function format(d) {
+                // `d` is the original data object for the row
+                return (
+                    '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
+                    '<tr>' + '<td style="width: 150px;">Required:</td>' + '<td style="width: 150px; text-align: right;">' + trueFalse(d.required) + '</td>' + '</tr>' +
+                    '<tr>' + '<td style="width: 150px;">Readonly:</td>' + '<td style="width: 150px; text-align: right;">' + trueFalse(d.readonly) + '</td>' + '</tr>' +
+                    '<tr>' + '<td style="width: 150px;">Long:</td>' + '<td style="width: 150px; text-align: right;">'+ d.long + '</td>' + '</tr>' +
+                    '<tr>' + '<td style="width: 150px;">RowCount:</td>' + '<td style="width: 150px; text-align: right;">'+ d.rowcount + '</td>' + '</tr>' +
+                    '</table>'
+                );
+            }
+
             var table = $('.indextable').DataTable({
                 serverSide: true,
                 scrollY: 390,
                 scrollX: true,
-                order: [[3, 'asc']],
+                order: [[4, 'asc']],
                 paging: false,
+                select: false,
                 buttons: [],
                 ajax: "{{ route('qdIndex', $questionnaires->id) }}",
                 columns: [
+                    {
+                        className: 'dt-control',
+                        orderable: false,
+                        data: null,
+                        defaultContent: '',
+                        width: '30px',
+                    },
+
                     {title: '<a class="btn btn-primary" title="Felvitel" href="{!! route('qdCreate', ['id' => $questionnaires->id ]) !!}"><i class="fa fa-plus-square"></i></a>',
                         data: 'action', sClass: "text-center", width: '100px', name: 'action', orderable: false, searchable: false},
                     {title: "{{ __('Név')}}", data: 'name', name: 'name'},
                     {title: "{{ __('Típus')}}", data: 'detailtypeName', name: 'detailtypeName'},
                     {title: "{{ __('id')}}", data: 'id', name: 'id', visible: false},
-                ]
+                ],
+                fnRowCallback: function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+                    if (aData.listing == 1) {
+                        $('td', nRow).css('background-color', 'lightgray');
+                    }
+                }
+
             });
 
-
-
+            $('.indextable tbody').on('click', 'td.dt-control', function () {
+                dtControl(this, table, format);
+            });
         });
     </script>
 @endsection

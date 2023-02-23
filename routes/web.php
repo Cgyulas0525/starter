@@ -17,6 +17,7 @@ use App\Http\Controllers\VouchersController;
 use App\Http\Controllers\QuestionnairesController;
 use App\Http\Controllers\LotteriesController;
 use App\Http\Controllers\QuestionnairedetailsController;
+use App\Http\Controllers\QuestionnairedetailitemsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,3 +108,8 @@ Route::get('lotteriesIndex/{active?}', [LotteriesController::class, 'lotteriesIn
 Route::resource('questionnairedetails', App\Http\Controllers\QuestionnairedetailsController::class);
 Route::get('qdIndex/{id}', [QuestionnairedetailsController::class, 'qdIndex'])->name('qdIndex');
 Route::get('qdCreate/{id}', [QuestionnairedetailsController::class, 'qdCreate'])->name('qdCreate');
+Route::get('qdEdit/{id}', [QuestionnairedetailsController::class, 'qdEdit'])->name('qdEdit');
+
+Route::resource('questionnairedetailitems', App\Http\Controllers\QuestionnairedetailitemsController::class);
+Route::get('qdiIndex/{id}', [QuestionnairedetailitemsController::class, 'qdiIndex'])->name('qdiIndex');
+Route::get('qdiCreate/{id}', [QuestionnairedetailitemsController::class, 'qdiCreate'])->name('qdiCreate');
