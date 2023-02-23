@@ -18,6 +18,7 @@ use App\Http\Controllers\QuestionnairesController;
 use App\Http\Controllers\LotteriesController;
 use App\Http\Controllers\QuestionnairedetailsController;
 use App\Http\Controllers\QuestionnairedetailitemsController;
+use App\Http\Controllers\ValidationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +58,9 @@ Route::get('Activation/{id}/{table}/{route}', [ChangeActiveController::class, 'A
 Route::get('ActivationWithParam/{table}/{id}/{route}/{param}', [ChangeActiveController::class, 'ActivationWithParam'])->name('ActivationWithParam');
 
 Route::get('beforeValidation/{id}/{table}/{route}', [ChangeActiveController::class, 'beforeValidation'])->name('beforeValidation');
+Route::get('beforeValidatingValidation/{id}/{table}', [ChangeActiveController::class, 'beforeValidatingValidation'])->name('beforeValidatingValidation');
 Route::get('Validation/{id}/{table}/{route}', [ChangeActiveController::class, 'Validation'])->name('Validation');
+Route::get('validatingValidation/{id}/{table}', [ChangeActiveController::class, 'validatingValidation'])->name('validatingValidation');
 
 Route::get('settingIndex', [SettingController::class, 'index'])->name('settingIndex');
 Route::get('communicationIndex', [SettingController::class, 'communicationIndex'])->name('communicationIndex');
@@ -93,6 +96,7 @@ Route::get('vouchertypesIndex/{local?}', [VouchertypesController::class, 'vouche
 
 Route::resource('clients', App\Http\Controllers\ClientsController::class);
 Route::get('clientsIndex/{active?}/{validated?}/{local?}', [ClientsController::class, 'clientsIndex'])->name('clientsIndex');
+Route::get('validating/{active}/{validated}', [ValidationController::class, 'validating'])->name('validating');
 
 Route::resource('vouchers', App\Http\Controllers\VouchersController::class);
 Route::get('vouchersIndex/{active?}/{partner?}', [VouchersController::class, 'vouchersIndex'])->name('vouchersIndex');

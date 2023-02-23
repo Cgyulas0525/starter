@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\SWAlertClass;
+use App\Classes\ToolsClass;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ClientToolsController;
 
@@ -59,7 +60,7 @@ class ChangeActiveController extends Controller
         $view = 'layouts.show';
         $model_name = 'App\Models\\'.$table;
         $data = $model_name::find($id);
-        SWAlertClass::choice($id, 'Biztosan Validálja az ügyfelet?', '/'.$route, 'Kilép', '/Validation/'.$id.'/'.$table.'/'.$route, 'Váltás');
+        SWAlertClass::choice($id, 'Biztosan validálja az ügyfelet?', '/'.$route, 'Kilép', '/Validation/'.$id.'/'.$table.'/'.$route, 'Váltás');
 
         return view($view)->with('table', $data);
     }
@@ -80,5 +81,34 @@ class ChangeActiveController extends Controller
         return redirect(route($route));
     }
 
+    public function beforeValidatingValidation($id, $table) {
+        $view = 'layouts.show';
+        $model_name = 'App\Models\\'.$table;
+        $data = $model_name::find($id);
+        SWAlertClass::choice($id, 'Biztosan validálja az ügyfelet?', '/validating/1/0', 'Kilép', '/validatingValidation/'.$id.'/'.$table, 'Váltás');
+
+        return view($view)->with('table', $data);
+    }
+
+    public function validatingValidation($id, $table) {
+        $route = '/validating/1/0';
+
+        $model_name = 'App\Models\\'.$table;
+        $record = $model_name::find($id);
+
+        if (empty($record)) {
+            return redirect(route('validating', [1,0]));
+        }
+
+        $record->validated = $record->validated == 0 ? 1 : 0;
+        $record->local = ClientToolsController::localCheck($record->postcode);
+        $record->save();
+
+        if (ToolsClass::toBeValidated()->count() > 0) {
+            return redirect(route('validating', [1,0]));
+        } else {
+            return redirect(route('dashboard'));
+        }
+    }
 
 }

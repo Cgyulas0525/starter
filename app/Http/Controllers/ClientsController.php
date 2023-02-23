@@ -72,7 +72,7 @@ class ClientsController extends AppBaseController
                     ->whereNull('t1.deleted_at')
                     ->where('t1.active', 1)
                     ->get();
-                return $this->dwData($data);
+                return $this->dwData($data, true);
 
             }
 

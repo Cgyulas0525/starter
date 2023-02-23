@@ -48,4 +48,32 @@ class ToolsClass
         return ($tf === 0) ? "Hamis" : "Igaz";
     }
 
+    public static function partnersLocalActive(Array $active, Array $vpactive) {
+        return DB::table('partners as t1')
+            ->whereNull('t1.deleted_at')
+            ->whereIn('t1.postcode', function ($query) use($vpactive){
+                return $query->from('validpostcodes as t2')->select('t2.postcode')->whereNull('t2.deleted_at')->whereIn('t2.active', $vpactive)->get();
+            })
+            ->whereIn('t1.active', $active)
+            ->get();
+    }
+
+    public static function partnersNonLocalActive(Array $active, Array $vpactive) {
+        return DB::table('partners as t1')
+            ->whereNull('t1.deleted_at')
+            ->whereNotIn('t1.postcode', function ($query) use($vpactive){
+                return $query->from('validpostcodes as t2')->select('t2.postcode')->whereNull('t2.deleted_at')->whereIn('t2.active', $vpactive)->get();
+            })
+            ->whereIn('t1.active', $active)
+            ->get();
+    }
+
+    public static function toBeValidated() {
+        return DB::table('clients as t1')
+            ->whereNull('t1.deleted_at')
+            ->where('t1.active', '=', 1)
+            ->where( 't1.validated', '=', 0)
+            ->get();
+    }
+
 }

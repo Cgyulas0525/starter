@@ -29,7 +29,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('clients.index') }}" class="nav-link text-red text-bold">
+                        <a href="{{ route('validating', [1,0]) }}" class="nav-link text-red text-bold">
                             {{ __('Validálandó') }} <span class="float-right badge bg-danger">{{ App\Models\Clients::where('active', 1)->where('validated', 0)->get()->count() }}</span>
                         </a>
                     </li>
@@ -65,12 +65,12 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('clients.index') }}" class="nav-link text-black text-bold">
-                            {{ __('Helyi') }} <span class="float-right badge bg-success">{{ App\Models\Clients::where('local', 0)->get()->count() }}</span>
+                            {{ __('Aktív helyi') }} <span class="float-right badge bg-success">{{ ToolsClass::partnersLocalActive([1], [0,1])->count() }}</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('clients.index') }}" class="nav-link text-red text-bold">
-                            {{ __('Validálandó') }} <span class="float-right badge bg-danger">{{ App\Models\Clients::where('active', 1)->where('validated', 0)->get()->count() }}</span>
+                            {{ __('Aktív nem helyi') }} <span class="float-right badge bg-success">{{ ToolsClass::partnersNonLocalActive([1], [0,1])->count() }}</span>
                         </a>
                     </li>
                 </ul>
@@ -109,7 +109,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('clients.index') }}" class="nav-link text-red text-bold">
+                        <a href="{{ route('validating', [1,0,2]) }}" class="nav-link text-red text-bold">
                             {{ __('Validálandó') }} <span class="float-right badge bg-danger">{{ App\Models\Clients::where('active', 1)->where('validated', 0)->get()->count() }}</span>
                         </a>
                     </li>
