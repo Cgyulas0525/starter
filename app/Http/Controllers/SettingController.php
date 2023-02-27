@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Response;
 use Auth;
+use myUser;
 
 class SettingController extends Controller
 {
@@ -17,7 +18,7 @@ class SettingController extends Controller
      */
     public function index(Request $request)
     {
-        if (Auth::check()) {
+        if (myUser::check()) {
 
             return view('setting.edit');
 
@@ -34,7 +35,7 @@ class SettingController extends Controller
      */
     public function communicationIndex(Request $request)
     {
-        if (Auth::check()) {
+        if (myUser::check()) {
 
             return view('setting.communicationEdit');
 

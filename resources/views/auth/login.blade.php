@@ -44,53 +44,88 @@
         <div class="card-body login-card-body">
             <p class="login-box-msg">Sign in to start your session</p>
 
-            <form method="post" action="{{ url('/login') }}">
-                @csrf
+            <form method="post" action="{{ route('myLogin') }}">
+                {!! csrf_field() !!}
 
-                <div class="input-group mb-3">
-                    <label for="username" class="col-md-4 col-form-label text-md-end">{{ __('Username') }}</label>
-
-                    <div class="col-md-6">
-                        <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
-
-                        @error('username')
-                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                        @enderror
-                    </div>
+                <div class="form-group has-feedback {{ $errors->has('name') ? ' has-error' : '' }}">
+                    <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Név">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    @if ($errors->has('name'))
+                        <span class="help-block">
+                                    <strong>{{ $errors->first('name') }}</strong>
+                                </span>
+                    @endif
                 </div>
 
-                <div class="input-group mb-3">
-                    <input type="password"
-                           name="password"
-                           placeholder="Password"
-                           class="form-control @error('password') is-invalid @enderror">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
-                        </div>
-                    </div>
-                    @error('password')
-                    <span class="error invalid-feedback">{{ $message }}</span>
-                    @enderror
-
+                <div class="form-group has-feedback{{ $errors->has('password') ? ' has-error' : '' }}">
+                    <input type="password" class="form-control" placeholder="Jelszó" name="password">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                    @endif
                 </div>
-
                 <div class="row">
-                    <div class="col-8">
-                        <div class="icheck-primary">
-                            <input type="checkbox" id="remember">
-                            <label for="remember">Remember Me</label>
+                    <div class="col-xs-8">
+                        <div class="checkbox icheck">
                         </div>
                     </div>
-
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    <!-- /.col -->
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">{{ __('Belép') }}</button>
                     </div>
-
+                    <!-- /.col -->
                 </div>
             </form>
+
+{{--            <form method="post" action="{{ url('/login') }}">--}}
+{{--                @csrf--}}
+
+{{--                <div class="input-group mb-3">--}}
+{{--                    <input type="email"--}}
+{{--                           name="email"--}}
+{{--                           value="{{ old('email') }}"--}}
+{{--                           placeholder="Email"--}}
+{{--                           class="form-control @error('email') is-invalid @enderror">--}}
+{{--                    <div class="input-group-append">--}}
+{{--                        <div class="input-group-text"><span class="fas fa-envelope"></span></div>--}}
+{{--                    </div>--}}
+{{--                    @error('email')--}}
+{{--                    <span class="error invalid-feedback">{{ $message }}</span>--}}
+{{--                    @enderror--}}
+{{--                </div>--}}
+
+{{--                <div class="input-group mb-3">--}}
+{{--                    <input type="password"--}}
+{{--                           name="password"--}}
+{{--                           placeholder="Password"--}}
+{{--                           class="form-control @error('password') is-invalid @enderror">--}}
+{{--                    <div class="input-group-append">--}}
+{{--                        <div class="input-group-text">--}}
+{{--                            <span class="fas fa-lock"></span>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    @error('password')--}}
+{{--                    <span class="error invalid-feedback">{{ $message }}</span>--}}
+{{--                    @enderror--}}
+
+{{--                </div>--}}
+
+{{--                <div class="row">--}}
+{{--                    <div class="col-8">--}}
+{{--                        <div class="icheck-primary">--}}
+{{--                            <input type="checkbox" id="remember">--}}
+{{--                            <label for="remember">Remember Me</label>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+
+{{--                    <div class="col-4">--}}
+{{--                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>--}}
+{{--                    </div>--}}
+
+{{--                </div>--}}
+{{--            </form>--}}
 
             <p class="mb-1">
                 <a href="{{ route('/password.request') }}">I forgot my password</a>

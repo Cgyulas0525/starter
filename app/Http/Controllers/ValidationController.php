@@ -15,6 +15,7 @@ use Response;
 use Auth;
 use DB;
 use DataTables;
+use myUser;
 
 class ValidationController extends Controller
 {
@@ -32,7 +33,7 @@ class ValidationController extends Controller
 
     public function validating(Request $request, $active, $validated)
     {
-        if( Auth::check() ){
+        if( myUser::check() ){
 
             if ($request->ajax()) {
 

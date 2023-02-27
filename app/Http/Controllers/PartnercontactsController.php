@@ -16,6 +16,7 @@ use Response;
 use Auth;
 use DB;
 use DataTables;
+use myUser;
 
 class PartnercontactsController extends AppBaseController
 {
@@ -60,7 +61,7 @@ class PartnercontactsController extends AppBaseController
      */
     public function index(Request $request)
     {
-        if( Auth::check() ){
+        if( myUser::check() ){
 
             if ($request->ajax()) {
 
@@ -82,7 +83,7 @@ class PartnercontactsController extends AppBaseController
      */
     public function partnerContactsIndex(Request $request, $partner, $active = 1)
     {
-        if( Auth::check() ){
+        if( myUser::check() ){
 
             if ($request->ajax()) {
 

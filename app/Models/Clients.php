@@ -143,6 +143,11 @@ class Clients extends Model
         return $this->belongsTo(Settlements::class);
     }
 
+    public function clientvoucher() {
+        return $this->hasMany(Clientvouchers::class);
+    }
+
+
     public function getFullAddressAttribute() {
         return ((!empty($this->postcode) ? $this->postcode : "") . " " .
             (!empty($this->settlement_id) ? $this->settlement->name : ""). " " .

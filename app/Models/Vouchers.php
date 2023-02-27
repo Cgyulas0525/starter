@@ -85,7 +85,7 @@ class Vouchers extends Model
         'content' => 'nullable|string|max:500',
         'validityfrom' => 'required',
         'validityto' => 'nullable',
-        'qrcode' => 'required|string|max:500',
+        'qrcode' => 'nullable|string|max:500',
         'discount' => 'required|integer',
         'discountpercent' => 'required|integer',
         'usednumber' => 'required|integer',
@@ -102,5 +102,10 @@ class Vouchers extends Model
     public function vouchertype() {
         return $this->belongsTo(Vouchertypes::class);
     }
+
+    public function clientvoucher() {
+        return $this->hasMany(Clientvouchers::class);
+    }
+
 
 }

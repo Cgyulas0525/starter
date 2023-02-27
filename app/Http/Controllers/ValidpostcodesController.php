@@ -15,6 +15,7 @@ use Response;
 use Auth;
 use DB;
 use DataTables;
+use myUser;
 
 class ValidpostcodesController extends AppBaseController
 {
@@ -58,7 +59,7 @@ class ValidpostcodesController extends AppBaseController
      */
     public function index(Request $request)
     {
-        if( Auth::check() ){
+        if( myUser::check() ){
 
             if ($request->ajax()) {
 
@@ -78,7 +79,7 @@ class ValidpostcodesController extends AppBaseController
 
     public function validPostCodesIndex(Request $request, $active = null)
     {
-        if( Auth::check() ){
+        if( myUser::check() ){
 
             if ($request->ajax()) {
 

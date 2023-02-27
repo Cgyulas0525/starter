@@ -16,6 +16,7 @@ use Response;
 use Auth;
 use DB;
 use DataTables;
+use myUser;
 
 
 class UsersController extends AppBaseController
@@ -53,7 +54,7 @@ class UsersController extends AppBaseController
      */
     public function index(Request $request)
     {
-        if( Auth::check() ){
+        if( myUser::check() ){
 
             if ($request->ajax()) {
 
@@ -89,10 +90,10 @@ class UsersController extends AppBaseController
 
         $file = $request->file('image_url');
         $imageUrl = new imageUrl($file);
+        $input['password'] = md5($input['password']);
 
         if (!empty($file)){
             $input['image_url'] = $imageUrl->pictureUpload();
-            $input['password'] = md5($input['password']);
         }
 
         $users = $this->usersRepository->create($input);
@@ -157,7 +158,7 @@ class UsersController extends AppBaseController
         $imageUrl = new imageUrl($file);
 
         if (!empty($file)){
-            $input['image_url'] = $imageUrl->kepFeltolt($file);
+            $input['image_url'] = $imageUrl->pictureUpload();
         }
 
         $users = $this->usersRepository->update($input, $id);

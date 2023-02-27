@@ -16,6 +16,7 @@ use Response;
 use Auth;
 use DB;
 use DataTables;
+use myUser;
 
 class QuestionnairedetailitemsController extends AppBaseController
 {
@@ -52,7 +53,7 @@ class QuestionnairedetailitemsController extends AppBaseController
      */
     public function index(Request $request)
     {
-        if( Auth::check() ){
+        if( myUser::check() ){
 
             if ($request->ajax()) {
 
@@ -67,7 +68,7 @@ class QuestionnairedetailitemsController extends AppBaseController
 
     public function qdiIndex(Request $request, $id)
     {
-        if( Auth::check() ){
+        if( myUser::check() ){
 
             if ($request->ajax()) {
 

@@ -104,6 +104,8 @@ class ChangeActiveController extends Controller
         $record->local = ClientToolsController::localCheck($record->postcode);
         $record->save();
 
+        // alap voucherek kiküldése
+
         if (ToolsClass::toBeValidated()->count() > 0) {
             return redirect(route('validating', [1,0]));
         } else {

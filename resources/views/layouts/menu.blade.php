@@ -6,23 +6,25 @@
     </a>
 </li>
 
-@can('fejlesztő')
-    <li class="nav-item has-treeview">
-        <a href="#" class="nav-link {{ Request::is('detailTypes*') ||
-                                       Request::is('logitemtypes*') ||
-                                       Request::is('vouchertypes*') ||
-                                       Request::is('partnerTypes*') ? 'active' : '' }}">
-            <i class="fas fa-university"></i>
-            <p>{{ __('Szótár') }}<i class="right fas fa-angle-left"></i></p>
-        </a>
-        <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="{{ route('partnerTypes.index') }}"
-                   class="nav-link {{ Request::is('partnerTypes*') ? 'active' : '' }}">
-                    <i class="fas fa-hands-helping"></i>
-                    <p>{{ __('Partner típus') }}</p>
-                </a>
-            </li>
+<li class="nav-item has-treeview">
+    <a href="#" class="nav-link {{ Request::is('detailTypes*') ||
+                                   Request::is('logitemtypes*') ||
+                                   Request::is('vouchertypes*') ||
+                                   Request::is('partnerTypes*') ? 'active' : '' }}">
+        <i class="fas fa-university"></i>
+        <p>{{ __('Szótár') }}<i class="right fas fa-angle-left"></i></p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{ route('partnerTypes.index') }}"
+               class="nav-link {{ Request::is('partnerTypes*') ? 'active' : '' }}">
+                <i class="fas fa-hands-helping"></i>
+                <p>{{ __('Partner típus') }}</p>
+            </a>
+        </li>
+
+        @if (myUser::user()->usertypes_id === 3)
+
             <li class="nav-item">
                 <a href="{{ route('detailTypes.index') }}"
                    class="nav-link {{ Request::is('detailTypes*') ? 'active' : '' }}">
@@ -37,16 +39,17 @@
                     <p>{{ __('Log típusok') }}</p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="{{ route('vouchertypes.index') }}"
-                   class="nav-link {{ Request::is('vouchertypes*') ? 'active' : '' }}">
-                    <i class="fas fa-check-square"></i>
-                    <p>{{ __('Voucher típusok') }}</p>
-                </a>
-            </li>
-        </ul>
-    </li>
-@endcan
+        @endif
+
+        <li class="nav-item">
+            <a href="{{ route('vouchertypes.index') }}"
+               class="nav-link {{ Request::is('vouchertypes*') ? 'active' : '' }}">
+                <i class="fas fa-check-square"></i>
+                <p>{{ __('Voucher típusok') }}</p>
+            </a>
+        </li>
+    </ul>
+</li>
 
 <li class="nav-item">
     <a href="{{ route('partners.index') }}"
@@ -93,7 +96,7 @@
     </ul>
 </li>
 
-@cannot('felhasználó')
+@if (myUser::user()->usertypes_id !== 1)
     <li class="nav-item has-treeview">
         <a href="#" class="nav-link ">
             <i class="fas fa-users"></i>
@@ -154,7 +157,7 @@
             </li>
         </ul>
     </li>
-@endcannot
+@endif
 
 {{--<li class="nav-item">--}}
 {{--    <a href="{{ route('logitems.index') }}"--}}
@@ -174,6 +177,14 @@
 {{--    <a href="{{ route('questionnairedetailitems.index') }}"--}}
 {{--       class="nav-link {{ Request::is('questionnairedetailitems*') ? 'active' : '' }}">--}}
 {{--        <p>{{ __('Questionnairedetailitems') }}</p>--}}
+{{--    </a>--}}
+{{--</li>--}}
+
+
+{{--<li class="nav-item">--}}
+{{--    <a href="{{ route('clientvouchers.index') }}"--}}
+{{--       class="nav-link {{ Request::is('clientvouchers*') ? 'active' : '' }}">--}}
+{{--        <p>{{ __('Clientvouchers') }}</p>--}}
 {{--    </a>--}}
 {{--</li>--}}
 

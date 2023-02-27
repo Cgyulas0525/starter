@@ -43,13 +43,13 @@ class LoginController extends Controller
 
     }
 
-    public function username()
-    {
-        return 'username';
-    }
-
-    public function myLogin(Request $request)
-    {
+//    public function username()
+//    {
+//        return 'username';
+//    }
+//
+//    public function myLogin(Request $request)
+//    {
 //        $request->validate([
 //            'username' => 'required',
 //            'password' => 'required',
@@ -62,5 +62,5 @@ class LoginController extends Controller
 //        }
 //
 //        return redirect("login")->withSuccess('Oppes! You have entered invalid credentials');
-    }
+//    }
 }

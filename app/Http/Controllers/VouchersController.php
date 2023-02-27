@@ -15,6 +15,7 @@ use Response;
 use Auth;
 use DB;
 use DataTables;
+use myUser;
 
 class VouchersController extends AppBaseController
 {
@@ -62,7 +63,7 @@ class VouchersController extends AppBaseController
      */
     public function index(Request $request)
     {
-        if( Auth::check() ){
+        if( myUser::check() ){
 
             if ($request->ajax()) {
 
@@ -83,7 +84,7 @@ class VouchersController extends AppBaseController
 
     public function vouchersIndex(Request $request, $active = null, $partner = null)
     {
-        if( Auth::check() ){
+        if( myUser::check() ){
 
             if ($request->ajax()) {
 
@@ -136,7 +137,10 @@ class VouchersController extends AppBaseController
     {
         $input = $request->all();
 
+        $input['qrcode'] = 'http';
         $vouchers = $this->vouchersRepository->create($input);
+        $vouchers->qrcode = 'http://voucher/' . $vouchers->id;
+        $vouchers->save();
 
         return redirect(route('vouchers.index'));
     }

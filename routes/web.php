@@ -19,6 +19,7 @@ use App\Http\Controllers\LotteriesController;
 use App\Http\Controllers\QuestionnairedetailsController;
 use App\Http\Controllers\QuestionnairedetailitemsController;
 use App\Http\Controllers\ValidationController;
+use App\Http\Controllers\MyloginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+
+Route::post('login', [MyloginController::class, 'login'])->name('myLogin');
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
@@ -117,3 +120,6 @@ Route::get('qdEdit/{id}', [QuestionnairedetailsController::class, 'qdEdit'])->na
 Route::resource('questionnairedetailitems', App\Http\Controllers\QuestionnairedetailitemsController::class);
 Route::get('qdiIndex/{id}', [QuestionnairedetailitemsController::class, 'qdiIndex'])->name('qdiIndex');
 Route::get('qdiCreate/{id}', [QuestionnairedetailitemsController::class, 'qdiCreate'])->name('qdiCreate');
+
+
+Route::resource('clientvouchers', App\Http\Controllers\ClientvouchersController::class);

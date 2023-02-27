@@ -23,8 +23,8 @@
     {!! Form::label('vouchertype_id', __('Típus:')) !!}
     {!! Form::select('vouchertype_id', App\Http\Controllers\VouchertypesController::DDDW(), null,
                 ['class'=>'select2 form-control', 'id' => 'vouchertype_id', 'required' => true]) !!}
-    {!! Form::label('qrcode', __('Qrcode:')) !!}
-    {!! Form::text('qrcode', null, ['class' => 'form-control','maxlength' => 500, 'required' => false, 'id' => 'qrcode']) !!}
+    {!! Form::label('qrcode', __('Qr kód:')) !!}
+    {!! Form::text('qrcode', null, ['class' => 'form-control','maxlength' => 500, 'readonly' => true, 'id' => 'qrcode']) !!}
     <div class="row">
         <div class="form-group col-sm-6">
             {!! Form::label('discount', __('Árengedmény ( FT ):')) !!}
@@ -52,6 +52,7 @@
     @include('functions.js.ajaxsetup')
     @include('functions.js.required')
     @include('functions.js.sweetalert')
+    @include('functions.js.readonlyModify')
 
     <script type="text/javascript">
         $(function () {
@@ -59,6 +60,7 @@
             ajaxSetup();
 
             RequiredBackgroundModify('.form-control')
+            ReadonlyBackgroundModify('.form-control')
 
             function dateCheck() {
                 let from = $('#validityfrom').val();

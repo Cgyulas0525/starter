@@ -15,6 +15,7 @@ use Response;
 use Auth;
 use DB;
 use DataTables;
+use myUser;
 
 class LotteriesController extends AppBaseController
 {
@@ -60,7 +61,7 @@ class LotteriesController extends AppBaseController
      */
     public function index(Request $request)
     {
-        if( Auth::check() ){
+        if( myUser::check() ){
 
             if ($request->ajax()) {
 
@@ -78,7 +79,7 @@ class LotteriesController extends AppBaseController
 
     public function lotteriesIndex(Request $request, $active = null)
     {
-        if( Auth::check() ){
+        if( myUser::check() ){
 
             if ($request->ajax()) {
 

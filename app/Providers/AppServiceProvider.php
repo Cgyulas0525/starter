@@ -4,14 +4,14 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
-use Illuminate\Support\Facades\Gate;
-use Auth;
 
 use App\Http\Controllers\DashboardController;
 use App\Classes\SWAlertClass;
 use App\Classes\imageUrl;
 use App\Classes\ToolsClass;
 use App\Classes\SettlementsClass;
+use App\Classes\myUserClass;
+use myUser;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
             $loader->alias('SWAlertClass', SWAlertClass::class);
             $loader->alias('ToolsClass', ToolsClass::class);
             $loader->alias('SettlementsClass', SettlementsClass::class);
+            $loader->alias('myUser', myUserClass::class);
         });
     }
 
@@ -39,14 +40,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Gate::define('felhasználó', function() {
-            return Auth::user()->usertypes_id == 1;
-        });
-        Gate::define('rendszergazda', function() {
-            return Auth::user()->usertypes_id == 2;
-        });
-        Gate::define('fejlesztő', function() {
-            return Auth::user()->usertypes_id == 3;
-        });
+        config( [ 'userId' => 0 ] );
     }
+
+
 }
