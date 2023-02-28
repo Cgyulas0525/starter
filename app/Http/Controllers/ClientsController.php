@@ -38,7 +38,7 @@ class ClientsController extends AppBaseController
                                          class="btn btn-danger btn-sm deleteProduct" title="Validálás"><i class="fas fa-user-edit"></i></a>';
                 } else {
                     if ($row->active == 1) {
-                        $btn = '<a href="' . route('clients.edit', [$row->id]) . '"
+                        $btn = $btn.'<a href="' . route('clients.edit', [$row->id]) . '"
                                  class="edit btn btn-success btn-sm editProduct" title="Módosítás"><i class="fa fa-paint-brush"></i></a>';
                         $btn = $btn.'<a href="' . route('beforeActivation', [$row->id, 'Clients', 'clients']) . '"
                                              class="btn btn-warning btn-sm deleteProduct" title="Deaktiválás"><i class="fas fa-user-check"></i></a>';
@@ -46,6 +46,12 @@ class ClientsController extends AppBaseController
                         $btn = $btn.'<a href="' . route('beforeActivation', [$row->id, 'Clients', 'clients']) . '"
                                              class="btn btn-danger btn-sm deleteProduct" title="Aktiválás"><i class="fas fa-user-alt-slash"></i></a>';
                     }
+                    $btn = $btn.'<a href="' . route('clientVouchers', [$row->id]) . '"
+                                 class="edit btn btn-info btn-sm editProduct" title="Voucherek"><i class="fas fa-ticket-alt"></i></a>';
+                    $btn = $btn.'<a href="' . route('clientVouchers', [$row->id]) . '"
+                                 class="edit btn btn-secondary btn-sm editProduct" title="Űrlapok"><i class="fas fa-question-circle"></i></a>';
+                    $btn = $btn.'<a href="' . route('clientVouchers', [$row->id]) . '"
+                                 class="edit btn btn-primary btn-sm editProduct" title="Sorsolások"><i class="fas fa-money-check-alt"></i></a>';
                 }
                 return $btn;
             })
@@ -181,6 +187,24 @@ class ClientsController extends AppBaseController
         }
 
         return view('clients.edit')->with('clients', $clients);
+    }
+
+    /**
+     * Show the form for editing the specified Client vouchers.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function clientVouchers($id)
+    {
+        $clients = $this->clientsRepository->find($id);
+
+        if (empty($clients)) {
+            return redirect(route('clients.index'));
+        }
+
+        return view('clients.clientvouchers')->with('clients', $clients);
     }
 
     /**

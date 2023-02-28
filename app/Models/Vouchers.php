@@ -95,8 +95,8 @@ class Vouchers extends Model
         'deleted_at' => 'nullable'
     ];
 
-    public function partnertype() {
-        return $this->belongsTo(PartnerTypes::class);
+    public function partner() {
+        return $this->belongsTo(Partner::class);
     }
 
     public function vouchertype() {

@@ -20,6 +20,7 @@ use App\Http\Controllers\QuestionnairedetailsController;
 use App\Http\Controllers\QuestionnairedetailitemsController;
 use App\Http\Controllers\ValidationController;
 use App\Http\Controllers\MyloginController;
+use App\Http\Controllers\ClientvouchersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -99,6 +100,7 @@ Route::get('vouchertypesIndex/{local?}', [VouchertypesController::class, 'vouche
 
 Route::resource('clients', App\Http\Controllers\ClientsController::class);
 Route::get('clientsIndex/{active?}/{validated?}/{local?}', [ClientsController::class, 'clientsIndex'])->name('clientsIndex');
+Route::get('clientVouchers/{id}', [ClientsController::class, 'clientVouchers'])->name('clientVouchers');
 Route::get('validating/{active}/{validated}', [ValidationController::class, 'validating'])->name('validating');
 
 Route::resource('vouchers', App\Http\Controllers\VouchersController::class);
@@ -123,3 +125,4 @@ Route::get('qdiCreate/{id}', [QuestionnairedetailitemsController::class, 'qdiCre
 
 
 Route::resource('clientvouchers', App\Http\Controllers\ClientvouchersController::class);
+Route::get('cvIndex/{id}', [ClientvouchersController::class, 'cvIndex'])->name('cvIndex');

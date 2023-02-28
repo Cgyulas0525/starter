@@ -32,10 +32,11 @@ class ClientvouchersController extends AppBaseController
         return Datatables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                $btn = '<a href="' . route('clientvouchers.edit', [$row->id]) . '"
-                             class="edit btn btn-success btn-sm editProduct" title="Módosítás"><i class="fa fa-paint-brush"></i></a>';
-                $btn = $btn.'<a href="' . route('beforeDestroys', ['Clientvouchers', $row["id"], 'clientvouchers']) . '"
-                                 class="btn btn-danger btn-sm deleteProduct" title="Törlés"><i class="fa fa-trash"></i></a>';
+                $btn = '';
+//                $btn = '<a href="' . route('clientvouchers.edit', [$row->id]) . '"
+//                             class="edit btn btn-success btn-sm editProduct" title="Módosítás"><i class="fa fa-paint-brush"></i></a>';
+//                $btn = $btn.'<a href="' . route('beforeDestroys', ['Clientvouchers', $row["id"], 'clientvouchers']) . '"
+//                                 class="btn btn-danger btn-sm deleteProduct" title="Törlés"><i class="fa fa-trash"></i></a>';
                 return $btn;
             })
             ->rawColumns(['action'])
@@ -57,6 +58,36 @@ class ClientvouchersController extends AppBaseController
             if ($request->ajax()) {
 
                 $data = $this->clientvouchersRepository->all();
+                return $this->dwData($data);
+
+            }
+
+            return view('clientvouchers.index');
+        }
+    }
+
+    /**
+     * Display a listing of the Clientvouchers.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function cvIndex(Request $request, $id)
+    {
+        if( myUser::check() ){
+
+            if ($request->ajax()) {
+
+                $data = DB::table('clientvouchers as t1')
+                    ->join('vouchers as t2', 't2.id', '=', 't1.voucher_id')
+                    ->join('clients as t3', 't3.id', '=', 't1.client_id')
+                    ->join('partners as t4', 't4.id', '=', 't2.partner_id')
+                    ->select('t1.*', 't2.name as voucherName', 't3.name as clientName', 't4.name as partnerName')
+                    ->where('t1.client_id', $id)
+                    ->whereNull('t1.deleted_at')
+                    ->get();
+
                 return $this->dwData($data);
 
             }

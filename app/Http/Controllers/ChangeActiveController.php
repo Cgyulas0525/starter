@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Classes\SWAlertClass;
 use App\Classes\ToolsClass;
 use Illuminate\Http\Request;
-use App\Http\Controllers\ClientToolsController;
+use App\Http\Controllers\VoucherToolController;
+use PDF;
+use Mail;
+use QrCode;
+use App\Models\Clientvouchers;
 
 class ChangeActiveController extends Controller
 {
@@ -100,17 +104,74 @@ class ChangeActiveController extends Controller
             return redirect(route('validating', [1,0]));
         }
 
+
+        // alap voucherek kiküldése
+        $vouchers = VoucherToolController::validFundVouchers();
+        if (!empty($vouchers)) {
+            $files = [];
+            foreach ($vouchers as $voucher) {
+                array_push($files, $this->voucherPDF($record, $voucher));
+                $this->clientVoucherInsert($record, $voucher);
+            }
+            $this->voucherEmail($record, $files);
+        }
+
+
         $record->validated = $record->validated == 0 ? 1 : 0;
         $record->local = ClientToolsController::localCheck($record->postcode);
         $record->save();
-
-        // alap voucherek kiküldése
 
         if (ToolsClass::toBeValidated()->count() > 0) {
             return redirect(route('validating', [1,0]));
         } else {
             return redirect(route('dashboard'));
         }
+    }
+
+    public function clientVoucherInsert($client, $voucher) {
+        $clientvoucher = new Clientvouchers();
+        $clientvoucher->client_id = $client->id;
+        $clientvoucher->voucher_id = $voucher->id;
+        $clientvoucher->posted = \Carbon\Carbon::now();
+        $clientvoucher->created_at = \Carbon\Carbon::now();
+        $clientvoucher->save();
+    }
+
+    public function voucherPDF($client, $voucher)
+    {
+
+        $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])
+            ->loadView('printing.voucherPrintingEmail', ['voucher' => $voucher, 'client' => $client]);
+
+        $fileName = $voucher->partnerName . '-' . $client->name . '-' . $voucher->name . '-' . date('Y-m-d',strtotime('today')) .'-voucher.pdf';
+        $path = public_path('print/'.$fileName);
+
+        $pdf->save($path, 'UTF-8');
+
+        return $path;
+
+    }
+
+    public function voucherEmail($client, $files) {
+
+        $data["client"] = $client->name;
+        $data["email"] = $client->email;
+        $data["title"] = 'Eger voucher alkalmazás!';
+        $data["body"] = 'Az Eger alakalmazás új vouchert, vochereket küldött Önnek.';
+        $data["datum"] = date('Y-m-d');
+
+        Mail::send('emails.voucherMail', $data, function($message) use($files, $data) {
+            $message->to($data["email"], $data["email"])
+                ->subject($data["title"]);
+
+            foreach ($files as $file) {
+                $message->attach($file);
+            }
+
+        });
+
+        return back();
+
     }
 
 }
