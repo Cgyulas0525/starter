@@ -189,3 +189,11 @@
 {{--</li>--}}
 
 
+{{--<li class="nav-item">--}}
+{{--    <a href="{{ route('clientquestionnaries.index') }}"--}}
+{{--       class="nav-link {{ Request::is('clientquestionnaries*') ? 'active' : '' }}">--}}
+{{--        <p>{{ __('Clientquestionnaries') }}</p>--}}
+{{--    </a>--}}
+{{--</li>--}}
+
+

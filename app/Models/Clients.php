@@ -147,6 +147,10 @@ class Clients extends Model
         return $this->hasMany(Clientvouchers::class);
     }
 
+    public function clientquestionnarie() {
+        return $this->hasMany(Clientquestionnaries::class);
+    }
+
 
     public function getFullAddressAttribute() {
         return ((!empty($this->postcode) ? $this->postcode : "") . " " .

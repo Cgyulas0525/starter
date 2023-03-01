@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>{{ $vouchers->name }} {{ QrCode::size(100)->generate($vouchers->qrcode) }}</h1>
+                    <h1>{{ $vouchers->name }} {{ !empty($vouchers->qrcode) ? QrCode::size(50)->generate($vouchers->qrcode) : ''}}</h1>
                 </div>
             </div>
         </div>

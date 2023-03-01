@@ -9,18 +9,22 @@
     {!! Form::label('name', __('Név:')) !!}
     {!! Form::text('name', null, ['class' => 'form-control','maxlength' => 200,'id' => 'name', 'required' => true]) !!}
     <div class="row">
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-3">
             {!! Form::label('validityfrom', __('Érvényes -tól:')) !!}
             {!! Form::date('validityfrom', isset($questionnaires) ? $questionnaires->validityfrom : \Carbon\Carbon::now(), ['class' => 'form-control','id'=>'validityfrom', 'required' => true]) !!}
         </div>
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-3">
             {!! Form::label('validityto', __('Érvényes -ig:')) !!}
             {!! Form::date('validityto', isset($questionnaires) ? $questionnaires->validityto : null, ['class' => 'form-control','id'=>'validityto', 'required' => false]) !!}
         </div>
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-3">
             {!! Form::label('basicpackage', __('Alapcsomag:')) !!}
             {!! Form::select('basicpackage', \App\Classes\ToolsClass::yesNoDDDW(), isset($questionnaires) ? $questionnaires->basicpackage : 0,
                     ['class'=>'select2 form-control', 'id' => 'basicpackage']) !!}
+        </div>
+        <div class="form-group col-sm-3">
+            {!! Form::label('qrcode', __('Qr kód:')) !!}
+            {!! Form::text('qrcode', null, ['class' => 'form-control','maxlength' => 500, 'readonly' => true, 'id' => 'qrcode']) !!}
         </div>
     </div>
     {!! Form::label('description', __('Megjegyzés:')) !!}
@@ -48,6 +52,7 @@
     @include('functions.js.required')
     @include('functions.js.sweetalert')
     @include('functions.js.dtControl')
+    @include('functions.js.readonlyModify')
 
     <script type="text/javascript">
         $(function () {
@@ -57,6 +62,7 @@
             ajaxSetup();
 
             RequiredBackgroundModify('.form-control')
+            ReadonlyBackgroundModify('.form-control')
 
             function dateCheck() {
                 let from = $('#validityfrom').val();

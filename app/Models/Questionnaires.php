@@ -40,6 +40,7 @@ class Questionnaires extends Model
         'validityto',
         'active',
         'basicpackage',
+        'qrcode',
         'description'
     ];
 
@@ -55,6 +56,7 @@ class Questionnaires extends Model
         'validityto' => 'date',
         'active' => 'integer',
         'basicpackage' => 'integer',
+        'qrcode' => 'string',
         'description' => 'string'
     ];
 
@@ -69,6 +71,7 @@ class Questionnaires extends Model
         'validityto' => 'nullable',
         'active' => 'required|integer',
         'basicpackage' => 'required|integer',
+        'qrcode' => 'nullable|string|max:500',
         'description' => 'nullable|string|max:500',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
@@ -77,6 +80,10 @@ class Questionnaires extends Model
 
     public function questionnairedetail() {
         return $this->hasMany(Questionnairedetails::class);
+    }
+
+    public function clientquestionnarie() {
+        return $this->hasMany(Clientquestionnaries::class);
     }
 
 

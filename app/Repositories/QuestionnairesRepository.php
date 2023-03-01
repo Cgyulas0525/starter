@@ -22,6 +22,7 @@ class QuestionnairesRepository extends BaseRepository
         'validityto',
         'active',
         'basicpackage',
+        'qrcode',
         'description'
     ];
 

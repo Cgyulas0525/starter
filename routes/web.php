@@ -61,11 +61,6 @@ Route::get('beforeActivationWithParam/{table}/{id}/{route}/{param}', [ChangeActi
 Route::get('Activation/{id}/{table}/{route}', [ChangeActiveController::class, 'Activation'])->name('Activation');
 Route::get('ActivationWithParam/{table}/{id}/{route}/{param}', [ChangeActiveController::class, 'ActivationWithParam'])->name('ActivationWithParam');
 
-Route::get('beforeValidation/{id}/{table}/{route}', [ChangeActiveController::class, 'beforeValidation'])->name('beforeValidation');
-Route::get('beforeValidatingValidation/{id}/{table}', [ChangeActiveController::class, 'beforeValidatingValidation'])->name('beforeValidatingValidation');
-Route::get('Validation/{id}/{table}/{route}', [ChangeActiveController::class, 'Validation'])->name('Validation');
-Route::get('validatingValidation/{id}/{table}', [ChangeActiveController::class, 'validatingValidation'])->name('validatingValidation');
-
 Route::get('settingIndex', [SettingController::class, 'index'])->name('settingIndex');
 Route::get('communicationIndex', [SettingController::class, 'communicationIndex'])->name('communicationIndex');
 
@@ -101,7 +96,13 @@ Route::get('vouchertypesIndex/{local?}', [VouchertypesController::class, 'vouche
 Route::resource('clients', App\Http\Controllers\ClientsController::class);
 Route::get('clientsIndex/{active?}/{validated?}/{local?}', [ClientsController::class, 'clientsIndex'])->name('clientsIndex');
 Route::get('clientVouchers/{id}', [ClientsController::class, 'clientVouchers'])->name('clientVouchers');
+
 Route::get('validating/{active}/{validated}', [ValidationController::class, 'validating'])->name('validating');
+Route::get('beforeValidation/{id}/{table}/{route}', [ValidationController::class, 'beforeValidation'])->name('beforeValidation');
+Route::get('beforeValidatingValidation/{id}/{table}', [ValidationController::class, 'beforeValidatingValidation'])->name('beforeValidatingValidation');
+Route::get('Validation/{id}/{table}/{route}', [ValidationController::class, 'Validation'])->name('Validation');
+Route::get('validatingValidation/{id}/{table}', [ValidationController::class, 'validatingValidation'])->name('validatingValidation');
+
 
 Route::resource('vouchers', App\Http\Controllers\VouchersController::class);
 Route::get('vouchersIndex/{active?}/{partner?}', [VouchersController::class, 'vouchersIndex'])->name('vouchersIndex');
@@ -126,3 +127,6 @@ Route::get('qdiCreate/{id}', [QuestionnairedetailitemsController::class, 'qdiCre
 
 Route::resource('clientvouchers', App\Http\Controllers\ClientvouchersController::class);
 Route::get('cvIndex/{id}', [ClientvouchersController::class, 'cvIndex'])->name('cvIndex');
+
+
+Route::resource('clientquestionnaries', App\Http\Controllers\ClientquestionnariesController::class);

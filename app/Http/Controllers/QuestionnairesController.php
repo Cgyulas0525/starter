@@ -126,7 +126,11 @@ class QuestionnairesController extends AppBaseController
     {
         $input = $request->all();
 
+        $input['qrcode'] = 'http';
         $questionnaires = $this->questionnairesRepository->create($input);
+        $questionnaires->qrcode = 'http://quetionnarie/' . $questionnaires->id;
+        $questionnaires->save();
+
 
         return redirect(route('questionnaires.index'));
     }
