@@ -79,5 +79,4 @@ class Clientquestionnaries extends Model
         return $this->belongsTo(Clients::class);
     }
 
-
 }

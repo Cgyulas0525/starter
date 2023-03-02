@@ -38,6 +38,8 @@ class QuestionnairesController extends AppBaseController
                                  class="edit btn btn-success btn-sm editProduct" title="Módosítás"><i class="fa fa-paint-brush"></i></a>';
                     $btn = $btn.'<a href="' . route('beforeActivation', [$row->id, 'Questionnaires', 'questionnaires']) . '"
                                              class="btn btn-warning btn-sm deleteProduct" title="Deaktiválás"><i class="fas fa-user-check"></i></a>';
+                    $btn = $btn.'<a href="' . route('qPartners', [$row->id]) . '"
+                                 class="edit btn btn-primary btn-sm editProduct" title="Partnerek"><i class="fas fa-handshake"></i></a>';
                 } else {
                     $btn = $btn.'<a href="' . route('beforeActivation', [$row->id, 'Questionnaires', 'questionnaires']) . '"
                                              class="btn btn-danger btn-sm deleteProduct" title="Aktiválás"><i class="fas fa-user-alt-slash"></i></a>';
@@ -169,6 +171,24 @@ class QuestionnairesController extends AppBaseController
         }
 
         return view('questionnaires.edit')->with('questionnaires', $questionnaires);
+    }
+
+    /**
+     * Show the form for editing the specified Questionnaires.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function qPartners($id)
+    {
+        $questionnaires = $this->questionnairesRepository->find($id);
+
+        if (empty($questionnaires)) {
+            return redirect(route('questionnaires.index'));
+        }
+
+        return view('questionnaires.questionnariePartners')->with('questionnaires', $questionnaires);
     }
 
     public function questionnairesEdit($id)

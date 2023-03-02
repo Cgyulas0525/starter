@@ -21,7 +21,7 @@
 
             <div class="card-body">
                 <div class="row">
-                    @include('clients.clientVouchersFields')
+                    @include('clients.clientTableContact', [ 'scriptFile' => 'clients.clientVoucher', 'title' => 'Voucherek'])
                 </div>
             </div>
 

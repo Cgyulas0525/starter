@@ -15,6 +15,7 @@ use Response;
 use Auth;
 use DB;
 use DataTables;
+use myUser;
 
 class ClientquestionnariesController extends AppBaseController
 {
@@ -31,10 +32,11 @@ class ClientquestionnariesController extends AppBaseController
         return Datatables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function($row){
-                $btn = '<a href="' . route('clientquestionnaries.edit', [$row->id]) . '"
-                             class="edit btn btn-success btn-sm editProduct" title="Módosítás"><i class="fa fa-paint-brush"></i></a>';
-                $btn = $btn.'<a href="' . route('beforeDestroys', ['Clientquestionnaries', $row["id"], 'clientquestionnaries']) . '"
-                                 class="btn btn-danger btn-sm deleteProduct" title="Törlés"><i class="fa fa-trash"></i></a>';
+                $btn = '';
+//                $btn = '<a href="' . route('clientquestionnaries.edit', [$row->id]) . '"
+//                             class="edit btn btn-success btn-sm editProduct" title="Módosítás"><i class="fa fa-paint-brush"></i></a>';
+//                $btn = $btn.'<a href="' . route('beforeDestroys', ['Clientquestionnaries', $row->id, 'clientquestionnaries']) . '"
+//                                 class="btn btn-danger btn-sm deleteProduct" title="Törlés"><i class="fa fa-trash"></i></a>';
                 return $btn;
             })
             ->rawColumns(['action'])
@@ -63,6 +65,37 @@ class ClientquestionnariesController extends AppBaseController
             return view('clientquestionnaries.index');
         }
     }
+
+    /**
+     * Display a listing of the Clientvouchers.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function cqIndex(Request $request, $id)
+    {
+        if( myUser::check() ){
+
+
+            if ($request->ajax()) {
+
+                $data = DB::table('clientquestionnaries as t1')
+                    ->join('questionnaires as t2', 't2.id', '=', 't1.questionnarie_id')
+                    ->join('clients as t3', 't3.id', '=', 't1.client_id')
+                    ->select('t1.*', 't2.name as questionnarieName', 't3.name as clientName')
+                    ->where('t1.client_id', $id)
+                    ->whereNull('t1.deleted_at')
+                    ->get();
+
+                return $this->dwData($data);
+
+            }
+
+            return view('clientvouchers.index');
+        }
+    }
+
 
     /**
      * Show the form for creating a new Clientquestionnaries.

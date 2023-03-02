@@ -21,6 +21,8 @@ use App\Http\Controllers\QuestionnairedetailitemsController;
 use App\Http\Controllers\ValidationController;
 use App\Http\Controllers\MyloginController;
 use App\Http\Controllers\ClientvouchersController;
+use App\Http\Controllers\ClientquestionnariesController;
+use App\Http\Controllers\PartnerquestionnariesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,6 +98,7 @@ Route::get('vouchertypesIndex/{local?}', [VouchertypesController::class, 'vouche
 Route::resource('clients', App\Http\Controllers\ClientsController::class);
 Route::get('clientsIndex/{active?}/{validated?}/{local?}', [ClientsController::class, 'clientsIndex'])->name('clientsIndex');
 Route::get('clientVouchers/{id}', [ClientsController::class, 'clientVouchers'])->name('clientVouchers');
+Route::get('clientQuestionnaries/{id}', [ClientsController::class, 'clientQuestionnaries'])->name('clientQuestionnaries');
 
 Route::get('validating/{active}/{validated}', [ValidationController::class, 'validating'])->name('validating');
 Route::get('beforeValidation/{id}/{table}/{route}', [ValidationController::class, 'beforeValidation'])->name('beforeValidation');
@@ -110,6 +113,7 @@ Route::get('vouchersIndex/{active?}/{partner?}', [VouchersController::class, 'vo
 Route::resource('questionnaires', App\Http\Controllers\QuestionnairesController::class);
 Route::get('questionnairesIndex/{active?}/{basicpackage?}', [QuestionnairesController::class, 'questionnairesIndex'])->name('questionnairesIndex');
 Route::get('questionnairesEdit/{id}', [QuestionnairesController::class, 'questionnairesEdit'])->name('questionnairesEdit');
+Route::get('qPartners/{id}', [QuestionnairesController::class, 'qPartners'])->name('qPartners');
 
 Route::resource('lotteries', App\Http\Controllers\LotteriesController::class);
 Route::get('lotteriesIndex/{active?}', [LotteriesController::class, 'lotteriesIndex'])->name('lotteriesIndex');
@@ -130,3 +134,9 @@ Route::get('cvIndex/{id}', [ClientvouchersController::class, 'cvIndex'])->name('
 
 
 Route::resource('clientquestionnaries', App\Http\Controllers\ClientquestionnariesController::class);
+Route::get('cqIndex/{id}', [ClientquestionnariesController::class, 'cqIndex'])->name('cqIndex');
+
+
+Route::resource('partnerquestionnaries', App\Http\Controllers\PartnerquestionnariesController::class);
+Route::get('pqIndex/{id}', [PartnerquestionnariesController::class, 'pqIndex'])->name('pqIndex');
+Route::get('qpIndex/{id}', [PartnerquestionnariesController::class, 'qpIndex'])->name('qpIndex');

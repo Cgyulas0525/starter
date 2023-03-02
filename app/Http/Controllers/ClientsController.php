@@ -48,7 +48,7 @@ class ClientsController extends AppBaseController
                     }
                     $btn = $btn.'<a href="' . route('clientVouchers', [$row->id]) . '"
                                  class="edit btn btn-info btn-sm editProduct" title="Voucherek"><i class="fas fa-ticket-alt"></i></a>';
-                    $btn = $btn.'<a href="' . route('clientVouchers', [$row->id]) . '"
+                    $btn = $btn.'<a href="' . route('clientQuestionnaries', [$row->id]) . '"
                                  class="edit btn btn-secondary btn-sm editProduct" title="Űrlapok"><i class="fas fa-question-circle"></i></a>';
                     $btn = $btn.'<a href="' . route('clientVouchers', [$row->id]) . '"
                                  class="edit btn btn-primary btn-sm editProduct" title="Sorsolások"><i class="fas fa-money-check-alt"></i></a>';
@@ -205,6 +205,24 @@ class ClientsController extends AppBaseController
         }
 
         return view('clients.clientvouchers')->with('clients', $clients);
+    }
+
+    /**
+     * Show the form for editing the specified Client questionnaries.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function clientQuestionnaries($id)
+    {
+        $clients = $this->clientsRepository->find($id);
+
+        if (empty($clients)) {
+            return redirect(route('clients.index'));
+        }
+
+        return view('clients.clientQuestionnaries')->with('clients', $clients);
     }
 
     /**

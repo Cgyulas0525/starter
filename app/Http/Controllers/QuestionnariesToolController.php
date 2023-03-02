@@ -19,6 +19,7 @@ class QuestionnariesToolController extends Controller
             ->get();
     }
 
+
     public static function activeBasicQuestionnaries() {
         return DB::table('questionnaires as t1')
             ->where('t1.active', 1)

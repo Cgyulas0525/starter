@@ -86,5 +86,8 @@ class Questionnaires extends Model
         return $this->hasMany(Clientquestionnaries::class);
     }
 
+    public function partnerquestionnarie() {
+        return $this->hasMany(Partnerquestionnaries::class);
+    }
 
 }

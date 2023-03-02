@@ -24,7 +24,7 @@
                                     {!! Form::select('active', ToolsClass::yesNoDDDW(), 1,
                                             ['class'=>'select2 form-control', 'id' => 'active']) !!}
                                 </div>
-                                <div class="mylabel col-sm-1">
+                                <div class="mylabel col-sm-2">
                                     <h5 class="text-right">{{ __('Alap csomag:') }}</h5>
                                 </div>
                                 <div class="col-sm-1">
@@ -35,13 +35,7 @@
                         </div>
                     </section>
                     @include('flash::message')
-                    <div class="clearfix"></div>
-                    <div class="box box-primary">
-                        <div class="box-body"  >
-                            <table class="table table-hover table-bordered indextable w-100"></table>
-                        </div>
-                    </div>
-                    <div class="text-center"></div>
+                    @include('layouts.indextable')
                 </div>
             </div>
         </div>

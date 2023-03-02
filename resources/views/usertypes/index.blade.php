@@ -15,13 +15,7 @@
                         <h4>{{ __('Felhasználó típusok') }}</h4>
                     </section>
                     @include('flash::message')
-                    <div class="clearfix"></div>
-                    <div class="box box-primary">
-                        <div class="box-body"  >
-                            <table class="table table-hover table-bordered partners-table w-100"></table>
-                        </div>
-                    </div>
-                    <div class="text-center"></div>
+                    @include('layouts.indextable')
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@
 
 
 <!-- Name Field -->
-<div class="form-group col-sm-4">
+<div class="form-group col-sm-6">
     {!! Form::label('name', __('Név:')) !!}
     {!! Form::text('name', null, ['class' => 'form-control','maxlength' => 200,'id' => 'name', 'required' => true]) !!}
     <div class="row">
@@ -34,7 +34,7 @@
 {!! Form::hidden('active', isset($questionnaires) ? $questionnaires->active : 1, ['class' => 'form-control','id'=>'active']) !!}
 
 @if (isset($questionnaires))
-    <div class="form-group col-sm-8 ">
+    <div class="form-group col-sm-6 ">
         <div class="clearfix"></div>
         <div class="box box-primary mt-3">
             <h4>{{ __('Tételek') }}</h4>
