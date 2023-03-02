@@ -25,3 +25,5 @@ fields_sample.json
 /plugins
 /dist
 /asset/vendor
+/public/print
+/tests
