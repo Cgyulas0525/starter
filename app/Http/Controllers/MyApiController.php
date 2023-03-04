@@ -9,6 +9,8 @@ use App\Models\Validpostcodes;
 use Response;
 use DB;
 
+use App\Models\Partnerquestionnaries;
+
 class MyApiController extends Controller
 {
     public static function insertValidPostcodesRecord(Request $request) {
@@ -21,5 +23,56 @@ class MyApiController extends Controller
             $validpostcodes->created_at = Carbon::now();
             $validpostcodes->save();
         }
+    }
+
+    /**
+     * Partner attaching to the questionnarie
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public static function partnerAttachQuestionnarie(Request $request) {
+
+        $partnerQuestionnarie = DB::table('partnerquestionnaries')
+                    ->where('partner_id', $request->get('partner'))
+                    ->where('questionnarie_id', $request->get('questionnaire'))
+                    ->first();
+
+        if (!empty($partnerQuestionnarie)) {
+            DB::table('partnerquestionnaries')
+                ->where('partner_id', $request->get('partner'))
+                ->where('questionnarie_id', $request->get('questionnaire'))
+                ->update([
+                    'deleted_at' => null
+                ]);
+        } else {
+            $partnerQuestionnarie = new Partnerquestionnaries();
+
+            $partnerQuestionnarie->partner_id = $request->get('partner');
+            $partnerQuestionnarie->questionnarie_id = $request->get('questionnaire');
+            $partnerQuestionnarie->created_at = Carbon::now();
+
+            $partnerQuestionnarie->save();
+        }
+
+        return back();
+    }
+
+    /**
+     * Partner unhooking from the questionnarie
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public static function partnerUnhookQuestionnarie(Request $request) {
+
+        DB::table('partnerquestionnaries')
+            ->where('partner_id', $request->get('partner'))
+            ->where('questionnarie_id', $request->get('questionnaire'))
+            ->update([
+                'deleted_at' => Carbon::now()
+            ]);
+
+        return back();
     }
 }

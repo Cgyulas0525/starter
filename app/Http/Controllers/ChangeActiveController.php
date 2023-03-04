@@ -60,4 +60,24 @@ class ChangeActiveController extends Controller
         return redirect(route($route,  $param));
     }
 
+    public static function changingActive($model) {
+        $model_name = 'App\Models\\'.$model;
+        $datas = $model_name::where('active', 1)
+                        ->where('validityfrom', '<=', date('Y.m.d', strtotime('today')))
+                        ->where('validityto', '<', date('Y.m.d', strtotime('today')))
+                        ->get();
+        if (!empty($datas)) {
+            foreach ($datas as $data) {
+                $data->active = 0;
+                $data->save();
+            }
+        }
+    }
+
+    public static function deActivating() {
+        self::changingActive('Vouchers');
+        self::changingActive('Questionnaires');
+        self::changingActive('Lotteries');
+    }
+
 }

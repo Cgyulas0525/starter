@@ -83,7 +83,7 @@ class PartnerquestionnariesController extends AppBaseController
                     ->join('partners as t2', 't2.id', '=', 't1.partner_id')
                     ->join('questionnaires as t3', 't3.id', '=', 't1.questionnarie_id')
                     ->select('t1.*', 't2.name as partnerName', 't3.name as questionnarieName', 't3.active as qactive',
-                        't3.active', 't3.validityfrom', 't3.validityto')
+                        't3.active', 't3.validityfrom', 't3.validityto', 't3.id as questionnarieId')
                     ->where('t1.partner_id', $id)
                     ->whereNull('t1.deleted_at')
                     ->get();
@@ -112,7 +112,7 @@ class PartnerquestionnariesController extends AppBaseController
                     ->join('partners as t2', 't2.id', '=', 't1.partner_id')
                     ->join('questionnaires as t3', 't3.id', '=', 't1.questionnarie_id')
                     ->select('t1.*', 't2.name as partnerName', 't3.name as questionnarieName', 't3.active as qactive',
-                        't3.active', 't3.validityfrom', 't3.validityto')
+                        't2.active as pactive', 't3.validityfrom', 't3.validityto', 't2.id as partnerId')
                     ->where('t1.questionnarie_id', $id)
                     ->whereNull('t1.deleted_at')
                     ->get();
@@ -229,15 +229,54 @@ class PartnerquestionnariesController extends AppBaseController
         return redirect(route('partnerquestionnaries.index'));
     }
 
-        /*
-         * Dropdown for field select
-         *
-         * return array
-         */
-        public static function DDDW() : array
-        {
-            return [" "] + partnerquestionnaries::orderBy('name')->pluck('name', 'id')->toArray();
-        }
+    /*
+     * Dropdown for field select
+     *
+     * return array
+     */
+    public static function DDDW() : array
+    {
+        return [" "] + partnerquestionnaries::orderBy('name')->pluck('name', 'id')->toArray();
+    }
+
+    /**
+     * Partners witch not are in partnerquestionnaries table
+     *
+     * @param $id
+     * @return \Illuminate\Support\Collection
+     */
+    public static function PartnerQuestionnairesPartnerNotConnected($id) {
+        $data = DB::table('partners as t1')
+            ->whereNull('t1.deleted_at')
+            ->where('active', 1)
+            ->whereNotIn('id', DB::table('partnerquestionnaries as t2')->where('t2.questionnarie_id', $id)->pluck('t2.partner_id'))
+            ->orWhereIn('id', DB::table('partnerquestionnaries as t2')->where('t2.questionnarie_id', $id)->whereNotNull('t2.deleted_at')->pluck('t2.partner_id'))
+            ->get();;
+
+        return Datatables::of($data)
+            ->addIndexColumn()
+            ->make(true);
+
+    }
+
+    /**
+     * Questionnarie witch not are in partnerquestionnaries table
+     *
+     * @param $id
+     * @return \Illuminate\Support\Collection
+     */
+    public function PartnerQuestionnariesQuestionnarieNotConnected($id) {
+        $data = DB::table('questionnaires as t1')
+            ->whereNull('t1.deleted_at')
+            ->where('active', 1)
+            ->whereNotIn('id', DB::table('partnerquestionnaries as t2')->where('t2.partner_id', $id)->pluck('t2.questionnarie_id'))
+            ->orWhereIn('id', DB::table('partnerquestionnaries as t2')->where('t2.partner_id', $id)->whereNotNull('t2.deleted_at')->pluck('t2.questionnarie_id'))
+            ->get();
+
+        return Datatables::of($data)
+            ->addIndexColumn()
+            ->make(true);
+    }
 }
 
 

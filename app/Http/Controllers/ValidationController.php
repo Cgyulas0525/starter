@@ -222,7 +222,7 @@ class ValidationController extends Controller
     public function clientQuestionnarieInsert($client, $questionnarie) {
         $clientquestionnarie = new Clientquestionnaries();
         $clientquestionnarie->client_id = $client->id;
-        $clientquestionnarie->voucher_id = $questionnarie->id;
+        $clientquestionnarie->questionnarie_id = $questionnarie->id;
         $clientquestionnarie->posted = \Carbon\Carbon::now();
         $clientquestionnarie->created_at = \Carbon\Carbon::now();
         $clientquestionnarie->save();
@@ -239,7 +239,7 @@ class ValidationController extends Controller
     {
 
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])
-            ->loadView('printing.voucherPrintingEmail', ['voucher' => $voucher, 'client' => $client]);
+            ->loadView('printing.printingEmail', ['body' => 'printing.voucherPrintingBody', 'voucher' => $voucher, 'client' => $client]);
 
         $fileName = $voucher->partnerName . '-' . $client->name . '-' . $voucher->name . '-' . date('Y-m-d',strtotime('today')) .'-voucher.pdf';
         $path = public_path('print/'.$fileName);
@@ -261,9 +261,9 @@ class ValidationController extends Controller
     {
 
         $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])
-            ->loadView('printing.voucherPrintingEmail', ['questionnarie' => $questionnarie, 'client' => $client]);
+            ->loadView('printing.printingEmail', ['body' => 'printing.questionnairePrintingBody', 'questionnaire' => $questionnarie, 'client' => $client]);
 
-        $fileName = $questionnarie->partnerName . '-' . $client->name . '-' . $questionnarie->name . '-' . date('Y-m-d',strtotime('today')) .'-kérdőív.pdf';
+        $fileName = $client->name . '-' . $questionnarie->name . '-' . date('Y-m-d',strtotime('today')) .'-kérdőív.pdf';
         $path = public_path('print/'.$fileName);
 
         $pdf->save($path, 'UTF-8');
@@ -271,28 +271,6 @@ class ValidationController extends Controller
         return $path;
 
     }
-
-//    public function voucherEmail($client, $files) {
-//
-//        $data["client"] = $client->name;
-//        $data["email"] = $client->email;
-//        $data["title"] = config('app.name') . ' alkalmazás!';
-//        $data["body"] = config('app.name') . ' alkalmazás új vouchert, vochereket küldött Önnek.';
-//        $data["datum"] = date('Y-m-d');
-//
-//        Mail::send('emails.voucherMail', $data, function($message) use($files, $data) {
-//            $message->to($data["email"], $data["email"])
-//                ->subject($data["title"]);
-//
-//            foreach ($files as $file) {
-//                $message->attach($file);
-//            }
-//
-//        });
-//
-//        return back();
-//
-//    }
 
     /**
      * @param $client

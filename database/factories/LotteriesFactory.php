@@ -23,13 +23,15 @@ class LotteriesFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-        'lotteriedate' => $this->faker->word,
-        'content' => $this->faker->word,
-        'description' => $this->faker->word,
-        'active' => $this->faker->randomDigitNotNull,
-        'created_at' => $this->faker->date('Y-m-d H:i:s'),
-        'updated_at' => $this->faker->date('Y-m-d H:i:s'),
-        'deleted_at' => $this->faker->date('Y-m-d H:i:s')
+            'lotteriedate' => $this->faker->word,
+            'content' => $this->faker->word,
+            'description' => $this->faker->word,
+            'active' => $this->faker->randomDigitNotNull,
+            'validityfrom' => $this->faker->word,
+            'validityto' => $this->faker->word,
+            'created_at' => $this->faker->date('Y-m-d H:i:s'),
+            'updated_at' => $this->faker->date('Y-m-d H:i:s'),
+            'deleted_at' => $this->faker->date('Y-m-d H:i:s')
         ];
     }
 }

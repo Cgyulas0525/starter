@@ -62,6 +62,7 @@ Route::get('beforeActivationWithParam/{table}/{id}/{route}/{param}', [ChangeActi
 
 Route::get('Activation/{id}/{table}/{route}', [ChangeActiveController::class, 'Activation'])->name('Activation');
 Route::get('ActivationWithParam/{table}/{id}/{route}/{param}', [ChangeActiveController::class, 'ActivationWithParam'])->name('ActivationWithParam');
+Route::get('deActivating', [ChangeActiveController::class, 'deActivating'])->name('deActivating');
 
 Route::get('settingIndex', [SettingController::class, 'index'])->name('settingIndex');
 Route::get('communicationIndex', [SettingController::class, 'communicationIndex'])->name('communicationIndex');

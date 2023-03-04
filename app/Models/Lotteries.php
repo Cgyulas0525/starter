@@ -38,7 +38,10 @@ class Lotteries extends Model
         'lotteriedate',
         'content',
         'description',
-        'active'
+        'active',
+        'validityfrom',
+        'validityto',
+
     ];
 
     /**
@@ -52,7 +55,10 @@ class Lotteries extends Model
         'lotteriedate' => 'date',
         'content' => 'string',
         'description' => 'string',
-        'active' => 'integer'
+        'active' => 'integer',
+        'validityfrom' => 'date',
+        'validityto' => 'date'
+
     ];
 
     /**
@@ -66,6 +72,8 @@ class Lotteries extends Model
         'content' => 'nullable|string|max:500',
         'description' => 'nullable|string|max:500',
         'active' => 'required|integer',
+        'validityfrom' => 'required',
+        'validityto' => 'nullable',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'

@@ -21,7 +21,10 @@ class LotteriesRepository extends BaseRepository
         'lotteriedate',
         'content',
         'description',
-        'active'
+        'active',
+        'validityfrom',
+        'validityto',
+
     ];
 
     /**

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Flash;
 use App\Models\Users;
+use App\Http\Controllers\ChangeActiveController;
 
 class MyloginController extends Controller
 {
@@ -13,8 +14,6 @@ class MyloginController extends Controller
 
         $name = $request->name;
         $password = $request->password;
-
-//        dd($name, $password);
 
         if (empty($name)) {
             Flash::error(__('A név kötelező!'))->important();
@@ -36,6 +35,7 @@ class MyloginController extends Controller
         }
 
         session(['userId' => $user->id]);
+        ChangeActiveController::deActivating();
 
         return view('home');
     }
