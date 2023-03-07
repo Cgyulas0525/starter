@@ -17,5 +17,6 @@ use App\Http\Controllers\MyApiController;
 */
 
 Route::get('PartnerQuestionnairesPartnerNotConnected/{id}', [PartnerquestionnariesController::class, 'PartnerQuestionnairesPartnerNotConnected'])->name('PartnerQuestionnairesPartnerNotConnected');
+Route::get('PartnerQuestionnariesQuestionnarieNotConnected/{id}', [PartnerquestionnariesController::class, 'PartnerQuestionnariesQuestionnarieNotConnected'])->name('PartnerQuestionnariesQuestionnarieNotConnected');
 Route::get('partnerAttachQuestionnarie', [MyApiController::class, 'partnerAttachQuestionnarie'])->name('partnerAttachQuestionnarie');
 Route::get('partnerUnhookQuestionnarie', [MyApiController::class, 'partnerUnhookQuestionnarie'])->name('partnerUnhookQuestionnarie');

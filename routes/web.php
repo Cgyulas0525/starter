@@ -84,6 +84,7 @@ Route::get('postcodeSettlementDDDW',[PartnersController::class, 'postcodeSettlem
 Route::resource('partners', App\Http\Controllers\PartnersController::class);
 Route::get('partnersIndex/{active?}', [PartnersController::class, 'partnersIndex'])->name('partnersIndex');
 Route::get('partnerContactEdit/{id}', [PartnersController::class, 'partnerContactEdit'])->name('partnerContactEdit');
+Route::get('pqEdit/{id}', [PartnersController::class, 'pqEdit'])->name('pqEdit');
 
 Route::resource('partnercontacts', App\Http\Controllers\PartnercontactsController::class);
 Route::get('partnerContactsIndex/{partner}/{active?}', [PartnercontactsController::class, 'partnerContactsIndex'])->name('partnerContactsIndex');

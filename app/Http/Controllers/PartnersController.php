@@ -42,6 +42,8 @@ class PartnersController extends AppBaseController
                              class="edit btn btn-info btn-sm editProduct" title="Felhasználók"><i class="fas fa-users"></i></a>';
                     $btn = $btn.'<a href="' . route('beforeActivation', [$row->id, 'Partners', 'partners']) . '"
                                          class="btn btn-warning btn-sm deleteProduct" title="Deaktiválás"><i class="fas fa-user-check"></i></a>';
+                    $btn = $btn.'<a href="' . route('pqEdit', [$row->id]) . '"
+                                 class="edit btn btn-primary btn-sm editProduct" title="Űrlapok"><i class="fas fa-question-circle"></i></a>';
                 } else {
                     $btn = $btn.'<a href="' . route('beforeActivation', [$row->id, 'Partners', 'partners']) . '"
                                          class="btn btn-danger btn-sm deleteProduct" title="Aktiválás"><i class="fas fa-user-alt-slash"></i></a>';
@@ -194,6 +196,24 @@ class PartnersController extends AppBaseController
         }
 
         return view('partners.partnerContactsEdit')->with('partners', $partners);
+    }
+
+    /**
+     * Show the form for editing the specified Partners.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function pqEdit($id)
+    {
+        $partners = $this->partnersRepository->find($id);
+
+        if (empty($partners)) {
+            return redirect(route('partners.index'));
+        }
+
+        return view('partners.partnerQuestionnaires')->with('partners', $partners);
     }
 
     /**
