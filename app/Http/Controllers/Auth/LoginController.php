@@ -43,24 +43,4 @@ class LoginController extends Controller
 
     }
 
-//    public function username()
-//    {
-//        return 'username';
-//    }
-//
-//    public function myLogin(Request $request)
-//    {
-//        $request->validate([
-//            'username' => 'required',
-//            'password' => 'required',
-//        ]);
-//
-//        $credentials = $request->only('username', 'password');
-//        if (Auth::attempt($credentials)) {
-//
-//            return redirect()->route('partnerTypes.index');
-//        }
-//
-//        return redirect("login")->withSuccess('Oppes! You have entered invalid credentials');
-//    }
 }

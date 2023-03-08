@@ -27,6 +27,7 @@ class LogitemsFactory extends Factory
         'user_id' => $this->faker->randomDigitNotNull,
         'partnercontact_id' => $this->faker->randomDigitNotNull,
         'datatable' => $this->faker->word,
+            'record' => $this->faker->randomDigitNotNull,
         'eventdatetime' => $this->faker->date('Y-m-d H:i:s'),
         'remoteaddress' => $this->faker->word,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),

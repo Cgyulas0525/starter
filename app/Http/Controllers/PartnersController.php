@@ -8,6 +8,7 @@ use App\Http\Requests\CreatePartnersRequest;
 use App\Http\Requests\UpdatePartnersRequest;
 use App\Repositories\PartnersRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Classes\LogitemClass;
 
 use App\Models\Partners;
 
@@ -23,10 +24,12 @@ class PartnersController extends AppBaseController
 {
     /** @var PartnersRepository $partnersRepository*/
     private $partnersRepository;
+    private $logitem;
 
     public function __construct(PartnersRepository $partnersRepo)
     {
         $this->partnersRepository = $partnersRepo;
+        $this->logitem = new LogitemClass();
     }
 
     public function dwData($data)
@@ -140,6 +143,7 @@ class PartnersController extends AppBaseController
         }
 
         $partners = $this->partnersRepository->create($input);
+        $this->logitem->iudRecord(3, $partners->getTable(), $partners->id);
 
         return redirect(route('partners.index'));
     }
@@ -241,6 +245,7 @@ class PartnersController extends AppBaseController
         }
 
         $partners = $this->partnersRepository->update($input, $id);
+        $this->logitem->iudRecord(4, $partners->getTable(), $partners->id);
 
         return redirect(route('partners.index'));
     }
@@ -263,6 +268,7 @@ class PartnersController extends AppBaseController
         }
 
         $this->partnersRepository->delete($id);
+        $this->logitem->iudRecord(5, $partners->getTable(), $partners->id);
 
         return redirect(route('partners.index'));
     }

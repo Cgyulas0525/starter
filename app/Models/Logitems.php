@@ -41,6 +41,7 @@ class Logitems extends Model
         'user_id',
         'partnercontact_id',
         'datatable',
+        'record',
         'eventdatetime',
         'remoteaddress'
     ];
@@ -57,6 +58,7 @@ class Logitems extends Model
         'user_id' => 'integer',
         'partnercontact_id' => 'integer',
         'datatable' => 'string',
+        'record' => 'integer',
         'eventdatetime' => 'datetime',
         'remoteaddress' => 'string'
     ];
@@ -72,6 +74,7 @@ class Logitems extends Model
         'user_id' => 'nullable|integer',
         'partnercontact_id' => 'nullable|integer',
         'datatable' => 'nullable|string|max:100',
+        'record' => 'nullable|integer',
         'eventdatetime' => 'required',
         'remoteaddress' => 'nullable|string|max:100',
         'created_at' => 'nullable',

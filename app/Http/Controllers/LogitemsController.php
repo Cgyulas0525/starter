@@ -14,6 +14,7 @@ use Flash;
 use Response;
 use Auth;
 use DB;
+use Carbon\Carbon;
 use DataTables;
 use myUser;
 
@@ -170,15 +171,15 @@ class LogitemsController extends AppBaseController
         return redirect(route('logitems.index'));
     }
 
-        /*
-         * Dropdown for field select
-         *
-         * return array
-         */
-        public static function DDDW() : array
-        {
-            return [" "] + logitems::orderBy('name')->pluck('name', 'id')->toArray();
-        }
+    /*
+     * Dropdown for field select
+     *
+     * return array
+     */
+    public static function DDDW() : array
+    {
+        return [" "] + logitems::orderBy('name')->pluck('name', 'id')->toArray();
+    }
 }
 
 
