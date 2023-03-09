@@ -16,15 +16,18 @@ use Auth;
 use DB;
 use DataTables;
 use myUser;
+use App\Classes\LogitemClass;
 
 class VouchersController extends AppBaseController
 {
     /** @var VouchersRepository $vouchersRepository*/
     private $vouchersRepository;
+    private $logitem;
 
     public function __construct(VouchersRepository $vouchersRepo)
     {
         $this->vouchersRepository = $vouchersRepo;
+        $this->logitem = new LogitemClass();
     }
 
     public function dwData($data)
@@ -141,6 +144,7 @@ class VouchersController extends AppBaseController
         $vouchers = $this->vouchersRepository->create($input);
         $vouchers->qrcode = 'http://voucher/' . $vouchers->id;
         $vouchers->save();
+        $this->logitem->iudRecord(3, $vouchers->getTable(), $vouchers->id);
 
         return redirect(route('vouchers.index'));
     }
@@ -198,6 +202,7 @@ class VouchersController extends AppBaseController
         }
 
         $vouchers = $this->vouchersRepository->update($request->all(), $id);
+        $this->logitem->iudRecord(4, $vouchers->getTable(), $vouchers->id);
 
         return redirect(route('vouchers.index'));
     }
@@ -220,6 +225,7 @@ class VouchersController extends AppBaseController
         }
 
         $this->vouchersRepository->delete($id);
+        $this->logitem->iudRecord(5, $vouchers->getTable(), $vouchers->id);
 
         return redirect(route('vouchers.index'));
     }

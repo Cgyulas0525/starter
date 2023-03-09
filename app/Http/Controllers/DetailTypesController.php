@@ -8,6 +8,7 @@ use App\Repositories\DetailTypesRepository;
 use App\Http\Controllers\AppBaseController;
 
 use App\Models\DetailTypes;
+use App\Classes\LogitemClass;
 
 use Illuminate\Http\Request;
 use Flash;
@@ -21,10 +22,12 @@ class DetailTypesController extends AppBaseController
 {
     /** @var DetailTypesRepository $detailTypesRepository*/
     private $detailTypesRepository;
+    private $logitem;
 
     public function __construct(DetailTypesRepository $detailTypesRepo)
     {
         $this->detailTypesRepository = $detailTypesRepo;
+        $this->logitem = new LogitemClass();
     }
 
     public function dwData($data)
@@ -88,6 +91,7 @@ class DetailTypesController extends AppBaseController
         $input = $request->all();
 
         $detailTypes = $this->detailTypesRepository->create($input);
+        $this->logitem->iudRecord(3, $detailTypes->getTable(), $detailTypes->id);
 
         return redirect(route('detailTypes.index'));
     }
@@ -145,6 +149,7 @@ class DetailTypesController extends AppBaseController
         }
 
         $detailTypes = $this->detailTypesRepository->update($request->all(), $id);
+        $this->logitem->iudRecord(4, $detailTypes->getTable(), $detailTypes->id);
 
         return redirect(route('detailTypes.index'));
     }
@@ -167,6 +172,7 @@ class DetailTypesController extends AppBaseController
         }
 
         $this->detailTypesRepository->delete($id);
+        $this->logitem->iudRecord(5, $detailTypes->getTable(), $detailTypes->id);
 
         return redirect(route('detailTypes.index'));
     }

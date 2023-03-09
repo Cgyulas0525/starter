@@ -17,16 +17,18 @@ use Auth;
 use DB;
 use DataTables;
 use myUser;
-
+use App\Classes\LogitemClass;
 
 class UsersController extends AppBaseController
 {
     /** @var UsersRepository $usersRepository*/
     private $usersRepository;
+    private $logitem;
 
     public function __construct(UsersRepository $usersRepo)
     {
         $this->usersRepository = $usersRepo;
+        $this->logitem = new LogitemClass();
     }
 
     public function dwData($data)
@@ -97,6 +99,7 @@ class UsersController extends AppBaseController
         }
 
         $users = $this->usersRepository->create($input);
+        $this->logitem->iudRecord(3, $users->getTable(), $users->id);
 
         return redirect(route('users.index'));
     }
@@ -162,6 +165,7 @@ class UsersController extends AppBaseController
         }
 
         $users = $this->usersRepository->update($input, $id);
+        $this->logitem->iudRecord(4, $users->getTable(), $users->id);
 
         return redirect(route('users.index'));
     }
@@ -184,6 +188,7 @@ class UsersController extends AppBaseController
         }
 
         $this->usersRepository->delete($id);
+        $this->logitem->iudRecord(5, $users->getTable(), $users->id);
 
         return redirect(route('users.index'));
     }

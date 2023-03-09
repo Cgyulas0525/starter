@@ -17,14 +17,18 @@ use DB;
 use DataTables;
 use myUser;
 
+use App\Classes\LogitemClass;
+
 class PartnerTypesController extends AppBaseController
 {
     /** @var PartnerTypesRepository $partnerTypesRepository*/
     private $partnerTypesRepository;
+    private $logitem;
 
     public function __construct(PartnerTypesRepository $partnerTypesRepo)
     {
         $this->partnerTypesRepository = $partnerTypesRepo;
+        $this->logitem = new LogitemClass();
     }
 
     public function dwData($data)
@@ -87,6 +91,7 @@ class PartnerTypesController extends AppBaseController
         $input = $request->all();
 
         $partnerTypes = $this->partnerTypesRepository->create($input);
+        $this->logitem->iudRecord(3, $partnerTypes->getTable(), $partnerTypes->id);
 
         return redirect(route('partnerTypes.index'));
     }
@@ -144,6 +149,7 @@ class PartnerTypesController extends AppBaseController
         }
 
         $partnerTypes = $this->partnerTypesRepository->update($request->all(), $id);
+        $this->logitem->iudRecord(4, $partnerTypes->getTable(), $partnerTypes->id);
 
         return redirect(route('partnerTypes.index'));
     }
@@ -166,6 +172,7 @@ class PartnerTypesController extends AppBaseController
         }
 
         $this->partnerTypesRepository->delete($id);
+        $this->logitem->iudRecord(5, $partnerTypes->getTable(), $partnerTypes->id);
 
         return redirect(route('partnerTypes.index'));
     }

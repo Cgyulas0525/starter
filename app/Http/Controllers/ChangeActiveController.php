@@ -10,9 +10,16 @@ use PDF;
 use Mail;
 use QrCode;
 use App\Models\Clientvouchers;
+use App\Classes\LogitemClass;
 
 class ChangeActiveController extends Controller
 {
+    public $logitem;
+
+    function __construct() {
+        $this->logitem = new LogitemClass();
+    }
+
     public function beforeActivation($id, $table, $route) {
         $view = 'layouts.show';
         $model_name = 'App\Models\\'.$table;
@@ -33,6 +40,8 @@ class ChangeActiveController extends Controller
 
         $record->active = $record->active == 0 ? 1 : 0;
         $record->save();
+        $this->logitem->iudRecord($record->active == 1 ? 6 : 7, $record->getTable(), $record->id);
+
 
         return redirect(route($route));
     }
@@ -56,11 +65,12 @@ class ChangeActiveController extends Controller
 
         $record->active = $record->active == 0 ? 1 : 0;
         $record->save();
+        $this->logitem->iudRecord($record->active == 1 ? 6 : 7, $record->getTable(), $record->id);
 
         return redirect(route($route,  $param));
     }
 
-    public static function changingActive($model) {
+    public function changingActive($model) {
         $model_name = 'App\Models\\'.$model;
         $datas = $model_name::where('active', 1)
                         ->where('validityfrom', '<=', date('Y.m.d', strtotime('today')))
@@ -70,14 +80,15 @@ class ChangeActiveController extends Controller
             foreach ($datas as $data) {
                 $data->active = 0;
                 $data->save();
+                $this->logitem->iudRecord(7, $data->getTable(), $data->id);
             }
         }
     }
 
-    public static function deActivating() {
-        self::changingActive('Vouchers');
-        self::changingActive('Questionnaires');
-        self::changingActive('Lotteries');
+    public function deActivating() {
+        $this->changingActive('Vouchers');
+        $this->changingActive('Questionnaires');
+        $this->changingActive('Lotteries');
     }
 
 }

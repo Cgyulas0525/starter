@@ -16,15 +16,18 @@ use Auth;
 use DB;
 use DataTables;
 use myUser;
+use App\Classes\LogitemClass;
 
 class ValidpostcodesController extends AppBaseController
 {
     /** @var ValidpostcodesRepository $validpostcodesRepository*/
     private $validpostcodesRepository;
+    private $logitem;
 
     public function __construct(ValidpostcodesRepository $validpostcodesRepo)
     {
         $this->validpostcodesRepository = $validpostcodesRepo;
+        $this->logitem = new LogitemClass();
     }
 
     public function dwData($data)
@@ -126,6 +129,7 @@ class ValidpostcodesController extends AppBaseController
         $input = $request->all();
 
         $validpostcodes = $this->validpostcodesRepository->create($input);
+        $this->logitem->iudRecord(3, $validpostcodes->getTable(), $validpostcodes->id);
 
         return redirect(route('validpostcodes.index'));
     }
@@ -183,6 +187,7 @@ class ValidpostcodesController extends AppBaseController
         }
 
         $validpostcodes = $this->validpostcodesRepository->update($request->all(), $id);
+        $this->logitem->iudRecord(4, $validpostcodes->getTable(), $validpostcodes->id);
 
         return redirect(route('validpostcodes.index'));
     }
@@ -205,6 +210,7 @@ class ValidpostcodesController extends AppBaseController
         }
 
         $this->validpostcodesRepository->delete($id);
+        $this->logitem->iudRecord(5, $validpostcodes->getTable(), $validpostcodes->id);
 
         return redirect(route('validpostcodes.index'));
     }

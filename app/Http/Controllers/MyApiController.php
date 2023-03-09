@@ -10,6 +10,7 @@ use Response;
 use DB;
 
 use App\Models\Partnerquestionnaries;
+use App\Classes\LogitemClass;
 
 class MyApiController extends Controller
 {
@@ -22,6 +23,9 @@ class MyApiController extends Controller
             $validpostcodes->active = 1;
             $validpostcodes->created_at = Carbon::now();
             $validpostcodes->save();
+            $logitem = new LogitemClass();
+            $logitem->iudRecord(3, $validpostcodes->getTable(), $validpostcodes->id);
+
         }
     }
 
@@ -53,6 +57,8 @@ class MyApiController extends Controller
             $partnerQuestionnarie->created_at = Carbon::now();
 
             $partnerQuestionnarie->save();
+            $logitem = new LogitemClass();
+            $logitem->iudRecord(3, $partnerQuestionnarie->getTable(), $partnerQuestionnarie->id);
         }
 
         return back();

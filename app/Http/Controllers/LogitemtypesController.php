@@ -16,15 +16,18 @@ use Auth;
 use DB;
 use DataTables;
 use myUser;
+use App\Classes\LogitemClass;
 
 class LogitemtypesController extends AppBaseController
 {
     /** @var LogitemtypesRepository $logitemtypesRepository*/
     private $logitemtypesRepository;
+    private $logitem;
 
     public function __construct(LogitemtypesRepository $logitemtypesRepo)
     {
         $this->logitemtypesRepository = $logitemtypesRepo;
+        $this->logitem = new LogitemClass();
     }
 
     public function dwData($data)
@@ -87,6 +90,7 @@ class LogitemtypesController extends AppBaseController
         $input = $request->all();
 
         $logitemtypes = $this->logitemtypesRepository->create($input);
+        $this->logitem->iudRecord(3, $logitemtypes->getTable(), $logitemtypes->id);
 
         return redirect(route('logitemtypes.index'));
     }
@@ -144,6 +148,7 @@ class LogitemtypesController extends AppBaseController
         }
 
         $logitemtypes = $this->logitemtypesRepository->update($request->all(), $id);
+        $this->logitem->iudRecord(4, $logitemtypes->getTable(), $logitemtypes->id);
 
         return redirect(route('logitemtypes.index'));
     }
@@ -166,6 +171,7 @@ class LogitemtypesController extends AppBaseController
         }
 
         $this->logitemtypesRepository->delete($id);
+        $this->logitem->iudRecord(5, $logitemtypes->getTable(), $logitemtypes->id);
 
         return redirect(route('logitemtypes.index'));
     }

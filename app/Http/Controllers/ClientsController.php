@@ -8,6 +8,7 @@ use App\Repositories\ClientsRepository;
 use App\Http\Controllers\AppBaseController;
 
 use App\Models\Clients;
+use App\Classes\LogitemClass;
 
 use Illuminate\Http\Request;
 use Flash;
@@ -21,10 +22,12 @@ class ClientsController extends AppBaseController
 {
     /** @var ClientsRepository $clientsRepository*/
     private $clientsRepository;
+    private $logitem;
 
     public function __construct(ClientsRepository $clientsRepo)
     {
         $this->clientsRepository = $clientsRepo;
+        $this->logitem = new LogitemClass();
     }
 
     public function dwData($data)
@@ -149,6 +152,7 @@ class ClientsController extends AppBaseController
         $input = $request->all();
 
         $clients = $this->clientsRepository->create($input);
+        $this->logitem->iudRecord(3, $clients->getTable(), $clients->id);
 
         return redirect(route('clients.index'));
     }
@@ -242,6 +246,7 @@ class ClientsController extends AppBaseController
         }
 
         $clients = $this->clientsRepository->update($request->all(), $id);
+        $this->logitem->iudRecord(4, $clients->getTable(), $clients->id);
 
         return redirect(route('clients.index'));
     }
@@ -264,6 +269,7 @@ class ClientsController extends AppBaseController
         }
 
         $this->clientsRepository->delete($id);
+        $this->logitem->iudRecord(5, $clients->getTable(), $clients->id);
 
         return redirect(route('clients.index'));
     }

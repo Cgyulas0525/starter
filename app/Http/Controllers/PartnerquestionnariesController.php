@@ -16,15 +16,18 @@ use Auth;
 use DB;
 use DataTables;
 use myUser;
+use App\Classes\LogitemClass;
 
 class PartnerquestionnariesController extends AppBaseController
 {
     /** @var PartnerquestionnariesRepository $partnerquestionnariesRepository*/
     private $partnerquestionnariesRepository;
+    private $logitem;
 
     public function __construct(PartnerquestionnariesRepository $partnerquestionnariesRepo)
     {
         $this->partnerquestionnariesRepository = $partnerquestionnariesRepo;
+        $this->logitem = new LogitemClass();
     }
 
     public function dwData($data)
@@ -146,6 +149,7 @@ class PartnerquestionnariesController extends AppBaseController
         $input = $request->all();
 
         $partnerquestionnaries = $this->partnerquestionnariesRepository->create($input);
+        $this->logitem->iudRecord(3, $partnerquestionnaries->getTable(), $partnerquestionnaries->id);
 
         return redirect(route('partnerquestionnaries.index'));
     }
@@ -203,6 +207,8 @@ class PartnerquestionnariesController extends AppBaseController
         }
 
         $partnerquestionnaries = $this->partnerquestionnariesRepository->update($request->all(), $id);
+        $this->logitem->iudRecord(4, $partnerquestionnaries->getTable(), $partnerquestionnaries->id);
+
 
         return redirect(route('partnerquestionnaries.index'));
     }
@@ -225,6 +231,7 @@ class PartnerquestionnariesController extends AppBaseController
         }
 
         $this->partnerquestionnariesRepository->delete($id);
+        $this->logitem->iudRecord(5, $partnerquestionnaries->getTable(), $partnerquestionnaries->id);
 
         return redirect(route('partnerquestionnaries.index'));
     }

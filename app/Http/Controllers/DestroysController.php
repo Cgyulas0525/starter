@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Classes\SWAlertClass;
-
-use App\Models\Contractdeadlineitem;
+use App\Classes\LogitemClass;
 
 class DestroysController extends Controller
 {
+    private $logitem;
+
+    function __construct() {
+        $this->logitem = new LogitemClass();
+    }
 
     public function beforeDestroys($table, $id, $route) {
         $view = 'layouts.show';
@@ -51,20 +55,10 @@ class DestroysController extends Controller
         }
 
         $data->delete();
+        $this->logitem->iudRecord(5, $data->getTable(), $data->id);
 
         return redirect(route($route));
     }
-
-    public function deletingContractAnnex($data) {
-        if (!is_null($data->document_url)) {
-            unlink($data->document_url);
-        }
-    }
-
-    public function deletingContractDeadLine($data) {
-        Contractdeadlineitem::where('contractdeadline_id', $data->id)->delete();
-    }
-
 
     public function destroyWithParam($table, $id, $route, $param) {
         $model_name = 'App\Models\\'.$table;
@@ -86,6 +80,8 @@ class DestroysController extends Controller
         }
 
         $data->delete();
+        $this->logitem->iudRecord(5, $data->getTable(), $data->id);
+
         return redirect(route($route,  $param));
     }
 

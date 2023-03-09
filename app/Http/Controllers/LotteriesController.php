@@ -16,15 +16,18 @@ use Auth;
 use DB;
 use DataTables;
 use myUser;
+use App\Classes\LogitemClass;
 
 class LotteriesController extends AppBaseController
 {
     /** @var LotteriesRepository $lotteriesRepository*/
     private $lotteriesRepository;
+    private $logitem;
 
     public function __construct(LotteriesRepository $lotteriesRepo)
     {
         $this->lotteriesRepository = $lotteriesRepo;
+        $this->logitem = new LogitemClass();
     }
 
     public function dwData($data)
@@ -123,6 +126,7 @@ class LotteriesController extends AppBaseController
         $input = $request->all();
 
         $lotteries = $this->lotteriesRepository->create($input);
+        $this->logitem->iudRecord(3, $lotteries->getTable(), $lotteries->id);
 
         return redirect(route('lotteries.index'));
     }
@@ -180,6 +184,7 @@ class LotteriesController extends AppBaseController
         }
 
         $lotteries = $this->lotteriesRepository->update($request->all(), $id);
+        $this->logitem->iudRecord(4, $lotteries->getTable(), $lotteries->id);
 
         return redirect(route('lotteries.index'));
     }
@@ -202,6 +207,7 @@ class LotteriesController extends AppBaseController
         }
 
         $this->lotteriesRepository->delete($id);
+        $this->logitem->iudRecord(5, $lotteries->getTable(), $lotteries->id);
 
         return redirect(route('lotteries.index'));
     }

@@ -17,15 +17,18 @@ use Auth;
 use DB;
 use DataTables;
 use myUser;
+use App\Classes\LogitemClass;
 
 class QuestionnairedetailitemsController extends AppBaseController
 {
     /** @var QuestionnairedetailitemsRepository $questionnairedetailitemsRepository*/
     private $questionnairedetailitemsRepository;
+    private $logitem;
 
     public function __construct(QuestionnairedetailitemsRepository $questionnairedetailitemsRepo)
     {
         $this->questionnairedetailitemsRepository = $questionnairedetailitemsRepo;
+        $this->logitem = new LogitemClass();
     }
 
     public function dwData($data)
@@ -112,6 +115,7 @@ class QuestionnairedetailitemsController extends AppBaseController
         $input = $request->all();
 
         $questionnairedetailitems = $this->questionnairedetailitemsRepository->create($input);
+        $this->logitem->iudRecord(3, $questionnairedetailitems->getTable(), $questionnairedetailitems->id);
 
         return redirect(route('questionnairedetails.edit', $questionnairedetailitems->questionnariedetail_id));
     }
@@ -169,6 +173,7 @@ class QuestionnairedetailitemsController extends AppBaseController
         }
 
         $questionnairedetailitems = $this->questionnairedetailitemsRepository->update($request->all(), $id);
+        $this->logitem->iudRecord(4, $questionnairedetailitems->getTable(), $questionnairedetailitems->id);
 
         return redirect(route('questionnairedetailitems.index'));
     }
@@ -191,6 +196,7 @@ class QuestionnairedetailitemsController extends AppBaseController
         }
 
         $this->questionnairedetailitemsRepository->delete($id);
+        $this->logitem->iudRecord(5, $questionnairedetailitems->getTable(), $questionnairedetailitems->id);
 
         return redirect(route('questionnairedetailitems.index'));
     }

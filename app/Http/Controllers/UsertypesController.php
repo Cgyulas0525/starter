@@ -16,15 +16,18 @@ use Auth;
 use DB;
 use DataTables;
 use myUser;
+use App\Classes\LogitemClass;
 
 class UsertypesController extends AppBaseController
 {
     /** @var UsertypesRepository $usertypesRepository*/
     private $usertypesRepository;
+    private $logitem;
 
     public function __construct(UsertypesRepository $usertypesRepo)
     {
         $this->usertypesRepository = $usertypesRepo;
+        $this->logitem = new LogitemClass();
     }
 
     public function dwData($data)
@@ -87,6 +90,7 @@ class UsertypesController extends AppBaseController
         $input = $request->all();
 
         $usertypes = $this->usertypesRepository->create($input);
+        $this->logitem->iudRecord(3, $usertypes->getTable(), $usertypes->id);
 
         return redirect(route('usertypes.index'));
     }
@@ -144,6 +148,7 @@ class UsertypesController extends AppBaseController
         }
 
         $usertypes = $this->usertypesRepository->update($request->all(), $id);
+        $this->logitem->iudRecord(4, $usertypes->getTable(), $usertypes->id);
 
         return redirect(route('usertypes.index'));
     }
@@ -166,6 +171,7 @@ class UsertypesController extends AppBaseController
         }
 
         $this->usertypesRepository->delete($id);
+        $this->logitem->iudRecord(5, $usertypes->getTable(), $usertypes->id);
 
         return redirect(route('usertypes.index'));
     }

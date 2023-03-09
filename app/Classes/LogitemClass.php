@@ -3,6 +3,8 @@
 namespace App\Classes;
 
 use App\Models\Logitems;
+use myUser;
+use Carbon;
 
 class LogitemClass
 {
@@ -10,7 +12,7 @@ class LogitemClass
     public function iudRecord($logitemtype_id, $datatable, $record) {
 
         $logitem = new Logitems();
-        $logitem->logitemtype_id = $logitemtye_id;
+        $logitem->logitemtype_id = $logitemtype_id;
         $logitem->user_id = myUser::user()->id;
         $logitem->datatable = $datatable;
         $logitem->record = $record;

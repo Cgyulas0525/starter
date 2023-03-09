@@ -26,10 +26,15 @@ use Mail;
 use QrCode;
 
 use App\Http\Controllers\QuestionnariesToolController;
-
+use App\Classes\LogitemClass;
 
 class ValidationController extends Controller
 {
+    private $logitem;
+
+    function __construct() {
+        $this->logitem = new LogitemClass();
+    }
     /**
      * @param $data
      * @return mixed
@@ -114,6 +119,7 @@ class ValidationController extends Controller
         $record->validated = $record->validated == 0 ? 1 : 0;
         $record->local = ClientToolsController::localCheck($record->postcode);
         $record->save();
+        $this->logitem->iudRecord(8, $record->getTable(), $record->id);
 
         return redirect(route($route));
     }
@@ -188,6 +194,7 @@ class ValidationController extends Controller
         $record->validated = $record->validated == 0 ? 1 : 0;
         $record->local = ClientToolsController::localCheck($record->postcode);
         $record->save();
+        $this->logitem->iudRecord(8, $record->getTable(), $record->id);
 
         if (ToolsClass::toBeValidated()->count() > 0) {
             return redirect(route('validating', [1,0]));
@@ -210,6 +217,7 @@ class ValidationController extends Controller
         $clientvoucher->posted = \Carbon\Carbon::now();
         $clientvoucher->created_at = \Carbon\Carbon::now();
         $clientvoucher->save();
+        $this->logitem->iudRecord(3, $clientvoucher->getTable(), $clientvoucher->id);
     }
 
     /**
@@ -226,6 +234,7 @@ class ValidationController extends Controller
         $clientquestionnarie->posted = \Carbon\Carbon::now();
         $clientquestionnarie->created_at = \Carbon\Carbon::now();
         $clientquestionnarie->save();
+        $this->logitem->iudRecord(3, $clientquestionnarie->getTable(), $clientquestionnarie->id);
     }
 
     /**

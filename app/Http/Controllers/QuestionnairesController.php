@@ -16,15 +16,18 @@ use Auth;
 use DB;
 use DataTables;
 use myUser;
+use App\Classes\LogitemClass;
 
 class QuestionnairesController extends AppBaseController
 {
     /** @var QuestionnairesRepository $questionnairesRepository*/
     private $questionnairesRepository;
+    private $logitem;
 
     public function __construct(QuestionnairesRepository $questionnairesRepo)
     {
         $this->questionnairesRepository = $questionnairesRepo;
+        $this->logitem = new LogitemClass();
     }
 
     public function dwData($data)
@@ -132,7 +135,7 @@ class QuestionnairesController extends AppBaseController
         $questionnaires = $this->questionnairesRepository->create($input);
         $questionnaires->qrcode = 'http://quetionnarie/' . $questionnaires->id;
         $questionnaires->save();
-
+        $this->logitem->iudRecord(3, $questionnaires->getTable(), $questionnaires->id);
 
         return redirect(route('questionnaires.index'));
     }
@@ -219,6 +222,7 @@ class QuestionnairesController extends AppBaseController
         }
 
         $questionnaires = $this->questionnairesRepository->update($request->all(), $id);
+        $this->logitem->iudRecord(4, $questionnaires->getTable(), $questionnaires->id);
 
         return redirect(route('questionnaires.index'));
     }
@@ -241,6 +245,7 @@ class QuestionnairesController extends AppBaseController
         }
 
         $this->questionnairesRepository->delete($id);
+        $this->logitem->iudRecord(5, $questionnaires->getTable(), $questionnaires->id);
 
         return redirect(route('questionnaires.index'));
     }

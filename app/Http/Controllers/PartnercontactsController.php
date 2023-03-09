@@ -17,15 +17,18 @@ use Auth;
 use DB;
 use DataTables;
 use myUser;
+use App\Classes\LogitemClass;
 
 class PartnercontactsController extends AppBaseController
 {
     /** @var PartnercontactsRepository $partnercontactsRepository*/
     private $partnercontactsRepository;
+    private $logitem;
 
     public function __construct(PartnercontactsRepository $partnercontactsRepo)
     {
         $this->partnercontactsRepository = $partnercontactsRepo;
+        $this->logitem = new LogitemClass();
     }
 
     public function dwData($data)
@@ -135,6 +138,8 @@ class PartnercontactsController extends AppBaseController
         $input = $request->all();
 
         $partnercontacts = $this->partnercontactsRepository->create($input);
+        $this->logitem->iudRecord(3, $partnercontacts->getTable(), $partnercontacts->id);
+
         $partners = Partners::find($partnercontacts->id);
 
         return redirect(route('partnerContactEdit', ['partners' => $partners]));
@@ -193,6 +198,7 @@ class PartnercontactsController extends AppBaseController
         }
 
         $partnercontacts = $this->partnercontactsRepository->update($request->all(), $id);
+        $this->logitem->iudRecord(4, $partnercontacts->getTable(), $partnercontacts->id);
 
         return redirect(route('partnercontacts.index'));
     }
@@ -215,6 +221,7 @@ class PartnercontactsController extends AppBaseController
         }
 
         $this->partnercontactsRepository->delete($id);
+        $this->logitem->iudRecord(5, $partnercontacts->getTable(), $partnercontacts->id);
 
         return redirect(route('partnercontacts.index'));
     }

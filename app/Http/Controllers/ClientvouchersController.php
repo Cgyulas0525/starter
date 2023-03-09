@@ -8,6 +8,7 @@ use App\Repositories\ClientvouchersRepository;
 use App\Http\Controllers\AppBaseController;
 
 use App\Models\Clientvouchers;
+use App\Classes\LogitemClass;
 
 use Illuminate\Http\Request;
 use Flash;
@@ -21,10 +22,12 @@ class ClientvouchersController extends AppBaseController
 {
     /** @var ClientvouchersRepository $clientvouchersRepository*/
     private $clientvouchersRepository;
+    private $logitem;
 
     public function __construct(ClientvouchersRepository $clientvouchersRepo)
     {
         $this->clientvouchersRepository = $clientvouchersRepo;
+        $this->logitem = new LogitemClass();
     }
 
     public function dwData($data)
@@ -118,6 +121,7 @@ class ClientvouchersController extends AppBaseController
         $input = $request->all();
 
         $clientvouchers = $this->clientvouchersRepository->create($input);
+        $this->logitem->iudRecord(3, $clientvouchers->getTable(), $clientvouchers->id);
 
         return redirect(route('clientvouchers.index'));
     }
@@ -175,6 +179,7 @@ class ClientvouchersController extends AppBaseController
         }
 
         $clientvouchers = $this->clientvouchersRepository->update($request->all(), $id);
+        $this->logitem->iudRecord(4, $clientvouchers->getTable(), $clientvouchers->id);
 
         return redirect(route('clientvouchers.index'));
     }
@@ -197,6 +202,7 @@ class ClientvouchersController extends AppBaseController
         }
 
         $this->clientvouchersRepository->delete($id);
+        $this->logitem->iudRecord(6, $clientvouchers->getTable(), $clientvouchers->id);
 
         return redirect(route('clientvouchers.index'));
     }

@@ -8,6 +8,7 @@ use App\Repositories\ClientquestionnariesRepository;
 use App\Http\Controllers\AppBaseController;
 
 use App\Models\Clientquestionnaries;
+use App\Classes\LogitemClass;
 
 use Illuminate\Http\Request;
 use Flash;
@@ -21,10 +22,12 @@ class ClientquestionnariesController extends AppBaseController
 {
     /** @var ClientquestionnariesRepository $clientquestionnariesRepository*/
     private $clientquestionnariesRepository;
+    private $logitem;
 
     public function __construct(ClientquestionnariesRepository $clientquestionnariesRepo)
     {
         $this->clientquestionnariesRepository = $clientquestionnariesRepo;
+        $this->logitem = new LogitemClass();
     }
 
     public function dwData($data)
@@ -119,6 +122,8 @@ class ClientquestionnariesController extends AppBaseController
         $input = $request->all();
 
         $clientquestionnaries = $this->clientquestionnariesRepository->create($input);
+        $this->logitem->iudRecord(3, $clientquestionnaries->getTable(), $clientquestionnaries->id);
+
 
         return redirect(route('clientquestionnaries.index'));
     }
@@ -176,6 +181,7 @@ class ClientquestionnariesController extends AppBaseController
         }
 
         $clientquestionnaries = $this->clientquestionnariesRepository->update($request->all(), $id);
+        $this->logitem->iudRecord(4, $clientquestionnaries->getTable(), $clientquestionnaries->id);
 
         return redirect(route('clientquestionnaries.index'));
     }
@@ -198,6 +204,7 @@ class ClientquestionnariesController extends AppBaseController
         }
 
         $this->clientquestionnariesRepository->delete($id);
+        $this->logitem->iudRecord(5, $clientquestionnaries->getTable(), $clientquestionnaries->id);
 
         return redirect(route('clientquestionnaries.index'));
     }
