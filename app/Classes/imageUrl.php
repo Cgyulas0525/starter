@@ -7,6 +7,8 @@ Class imageUrl{
 
     public $file;
 
+    //ide irtam valamit
+
     function __construct($file) {
         $this->file = $file;
     }
