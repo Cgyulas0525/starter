@@ -70,7 +70,7 @@ class ChangeActiveController extends Controller
         return redirect(route($route,  $param));
     }
 
-    public function changingActive($model) {
+    public static function changingActive($model) {
         $model_name = 'App\Models\\'.$model;
         $datas = $model_name::where('active', 1)
                         ->where('validityfrom', '<=', date('Y.m.d', strtotime('today')))
@@ -80,15 +80,15 @@ class ChangeActiveController extends Controller
             foreach ($datas as $data) {
                 $data->active = 0;
                 $data->save();
-                $this->logitem->iudRecord(7, $data->getTable(), $data->id);
+                self::$logitem->iudRecord(7, $data->getTable(), $data->id);
             }
         }
     }
 
-    public function deActivating() {
-        $this->changingActive('Vouchers');
-        $this->changingActive('Questionnaires');
-        $this->changingActive('Lotteries');
+    public static function deActivating() {
+        self::changingActive('Vouchers');
+        self::changingActive('Questionnaires');
+        self::changingActive('Lotteries');
     }
 
 }
