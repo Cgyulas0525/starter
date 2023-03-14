@@ -158,3 +158,12 @@
         </ul>
     </li>
 @endif
+
+{{--<li class="nav-item">--}}
+{{--    <a href="{{ route('clientvoucheruseds.index') }}"--}}
+{{--       class="nav-link {{ Request::is('clientvoucheruseds*') ? 'active' : '' }}">--}}
+{{--        <p>{{ __('Clientvoucheruseds') }}</p>--}}
+{{--    </a>--}}
+{{--</li>--}}
+
+

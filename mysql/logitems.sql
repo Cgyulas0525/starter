@@ -6,6 +6,7 @@ create table logitems
 	user_id int null,
 	partnercontact_id int null,
 	datatable varchar(100) null,
+	record int null,
 	eventdatetime timestamp not null,
 	remoteaddress varchar(100) null,
 	created_at timestamp null,

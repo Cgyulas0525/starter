@@ -25,7 +25,7 @@ class ClientvouchersFactory extends Factory
             'client_id' => $this->faker->randomDigitNotNull,
         'voucher_id' => $this->faker->randomDigitNotNull,
         'posted' => $this->faker->word,
-        'used' => $this->faker->word,
+        'used' => $this->faker->randomDigitNotNull,
         'description' => $this->faker->word,
         'created_at' => $this->faker->date('Y-m-d H:i:s'),
         'updated_at' => $this->faker->date('Y-m-d H:i:s'),

@@ -36,10 +36,10 @@ class ClientvouchersController extends AppBaseController
             ->addIndexColumn()
             ->addColumn('action', function($row){
                 $btn = '';
-//                $btn = '<a href="' . route('clientvouchers.edit', [$row->id]) . '"
-//                             class="edit btn btn-success btn-sm editProduct" title="Módosítás"><i class="fa fa-paint-brush"></i></a>';
-//                $btn = $btn.'<a href="' . route('beforeDestroys', ['Clientvouchers', $row["id"], 'clientvouchers']) . '"
-//                                 class="btn btn-danger btn-sm deleteProduct" title="Törlés"><i class="fa fa-trash"></i></a>';
+//                if ( $row->used > 0 ) {
+                    $btn = $btn.'<a href="' . route('clientvouchers.edit', [$row->id]) . '"
+                                 class="edit btn btn-primary btn-sm editProduct" title="Felhasználások"><i class="fas fa-id-card-alt"></i></a>';
+//                }
                 return $btn;
             })
             ->rawColumns(['action'])

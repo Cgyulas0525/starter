@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-sm-8">
             {!! Form::label('name', __('Név:')) !!}
-            {!! Form::text('name', null, ['class' => 'form-control','maxlength' => 100,'readonly' => true]) !!}
+            {!! Form::text('name', $clients->name, ['class' => 'form-control','maxlength' => 100,'readonly' => true]) !!}
         </div>
         <div class="col-sm-4">
             {!! Form::label('gender', __('Neme:')) !!}
@@ -18,15 +18,15 @@
     <div class="row">
         <div class="col-sm-4">
             {!! Form::label('birthday', __('Születésnap:')) !!}
-            {!! Form::text('birthday', null, ['class' => 'form-control','id'=>'birthday','readonly' => true]) !!}
+            {!! Form::date('birthday', $clients->birthday, ['class' => 'form-control','id'=>'birthday','readonly' => true]) !!}
         </div>
         <div class="col-sm-4">
             {!! Form::label('email', __('Email:')) !!}
-            {!! Form::email('email', null, ['class' => 'form-control','maxlength' => 100,'readonly' => true]) !!}
+            {!! Form::email('email', $clients->email, ['class' => 'form-control','maxlength' => 100,'readonly' => true]) !!}
         </div>
         <div class="col-sm-4">
             {!! Form::label('phonenumber', __('Telefonszám:')) !!}
-            {!! Form::text('phonenumber', null, ['class' => 'form-control','maxlength' => 25,'readonly' => true]) !!}
+            {!! Form::text('phonenumber', $clients->phonenumber, ['class' => 'form-control','maxlength' => 25,'readonly' => true]) !!}
         </div>
     </div>
 </div>

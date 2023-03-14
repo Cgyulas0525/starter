@@ -6,6 +6,7 @@ create table questionnaires
 	validityto date null,
 	active int default 0 not null,
 	basicpackage int default 0 null,
+	qrcode varchar(500) not null,
 	description varchar(500) null,
 	created_at timestamp null,
 	updated_at timestamp null,

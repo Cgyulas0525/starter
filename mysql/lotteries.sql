@@ -6,6 +6,8 @@ create table lotteries
 	content varchar(500) null,
 	description varchar(500) null,
 	active int default 0 not null,
+	validityfrom date not null,
+	validityto date null,
 	created_at timestamp null,
 	updated_at timestamp null,
 	deleted_at timestamp null,

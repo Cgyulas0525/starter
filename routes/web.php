@@ -143,3 +143,6 @@ Route::get('cqIndex/{id}', [ClientquestionnariesController::class, 'cqIndex'])->
 Route::resource('partnerquestionnaries', App\Http\Controllers\PartnerquestionnariesController::class);
 Route::get('pqIndex/{id}', [PartnerquestionnariesController::class, 'pqIndex'])->name('pqIndex');
 Route::get('qpIndex/{id}', [PartnerquestionnariesController::class, 'qpIndex'])->name('qpIndex');
+
+
+Route::resource('clientvoucheruseds', App\Http\Controllers\ClientvoucherusedController::class);
