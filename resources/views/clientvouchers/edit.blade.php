@@ -17,7 +17,7 @@
 
         <div class="card">
 
-            {!! Form::model($clientvouchers, ['route' => ['clientvouchers.update', $clientvouchers->id], 'method' => 'patch']) !!}
+{{--            {!! Form::model($clientvouchers, ['route' => ['clientvouchers.update', $clientvouchers->id], 'method' => 'patch']) !!}--}}
 
             <div class="card-body">
                 <div class="row">
@@ -26,8 +26,8 @@
             </div>
 
             <div class="card-footer">
-                {!! Form::submit(__('Ment'), ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('clientvouchers.index') }}" class="btn btn-default">{{ __('Kilép') }}</a>
+{{--                {!! Form::submit(__('Ment'), ['class' => 'btn btn-primary']) !!}--}}
+                <a href="{{ route('clientVouchers', $clientvouchers->client_id) }}" class="btn btn-default">{{ __('Kilép') }}</a>
             </div>
 
            {!! Form::close() !!}

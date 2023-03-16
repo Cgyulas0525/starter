@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Classes\SWAlertClass;
 use App\Classes\ToolsClass;
+use App\Classes\Models\ModelPath;
 use App\Http\Requests\CreateClientsRequest;
 use App\Http\Requests\UpdateClientsRequest;
 use App\Models\Clientquestionnaries;
@@ -92,7 +93,7 @@ class ValidationController extends Controller
      */
     public function beforeValidation($id, $table, $route) {
         $view = 'layouts.show';
-        $model_name = 'App\Models\\'.$table;
+        $model_name = ModelPath::makeModelPath($table);
         $data = $model_name::find($id);
         SWAlertClass::choice($id, 'Biztosan validálja az ügyfelet?', '/'.$route, 'Kilép', '/Validation/'.$id.'/'.$table.'/'.$route, 'Váltás');
 
@@ -109,7 +110,7 @@ class ValidationController extends Controller
      */
     public function Validation($id, $table, $route) {
         $route .= '.index';
-        $model_name = 'App\Models\\'.$table;
+        $model_name = ModelPath::makeModelPath($table);
         $record = $model_name::find($id);
 
         if (empty($record)) {
@@ -133,7 +134,7 @@ class ValidationController extends Controller
      */
     public function beforeValidatingValidation($id, $table) {
         $view = 'layouts.show';
-        $model_name = 'App\Models\\'.$table;
+        $model_name = ModelPath::makeModelPath($table);
         $data = $model_name::find($id);
         SWAlertClass::choice($id, 'Biztosan validálja az ügyfelet?', '/validating/1/0', 'Kilép', '/validatingValidation/'.$id.'/'.$table, 'Váltás');
 
@@ -181,7 +182,7 @@ class ValidationController extends Controller
     public function validatingValidation($id, $table) {
         $route = '/validating/1/0';
 
-        $model_name = 'App\Models\\'.$table;
+        $model_name = ModelPath::makeModelPath($table);
         $record = $model_name::find($id);
 
         if (empty($record)) {

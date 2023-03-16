@@ -96,7 +96,7 @@ class Vouchers extends Model
     ];
 
     public function partner() {
-        return $this->belongsTo(Partner::class);
+        return $this->belongsTo(Partners::class);
     }
 
     public function vouchertype() {

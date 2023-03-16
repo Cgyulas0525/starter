@@ -86,7 +86,9 @@ class ClientquestionnariesController extends AppBaseController
                 $data = DB::table('clientquestionnaries as t1')
                     ->join('questionnaires as t2', 't2.id', '=', 't1.questionnarie_id')
                     ->join('clients as t3', 't3.id', '=', 't1.client_id')
-                    ->select('t1.*', 't2.name as questionnarieName', 't3.name as clientName')
+                    ->join('partnerquestionnaries as t4', 't4.questionnarie_id', '=', 't1.questionnarie_id')
+                    ->join('partners as t5', 't5.id', '=', 't4.partner_id')
+                    ->select('t1.*', 't2.name as questionnarieName', 't3.name as clientName', 't5.name as partnerName')
                     ->where('t1.client_id', $id)
                     ->whereNull('t1.deleted_at')
                     ->get();

@@ -11,6 +11,8 @@ use App\Classes\imageUrl;
 use App\Classes\ToolsClass;
 use App\Classes\SettlementsClass;
 use App\Classes\myUserClass;
+use App\Classes\Models\ModelPath;
+
 use myUser;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
             $loader->alias('ToolsClass', ToolsClass::class);
             $loader->alias('SettlementsClass', SettlementsClass::class);
             $loader->alias('myUser', myUserClass::class);
+            $loader->alias('ModelPath', ModelPath::class);
         });
     }
 

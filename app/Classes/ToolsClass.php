@@ -2,6 +2,7 @@
 
 namespace App\Classes;
 
+use App\Classes\Models\ModelPath;
 use DB;
 
 class ToolsClass
@@ -27,8 +28,8 @@ class ToolsClass
         return ($value == 0 ? "Nem" : ($value == 1 ? "Igen" : "Nincs érték"));
     }
 
-    public static function modelCount($model) {
-        $model_name = 'App\Models\\'.$model;
+    public static function modelCount($table) {
+        $model_name = ModelPath::makeModelPath($table);
         return $model_name::where('active', 1)->get()->count();
     }
 

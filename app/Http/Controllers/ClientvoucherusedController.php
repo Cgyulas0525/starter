@@ -34,14 +34,14 @@ class ClientvoucherusedController extends AppBaseController
     {
         return Datatables::of($data)
             ->addIndexColumn()
-            ->addColumn('action', function($row){
-                $btn = '<a href="' . route('clientvoucheruseds.edit', [$row->id]) . '"
-                             class="edit btn btn-success btn-sm editProduct" title="Módosítás"><i class="fa fa-paint-brush"></i></a>';
-                $btn = $btn.'<a href="' . route('beforeDestroys', ['Clientvoucherused', $row["id"], 'clientvoucheruseds']) . '"
-                                 class="btn btn-danger btn-sm deleteProduct" title="Törlés"><i class="fa fa-trash"></i></a>';
-                return $btn;
-            })
-            ->rawColumns(['action'])
+//            ->addColumn('action', function($row){
+//                $btn = '<a href="' . route('clientvoucheruseds.edit', [$row->id]) . '"
+//                             class="edit btn btn-success btn-sm editProduct" title="Módosítás"><i class="fa fa-paint-brush"></i></a>';
+//                $btn = $btn.'<a href="' . route('beforeDestroys', ['Clientvoucherused', $row["id"], 'clientvoucheruseds']) . '"
+//                                 class="btn btn-danger btn-sm deleteProduct" title="Törlés"><i class="fa fa-trash"></i></a>';
+//                return $btn;
+//            })
+//            ->rawColumns(['action'])
             ->make(true);
     }
 
@@ -60,6 +60,32 @@ class ClientvoucherusedController extends AppBaseController
             if ($request->ajax()) {
 
                 $data = $this->clientvoucherusedRepository->all();
+                return $this->dwData($data);
+
+            }
+
+            return view('clientvoucheruseds.index');
+        }
+    }
+
+    /**
+     * Display a listing of the Clientvoucherused.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function clientVoucherUsedindex(Request $request, $id)
+    {
+        if( myUser::check() ){
+
+            if ($request->ajax()) {
+
+                $data = DB::table('clientvoucherused')
+                          ->whereNull('deleted_at')
+                          ->where('clientvoucher_id', $id)
+                          ->get();
+//                $data = $this->clientvoucherusedRepository->all();
                 return $this->dwData($data);
 
             }

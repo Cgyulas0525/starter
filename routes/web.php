@@ -23,6 +23,7 @@ use App\Http\Controllers\MyloginController;
 use App\Http\Controllers\ClientvouchersController;
 use App\Http\Controllers\ClientquestionnariesController;
 use App\Http\Controllers\PartnerquestionnariesController;
+use App\Http\Controllers\ClientvoucherusedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -146,3 +147,4 @@ Route::get('qpIndex/{id}', [PartnerquestionnariesController::class, 'qpIndex'])-
 
 
 Route::resource('clientvoucheruseds', App\Http\Controllers\ClientvoucherusedController::class);
+Route::get('clientVoucherUsedindex/{id}', [ClientvoucherusedController::class, 'clientVoucherUsedindex'])->name('clientVoucherUsedindex');

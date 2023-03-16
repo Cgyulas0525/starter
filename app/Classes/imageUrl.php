@@ -17,7 +17,6 @@ Class imageUrl{
         $small == 0 ? $img = Image::make($this->file) : Image::make($this->file)->resize(40,40);
         $img->save(public_path($path));
 
-//        return 'public/'.$path;
         return $path;
     }
 
