@@ -24,6 +24,7 @@ use App\Http\Controllers\ClientvouchersController;
 use App\Http\Controllers\ClientquestionnariesController;
 use App\Http\Controllers\PartnerquestionnariesController;
 use App\Http\Controllers\ClientvoucherusedController;
+use App\Http\Controllers\ClientquestionnariedetailsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,37 +70,37 @@ Route::get('deActivating', [ChangeActiveController::class, 'deActivating'])->nam
 Route::get('settingIndex', [SettingController::class, 'index'])->name('settingIndex');
 Route::get('communicationIndex', [SettingController::class, 'communicationIndex'])->name('communicationIndex');
 
-Route::resource('usertypes', App\Http\Controllers\UsertypesController::class);
+Route::resource('usertypes',UsertypesController::class);
 
-Route::resource('users', App\Http\Controllers\UsersController::class);
+Route::resource('users',UsersController::class);
 
-Route::resource('partnerTypes', App\Http\Controllers\PartnerTypesController::class);
+Route::resource('partnerTypes',PartnerTypesController::class);
 
-Route::resource('detailTypes', App\Http\Controllers\DetailTypesController::class);
+Route::resource('detailTypes',DetailTypesController::class);
 
-Route::resource('validpostcodes', App\Http\Controllers\ValidpostcodesController::class);
+Route::resource('validpostcodes',ValidpostcodesController::class);
 Route::get('validPostCodesIndex/{active?}', [ValidpostcodesController::class, 'validPostCodesIndex'])->name('validPostCodesIndex');
 
 Route::get('insertValidPostcodesRecord', [MyApiController::class, 'insertValidPostcodesRecord'])->name('insertValidPostcodesRecord');
 Route::get('postcodeSettlementDDDW',[PartnersController::class, 'postcodeSettlementDDDW'])->name('postcodeSettlementDDDW');
 
-Route::resource('partners', App\Http\Controllers\PartnersController::class);
+Route::resource('partners', PartnersController::class);
 Route::get('partnersIndex/{active?}', [PartnersController::class, 'partnersIndex'])->name('partnersIndex');
 Route::get('partnerContactEdit/{id}', [PartnersController::class, 'partnerContactEdit'])->name('partnerContactEdit');
 Route::get('pqEdit/{id}', [PartnersController::class, 'pqEdit'])->name('pqEdit');
 
-Route::resource('partnercontacts', App\Http\Controllers\PartnercontactsController::class);
+Route::resource('partnercontacts',PartnercontactsController::class);
 Route::get('partnerContactsIndex/{partner}/{active?}', [PartnercontactsController::class, 'partnerContactsIndex'])->name('partnerContactsIndex');
 Route::get('partnerContactCreate/{id}', [PartnercontactsController::class, 'partnerContactCreate'])->name('partnerContactCreate');
 
-Route::resource('logitemtypes', App\Http\Controllers\LogitemtypesController::class);
+Route::resource('logitemtypes',LogitemtypesController::class);
 
-Route::resource('logitems', App\Http\Controllers\LogitemsController::class);
+Route::resource('logitems',LogitemsController::class);
 
-Route::resource('vouchertypes', App\Http\Controllers\VouchertypesController::class);
+Route::resource('vouchertypes',VouchertypesController::class);
 Route::get('vouchertypesIndex/{local?}', [VouchertypesController::class, 'vouchertypesIndex'])->name('vouchertypesIndex');
 
-Route::resource('clients', App\Http\Controllers\ClientsController::class);
+Route::resource('clients',ClientsController::class);
 Route::get('clientsIndex/{active?}/{validated?}/{local?}', [ClientsController::class, 'clientsIndex'])->name('clientsIndex');
 Route::get('clientVouchers/{id}', [ClientsController::class, 'clientVouchers'])->name('clientVouchers');
 Route::get('clientQuestionnaries/{id}', [ClientsController::class, 'clientQuestionnaries'])->name('clientQuestionnaries');
@@ -111,40 +112,43 @@ Route::get('Validation/{id}/{table}/{route}', [ValidationController::class, 'Val
 Route::get('validatingValidation/{id}/{table}', [ValidationController::class, 'validatingValidation'])->name('validatingValidation');
 
 
-Route::resource('vouchers', App\Http\Controllers\VouchersController::class);
+Route::resource('vouchers',VouchersController::class);
 Route::get('vouchersIndex/{active?}/{partner?}', [VouchersController::class, 'vouchersIndex'])->name('vouchersIndex');
 
-Route::resource('questionnaires', App\Http\Controllers\QuestionnairesController::class);
+Route::resource('questionnaires',QuestionnairesController::class);
 Route::get('questionnairesIndex/{active?}/{basicpackage?}', [QuestionnairesController::class, 'questionnairesIndex'])->name('questionnairesIndex');
 Route::get('questionnairesEdit/{id}', [QuestionnairesController::class, 'questionnairesEdit'])->name('questionnairesEdit');
 Route::get('qPartners/{id}', [QuestionnairesController::class, 'qPartners'])->name('qPartners');
 
-Route::resource('lotteries', App\Http\Controllers\LotteriesController::class);
+Route::resource('lotteries',LotteriesController::class);
 Route::get('lotteriesIndex/{active?}', [LotteriesController::class, 'lotteriesIndex'])->name('lotteriesIndex');
 
 
-Route::resource('questionnairedetails', App\Http\Controllers\QuestionnairedetailsController::class);
+Route::resource('questionnairedetails',QuestionnairedetailsController::class);
 Route::get('qdIndex/{id}', [QuestionnairedetailsController::class, 'qdIndex'])->name('qdIndex');
 Route::get('qdCreate/{id}', [QuestionnairedetailsController::class, 'qdCreate'])->name('qdCreate');
 Route::get('qdEdit/{id}', [QuestionnairedetailsController::class, 'qdEdit'])->name('qdEdit');
 
-Route::resource('questionnairedetailitems', App\Http\Controllers\QuestionnairedetailitemsController::class);
+Route::resource('questionnairedetailitems',QuestionnairedetailitemsController::class);
 Route::get('qdiIndex/{id}', [QuestionnairedetailitemsController::class, 'qdiIndex'])->name('qdiIndex');
 Route::get('qdiCreate/{id}', [QuestionnairedetailitemsController::class, 'qdiCreate'])->name('qdiCreate');
 
 
-Route::resource('clientvouchers', App\Http\Controllers\ClientvouchersController::class);
+Route::resource('clientvouchers',ClientvouchersController::class);
 Route::get('cvIndex/{id}', [ClientvouchersController::class, 'cvIndex'])->name('cvIndex');
 
 
-Route::resource('clientquestionnaries', App\Http\Controllers\ClientquestionnariesController::class);
+Route::resource('clientquestionnaries',ClientquestionnariesController::class);
 Route::get('cqIndex/{id}', [ClientquestionnariesController::class, 'cqIndex'])->name('cqIndex');
 
 
-Route::resource('partnerquestionnaries', App\Http\Controllers\PartnerquestionnariesController::class);
+Route::resource('partnerquestionnaries',PartnerquestionnariesController::class);
 Route::get('pqIndex/{id}', [PartnerquestionnariesController::class, 'pqIndex'])->name('pqIndex');
 Route::get('qpIndex/{id}', [PartnerquestionnariesController::class, 'qpIndex'])->name('qpIndex');
 
 
-Route::resource('clientvoucheruseds', App\Http\Controllers\ClientvoucherusedController::class);
+Route::resource('clientvoucheruseds',ClientvoucherusedController::class);
 Route::get('clientVoucherUsedindex/{id}', [ClientvoucherusedController::class, 'clientVoucherUsedindex'])->name('clientVoucherUsedindex');
+
+Route::resource('clientquestionnariedetails',ClientquestionnariedetailsController::class);
+Route::get('cqdIndex/{id}', [ClientquestionnariedetailsController::class, 'cqdIndex'])->name('cqdIndex');

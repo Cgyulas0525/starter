@@ -21,7 +21,11 @@
 
             <div class="card-body">
                 <div class="row">
-                    @include('clients.clientTableContact', [ 'scriptFile' => 'clients.clientQuestionnarie', 'title' => 'Űrlapok'])
+                    @include('clients.clientTableContactDetail', [   'scriptFile' => 'clients.clientQuestionnarie',
+                                                                    'title' => 'Űrlapok',
+                                                                    'tTitle' => 'Sorok',
+                                                                    'col1' => "col-lg-6",
+                                                                    'col2' => "col-lg-6"])
                 </div>
             </div>
 

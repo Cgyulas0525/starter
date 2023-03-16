@@ -79,4 +79,8 @@ class Clientquestionnaries extends Model
         return $this->belongsTo(Clients::class);
     }
 
+    public function clientquestionnariedetail() {
+        return $this->hasMany(Clientquestionnariedetails::class);
+    }
+
 }

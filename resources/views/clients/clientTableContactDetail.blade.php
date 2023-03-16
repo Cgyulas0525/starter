@@ -16,11 +16,11 @@
         @include('flash::message')
 
         <div class="row">
-            <div class="col-lg-8">
+            <div @class([ $col1 ])">
                 @include('layouts.indextable')
             </div>
-            <div class="col-lg-4">
-                @include('layouts.indextable', ['tableTitle' => 'Felhasználások', 'class' => "table table-hover table-bordered detailtable w-100"])
+            <div @class([ $col2 ])>
+                @include('layouts.indextable', ['tableTitle' => $tTitle, 'class' => "table table-hover table-bordered detailtable w-100"])
             </div>
         </div>
 

@@ -95,5 +95,8 @@ class Questionnairedetails extends Model
         return $this->hasMany(Questionnairedetailitems::class);
     }
 
+    public function clientquestionnariedetail() {
+        return $this->hasMany(Clientquestionnariedetails::class);
+    }
 
 }
