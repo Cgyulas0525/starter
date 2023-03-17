@@ -212,7 +212,6 @@
 <script src="https://cdn.datatables.net/rowgroup/1.2.0/js/dataTables.rowGroup.min.js"></script>
 <script src="https://cdn.datatables.net/scroller/2.0.7/js/dataTables.scroller.min.js"></script>
 
-
 <script>
     $(function () {
         function urlChange(table, url) {

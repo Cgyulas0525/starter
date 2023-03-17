@@ -10,6 +10,7 @@
     <a href="#" class="nav-link {{ Request::is('detailTypes*') ||
                                    Request::is('logitemtypes*') ||
                                    Request::is('vouchertypes*') ||
+                                   Request::is('admin*') ||
                                    Request::is('partnerTypes*') ? 'active' : '' }}">
         <i class="fas fa-university"></i>
         <p>{{ __('Szótár') }}<i class="right fas fa-angle-left"></i></p>
@@ -23,8 +24,15 @@
             </a>
         </li>
 
-        @if (myUser::user()->usertypes_id === 3)
+        @if (myUser::user()->usertypes_id === 3 || myUser::user()->usertypes_id === 2 )
 
+            <li class="nav-item">
+                <a href="{{ route('adminIndex') }}"
+                   class="nav-link {{ Request::is('admin*') ? 'active' : '' }}">
+                    <i class="fas fa-tools"></i>
+                    <p>{{ __('Adminisztratori feladatok') }}</p>
+                </a>
+            </li>
             <li class="nav-item">
                 <a href="{{ route('detailTypes.index') }}"
                    class="nav-link {{ Request::is('detailTypes*') ? 'active' : '' }}">

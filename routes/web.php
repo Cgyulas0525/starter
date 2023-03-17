@@ -25,6 +25,7 @@ use App\Http\Controllers\ClientquestionnariesController;
 use App\Http\Controllers\PartnerquestionnariesController;
 use App\Http\Controllers\ClientvoucherusedController;
 use App\Http\Controllers\ClientquestionnariedetailsController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,7 @@ Route::get('myLogout', [MyloginController::class, 'myLogout'])->name('myLogout')
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::get('index', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('adminIndex', [AdminController::class, 'adminIndex'])->name('adminIndex');
 
 Route::get('destroy/{table}/{id}/{route}', [DestroysController::class, 'destroy'])->name('destroys');
 Route::get('destroyWithParam/{table}/{id}/{route}/{param}', [DestroysController::class, 'destroyWithParam'])->name('destroyWithParam');
