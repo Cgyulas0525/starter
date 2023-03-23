@@ -13,7 +13,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        'App\Console\Commands\DeleteOldLogitems',
+        'App\Console\Commands\WriteDemo'
+
     ];
 
     /**
@@ -24,7 +26,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+//         $schedule->command('inspire')->hourly();
+        $schedule->command('delete:logitems')->daily();
+
+//        $schedule->command('write:demo')->everyMinute();
     }
 
     /**
