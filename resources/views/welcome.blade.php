@@ -43,7 +43,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ url('/home') }}"><img src={{ URL::asset('/img/eger.jpg') }} style="width: 50%; height: 50%;" class="img-circle" alt="{{ config('app.name') }} Logo" ></a>
+        <a href="{{ url('/home') }}"><img src={{ URL::asset('/img/logo/developer2.png') }} style="width: 50%; height: 50%;" class="img-circle" alt="{{ config('app.name') }} Logo" ></a>
         </br>
         <a><h1>{{ config('app.name') }}</a>
     </div>

@@ -48,7 +48,7 @@ class MyloginController extends Controller
         $logitem->created_at = Carbon\Carbon::now();
         $logitem->save();
 
-        ChangeActiveController::deActivating();
+//        ChangeActiveController::deActivating();
 
         return view('home');
     }

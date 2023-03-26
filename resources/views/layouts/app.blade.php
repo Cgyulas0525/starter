@@ -5,7 +5,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name') }}</title>
-    <link rel="icon" href={{ URL::asset('/public/img/eger.jpg')}}/>
+    <link rel="icon" href={{ URL::asset('/img/logo/developer2.png')}}/>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
     <!-- Font Awesome -->
@@ -68,6 +68,8 @@
 
     @stack('page_css')
     @yield('css')
+
+{{--    @include('layouts.costumcss')--}}
 </head>
 
 <body class="hold-transition skin-black-light sidebar-mini">

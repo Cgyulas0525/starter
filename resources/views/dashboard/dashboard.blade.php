@@ -9,8 +9,8 @@
 @section('content')
     <div class="content">
         @include('dashboard.dashboardHeader')
-        @include('dashboard.dashboardWidget')
-        @include('dashboard.dashboardClient')
+{{--        @include('dashboard.dashboardWidget')--}}
+{{--        @include('dashboard.dashboardClient')--}}
     </div>
 @endsection
 
