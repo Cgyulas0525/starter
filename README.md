@@ -1,5 +1,7 @@
 <h1 align="center"><img src="https://assets.infyom.com/open-source/infyom-logo.png" alt="InfyOm"></h1>
 
+# Laravel 9, PHP 8.1
+
 # Laravel Boilerplate for AdminLTE Theme
 
 Laravel Boilerplate with [AdminLTE](https://adminlte.io/) Theme with [InfyOm Laravel Generator](https://github.com/InfyOmLabs/laravel-generator).
