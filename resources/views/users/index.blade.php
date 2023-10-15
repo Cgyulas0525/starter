@@ -41,7 +41,8 @@
                 columns: [
                     {title: '<a class="btn btn-primary" title="Felvitel" href="{!! route('users.create') !!}"><i class="fa fa-plus-square"></i></a>',
                         data: 'action', sClass: "text-center", width: '200px', name: 'action', orderable: false, searchable: false},
-                    {title: "{{ __('Név')}}", data: 'username', name: 'username'},
+                    {title: "{{ __('Név')}}", data: 'name', name: 'name'},
+                    {title: "{{ __('Státusz')}}", data: 'usertype', name: 'usertype'},
                     {title: '', data: "image_url", sClass: "text-center", "render": function (data) {
                             return '<img src="' + data + '" style="height:50px;width:50px;object-fit:cover;"/>';
                         }

@@ -36,8 +36,8 @@
 
 <!-- Usertypes Id Field -->
 <div class="col-sm-12">
-    {!! Form::label('usertypes_id', 'Usertypes Id:') !!}
-    <p>{{ $users->usertypes_id }}</p>
+    {!! Form::label('usertype', 'Usertypes Id:') !!}
+    <p>{{ $users->usertype }}</p>
 </div>
 
 <!-- Commit Field -->

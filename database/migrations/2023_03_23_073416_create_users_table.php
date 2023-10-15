@@ -13,15 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
+        if (Schema::hasTable('users')) {
+            return;
+        }
+
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('username', 191)->index('idx_users_name');
+            $table->string('name', 191)->index('idx_users_name');
             $table->string('email', 191)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 191);
             $table->rememberToken();
             $table->string('image_url', 191)->nullable();
-            $table->integer('usertypes_id')->nullable()->index('status_id');
+            $table->string('usertype', 25)->index('idx_usertype')->default('felhasználó');
             $table->string('commit', 500)->nullable();
             $table->timestamps();
             $table->softDeletes();

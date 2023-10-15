@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\LogTypeEnum;
 use Eloquent as Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Kirschbaum\PowerJoins\PowerJoins;
@@ -12,10 +14,8 @@ use Kirschbaum\PowerJoins\PowerJoins;
  * @package App\Models
  * @version February 14, 2023, 6:25 am UTC
  *
- * @property integer $logitemtype_id
- * @property integer $client_id
+ * @property string $logitemtype
  * @property integer $user_id
- * @property integer $partnercontact_id
  * @property string $datatable
  * @property string|\Carbon\Carbon $eventdatetime
  * @property string $remoteaddress
@@ -35,10 +35,8 @@ class Logitems extends Model
 
 
     public $fillable = [
-        'logitemtype_id',
-        'client_id',
+        'logitemtype',
         'user_id',
-        'partnercontact_id',
         'datatable',
         'record',
         'eventdatetime',
@@ -52,10 +50,8 @@ class Logitems extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'logitemtype_id' => 'integer',
-        'client_id' => 'integer',
+        'logitemtype' => LogTypeEnum::class,
         'user_id' => 'integer',
-        'partnercontact_id' => 'integer',
         'datatable' => 'string',
         'record' => 'integer',
         'eventdatetime' => 'datetime',
@@ -68,10 +64,8 @@ class Logitems extends Model
      * @var array
      */
     public static $rules = [
-        'logitemtype_id' => 'required|integer',
-        'client_id' => 'nullable|integer',
+        'logitemtype' => 'required|string:25',
         'user_id' => 'nullable|integer',
-        'partnercontact_id' => 'nullable|integer',
         'datatable' => 'nullable|string|max:100',
         'record' => 'nullable|integer',
         'eventdatetime' => 'required',
@@ -81,5 +75,9 @@ class Logitems extends Model
         'deleted_at' => 'nullable'
     ];
 
+    public function user(): string|BelongsTo
+    {
+        return $this->belongsTo(Users::class);
+    }
 
 }

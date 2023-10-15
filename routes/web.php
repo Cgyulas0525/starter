@@ -11,9 +11,7 @@ use App\Http\Controllers\ChangeActiveController;
 use App\Http\Controllers\ValidationController;
 use App\Http\Controllers\MyloginController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UsertypesController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\LogitemtypesController;
 use App\Http\Controllers\LogitemsController;
 /*
 |--------------------------------------------------------------------------
@@ -60,8 +58,6 @@ Route::get('deActivating', [ChangeActiveController::class, 'deActivating'])->nam
 Route::get('settingIndex', [SettingController::class, 'index'])->name('settingIndex');
 Route::get('communicationIndex', [SettingController::class, 'communicationIndex'])->name('communicationIndex');
 
-Route::resource('usertypes',UsertypesController::class);
-
 Route::resource('users',UsersController::class);
 
 Route::get('validating/{active}/{validated}', [ValidationController::class, 'validating'])->name('validating');
@@ -70,10 +66,7 @@ Route::get('beforeValidatingValidation/{id}/{table}', [ValidationController::cla
 Route::get('Validation/{id}/{table}/{route}', [ValidationController::class, 'Validation'])->name('Validation');
 Route::get('validatingValidation/{id}/{table}', [ValidationController::class, 'validatingValidation'])->name('validatingValidation');
 
-
 Route::get('insertValidPostcodesRecord', [MyApiController::class, 'insertValidPostcodesRecord'])->name('insertValidPostcodesRecord');
-
-Route::resource('logitemtypes',LogitemtypesController::class);
 
 Route::resource('logitems',LogitemsController::class);
 

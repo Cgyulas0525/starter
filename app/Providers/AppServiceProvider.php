@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Enums\LogTypeEnum;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 
@@ -12,6 +13,7 @@ use App\Classes\ToolsClass;
 use App\Classes\SettlementsClass;
 use App\Classes\myUserClass;
 use App\Classes\Models\ModelPath;
+use App\Enums\RolesEnum;
 
 use myUser;
 
@@ -33,6 +35,8 @@ class AppServiceProvider extends ServiceProvider
             $loader->alias('SettlementsClass', SettlementsClass::class);
             $loader->alias('myUser', myUserClass::class);
             $loader->alias('ModelPath', ModelPath::class);
+            $loader->alias('RolesEnum', RolesEnum::class);
+            $loader->alias('LogTypeEnum', LogTypeEnum::class);
         });
     }
 

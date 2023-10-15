@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\RolesEnum;
 use Eloquent as Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Kirschbaum\PowerJoins\PowerJoins;
 
 /**
@@ -18,7 +20,7 @@ use Kirschbaum\PowerJoins\PowerJoins;
  * @property string $password
  * @property string $remember_token
  * @property string $image_url
- * @property integer $usertypes_id
+ * @property string $usertype
  * @property string $commit
  */
 class Users extends Model
@@ -34,16 +36,25 @@ class Users extends Model
     protected $dates = ['deleted_at'];
 
 
-
     public $fillable = [
-        'username',
+        'name',
         'email',
         'email_verified_at',
         'password',
         'remember_token',
         'image_url',
-        'usertypes_id',
+        'usertype',
         'commit'
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -53,13 +64,13 @@ class Users extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'username' => 'string',
+        'name' => 'string',
         'email' => 'string',
         'email_verified_at' => 'datetime',
         'password' => 'string',
         'remember_token' => 'string',
         'image_url' => 'string',
-        'usertypes_id' => 'integer',
+        'usertype' => RolesEnum::class,
         'commit' => 'string'
     ];
 
@@ -69,20 +80,21 @@ class Users extends Model
      * @var array
      */
     public static $rules = [
-        'username' => 'required|string|max:191',
+        'name' => 'required|string|max:191',
         'email' => 'required|string|max:191',
         'email_verified_at' => 'nullable',
         'password' => 'required|string|max:191',
         'remember_token' => 'nullable|string|max:100',
-        'usertypes_id' => 'nullable|integer',
+        'usertype' => 'nullable|string',
         'commit' => 'nullable|string|max:500',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
     ];
 
-    public function usertypes() {
-        return $this->belongsTo(Usertypes::class);
+    public function logitem(): string|HasMany
+    {
+        return $this->HasMany(Logitems::class);
     }
 
 }

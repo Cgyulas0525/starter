@@ -200,7 +200,7 @@ class UsersController extends AppBaseController
          */
         public static function DDDW() : array
         {
-            return [" "] + users::orderBy('username')->pluck('username', 'id')->toArray();
+            return [" "] + users::orderBy('name')->pluck('name', 'id')->toArray();
         }
 }
 

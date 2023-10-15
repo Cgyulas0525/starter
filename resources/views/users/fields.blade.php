@@ -4,8 +4,8 @@
 
 <!-- Name Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('username', __('Név:')) !!}
-    {!! Form::text('username', null, ['class' => 'form-control','maxlength' => 191]) !!}
+    {!! Form::label('name', __('Név:')) !!}
+    {!! Form::text('name', null, ['class' => 'form-control','maxlength' => 191]) !!}
 </div>
 
 <!-- Email Field -->
@@ -25,9 +25,9 @@
 
 <!-- Usertypes Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('usertypes_id', __('Típus:')) !!}
-    {!! Form::select('usertypes_id', \App\Http\Controllers\UsertypesController::DDDW(), null,
-                ['class'=>'select2 form-control', 'id' => 'usertypes_id', 'required' => true]) !!}
+    {!! Form::label('usertype', __('Státusz:')) !!}
+    {!! Form::select('usertype', RolesEnum::Options(), isset($users) ? $users->usertype->name : RolesEnum::USER->name,
+                ['class'=>'select2 form-control', 'id' => 'usertype', 'required' => true]) !!}
 </div>
 
 <!-- Commit Field -->

@@ -22,7 +22,7 @@
             <td>{{ $users->password }}</td>
             <td>{{ $users->remember_token }}</td>
             <td>{{ $users->image_url }}</td>
-            <td>{{ $users->usertypes_id }}</td>
+            <td>{{ $users->usertype }}</td>
             <td>{{ $users->commit }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['users.destroy', $users->id], 'method' => 'delete']) !!}

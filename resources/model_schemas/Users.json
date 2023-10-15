@@ -84,7 +84,7 @@
         "inView": true
     },
     {
-        "name": "usertypes_id",
+        "name": "usertype",
         "dbType": "integer,false",
         "htmlType": null,
         "validations": "nullable|integer|nullable|integer",

@@ -25,7 +25,7 @@
                                                 'action' => "btn btn-default loginButton",
                                                 'btnName' => 'Login törlés',
                                                 'btnTitle' => 'Login törlés',
-                                                'function' => number_format(App\Models\Logitems::where('logitemtype_id', 1)->get()->count(),0,",",".") ])
+                                                'function' => number_format(App\Models\Logitems::where('logitemtype', LogTypeEnum::LOGIN->value)->get()->count(),0,",",".") ])
     @include('admin.adminWidgetItem', ['title' => 'Összes log rekord törlés',
                                                 'icon' => 'fa fa-box',
                                                 'box' => 'small-box bg-warning',

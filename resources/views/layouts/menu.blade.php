@@ -6,32 +6,16 @@
     </a>
 </li>
 
-<li class="nav-item has-treeview">
-    <a href="#" class="nav-link {{ Request::is('logitemtypes*') ||
-                                   Request::is('admin*') ? 'active' : '' }}">
-        <i class="fas fa-university"></i>
-        <p>{{ __('Szótár') }}<i class="right fas fa-angle-left"></i></p>
-    </a>
-    <ul class="nav nav-treeview">
-         @if (myUser::user()->usertypes_id === 3 || myUser::user()->usertypes_id === 2 )
+ @if (myUser::user()->usertype->name !== 'USER' )
 
-            <li class="nav-item">
-                <a href="{{ route('adminIndex') }}"
-                   class="nav-link {{ Request::is('admin*') ? 'active' : '' }}">
-                    <i class="fas fa-tools"></i>
-                    <p>{{ __('Adminisztratori feladatok') }}</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('logitemtypes.index') }}"
-                   class="nav-link {{ Request::is('logitemtypes*') ? 'active' : '' }}">
-                    <i class="fas fa-sign-in-alt"></i>
-                    <p>{{ __('Log típusok') }}</p>
-                </a>
-            </li>
-        @endif
-    </ul>
-</li>
+    <li class="nav-item">
+        <a href="{{ route('adminIndex') }}"
+           class="nav-link {{ Request::is('admin*') ? 'active' : '' }}">
+            <i class="fas fa-tools"></i>
+            <p>{{ __('Adminisztratori feladatok') }}</p>
+        </a>
+    </li>
+@endif
 
 <li class="nav-item has-treeview">
     <a href="#" class="nav-link ">
@@ -42,30 +26,13 @@
     </ul>
 </li>
 
-@if (myUser::user()->usertypes_id !== 1)
-    <li class="nav-item has-treeview">
-        <a href="#" class="nav-link ">
+@if (myUser::user()->usertype->name !== 'USER')
+    <li class="nav-item">
+        <a href="{{ route('users.index') }}"
+           class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
             <i class="fas fa-users"></i>
-            <p>{{ __('Felhasználók') }}<i class="right fas fa-angle-left"></i></p>
+            <p>{{ __('Felhasználók') }}</p>
         </a>
-        <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="{{ route('usertypes.index') }}"
-                   class="nav-link {{ Request::is('usertypes*') ? 'active' : '' }}">
-                    <i class="fas fa-user-tag"></i>
-                    <p>{{ __('Felhasználó típusok') }}</p>
-                </a>
-            </li>
-
-
-            <li class="nav-item">
-                <a href="{{ route('users.index') }}"
-                   class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
-                    <i class="fas fa-users"></i>
-                    <p>{{ __('Felhasználók') }}</p>
-                </a>
-            </li>
-        </ul>
     </li>
     <li class="nav-item">
         <a href="#" class="nav-link {{ Request::is('settingIndex*') ||
