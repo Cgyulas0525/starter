@@ -19,6 +19,8 @@ use Kirschbaum\PowerJoins\PowerJoins;
  * @property string $datatable
  * @property string|\Carbon\Carbon $eventdatetime
  * @property string $remoteaddress
+ * @property string $before
+ * @property string $after
  */
 class Logitems extends Model
 {
@@ -39,8 +41,10 @@ class Logitems extends Model
         'user_id',
         'datatable',
         'record',
+        'before',
+        'after',
         'eventdatetime',
-        'remoteaddress'
+        'remoteaddress',
     ];
 
     /**
@@ -54,8 +58,10 @@ class Logitems extends Model
         'user_id' => 'integer',
         'datatable' => 'string',
         'record' => 'integer',
+        'before' => 'string',
+        'after' => 'string',
         'eventdatetime' => 'datetime',
-        'remoteaddress' => 'string'
+        'remoteaddress' => 'string',
     ];
 
     /**
@@ -68,11 +74,13 @@ class Logitems extends Model
         'user_id' => 'nullable|integer',
         'datatable' => 'nullable|string|max:100',
         'record' => 'nullable|integer',
+        'before' => 'nullable|string',
+        'after' => 'nullable|string',
         'eventdatetime' => 'required',
         'remoteaddress' => 'nullable|string|max:100',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
-        'deleted_at' => 'nullable'
+        'deleted_at' => 'nullable',
     ];
 
     public function user(): string|BelongsTo

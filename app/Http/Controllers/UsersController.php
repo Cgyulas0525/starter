@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\imageUrl;
+use App\Enums\LogTypeEnum;
 use App\Http\Requests\CreateUsersRequest;
 use App\Http\Requests\UpdateUsersRequest;
 use App\Repositories\UsersRepository;
@@ -99,7 +100,7 @@ class UsersController extends AppBaseController
         }
 
         $users = $this->usersRepository->create($input);
-        $this->logitem->iudRecord(3, $users->getTable(), $users->id);
+        $this->logitem->iudRecord(LogTypeEnum::INSERT->value, $users->getTable(), $users->id, $users->toJson());
 
         return redirect(route('users.index'));
     }
@@ -151,6 +152,7 @@ class UsersController extends AppBaseController
     public function update($id, UpdateUsersRequest $request)
     {
         $users = $this->usersRepository->find($id);
+        $before = $users->toJson();
 
         if (empty($users)) {
             return redirect(route('users.index'));
@@ -165,7 +167,7 @@ class UsersController extends AppBaseController
         }
 
         $users = $this->usersRepository->update($input, $id);
-        $this->logitem->iudRecord(4, $users->getTable(), $users->id);
+        $this->logitem->iudRecord(LogTypeEnum::MODIFY->value, $users->getTable(), $users->id, $before, $users->toJson());
 
         return redirect(route('users.index'));
     }
@@ -188,7 +190,7 @@ class UsersController extends AppBaseController
         }
 
         $this->usersRepository->delete($id);
-        $this->logitem->iudRecord(5, $users->getTable(), $users->id);
+        $this->logitem->iudRecord(LogTypeEnum::DELETE->value, $users->getTable(), $users->id, $users->toJson());
 
         return redirect(route('users.index'));
     }

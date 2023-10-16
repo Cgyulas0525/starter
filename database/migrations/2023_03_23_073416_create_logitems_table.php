@@ -23,6 +23,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('datatable', 100)->nullable();
             $table->integer('record')->nullable();
+            $table->text('before')->nullable();
+            $table->text('after')->nullable();
             $table->timestamp('eventdatetime')->index('logitem__eventdatetime_index');
             $table->string('remoteaddress', 100)->nullable();
             $table->timestamps();

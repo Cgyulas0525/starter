@@ -23,6 +23,8 @@ class LogitemsRepository extends BaseRepository
         'partnercontact_id',
         'datatable',
         'record',
+        'before',
+        'after',
         'eventdatetime',
         'remoteaddress'
     ];
