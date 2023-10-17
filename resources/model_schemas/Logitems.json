@@ -12,7 +12,7 @@
         "inView": false
     },
     {
-        "name": "logitemtype_id",
+        "name": "logitemtype",
         "dbType": "integer,false",
         "htmlType": null,
         "validations": "required|integer|integer",

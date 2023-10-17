@@ -17,7 +17,7 @@ class LogitemsRepository extends BaseRepository
      * @var array
      */
     protected $fieldSearchable = [
-        'logitemtype_id',
+        'logitemtype',
         'client_id',
         'user_id',
         'partnercontact_id',

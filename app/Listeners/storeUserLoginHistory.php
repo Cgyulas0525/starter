@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Enums\LogTypeEnum;
 use App\Events\LoginHistory;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -34,7 +35,7 @@ class storeUserLoginHistory
 
         $saveHistory = DB::table('logitems')->insert(
                     ['user_id' => $user->id,
-                     'logitemtype_id' => 1,
+                     'logitemtype' => LogTypeEnum::INSERT->value,
                      'eventdatetime' => $current_timestamp,
                      'created_at' => $current_timestamp,
                      'updated_at' => $current_timestamp

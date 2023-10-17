@@ -1,7 +1,7 @@
 <!-- Logitemtype Id Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('logitemtype_id', __('Logitemtype Id:')) !!}
-    {!! Form::number('logitemtype_id', null, ['class' => 'form-control']) !!}
+    {!! Form::label('logitemtype', __('Logitemtype:')) !!}
+    {!! Form::number('logitemtype', null, ['class' => 'form-control']) !!}
 </div>
 
 

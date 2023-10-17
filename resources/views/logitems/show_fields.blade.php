@@ -1,7 +1,7 @@
 <!-- Logitemtype Id Field -->
 <div class="col-sm-12">
-    {!! Form::label('logitemtype_id', 'Logitemtype Id:') !!}
-    <p>{{ $logitems->logitemtype_id }}</p>
+    {!! Form::label('logitemtype', 'Logitemtype:') !!}
+    <p>{{ $logitems->logitemtype->value }}</p>
 </div>
 
 <!-- Client Id Field -->

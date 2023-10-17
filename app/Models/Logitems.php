@@ -58,8 +58,8 @@ class Logitems extends Model
         'user_id' => 'integer',
         'datatable' => 'string',
         'record' => 'integer',
-        'before' => 'string',
-        'after' => 'string',
+        'before' => 'json',
+        'after' => 'json',
         'eventdatetime' => 'datetime',
         'remoteaddress' => 'string',
     ];

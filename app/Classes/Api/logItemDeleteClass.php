@@ -3,6 +3,7 @@
 namespace App\Classes\Api;
 
 use App\Classes\Api\apiUtilityClass;
+use App\Enums\LogTypeEnum;
 use App\Models\Logitems;
 
 class logItemDeleteClass
@@ -23,9 +24,9 @@ class logItemDeleteClass
     public function deleteLogin() {
 
 
-        $this->utility->fileWrite($this->outputFile, "Törölt login rekord: " . Logitems::where('logitemtype_id', 1)->get()->count() . "\n");
+        $this->utility->fileWrite($this->outputFile, "Törölt login rekord: " . Logitems::where('logitemtype', LogTypeEnum::DELETE->value)->get()->count() . "\n");
 
-        Logitems::where('logitemtype_id', 1)->forceDelete();
+        Logitems::where('logitemtype', LogTypeEnum::DELETE->value)->forceDelete();
 
         $this->utility->fileWrite($this->outputFile, "OK\n");
         $this->utility->fileWrite($this->outputFile, "End: " . date('Y.m.d H:m:s', strtotime('now')) . "\n");

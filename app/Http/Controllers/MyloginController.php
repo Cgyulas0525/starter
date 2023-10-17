@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\LogTypeEnum;
 use Illuminate\Http\Request;
 use Flash;
 use App\Models\Users;
@@ -40,7 +41,7 @@ class MyloginController extends Controller
         session(['userId' => $user->id]);
 
         $lis = new LogItemService();
-        $lis->newLogItem(1, $user->id);
+        $lis->newLogItem(LogTypeEnum::INSERT->value, $user->id);
 
         return view('home');
     }

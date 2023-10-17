@@ -11,7 +11,7 @@ class LogItemService
 
         $logitem = new Logitems();
 
-        $logitem->logitemtype_id = $type;
+        $logitem->logitemtype = $type;
         $logitem->user_id = $userId;
         $logitem->eventdatetime = Carbon::now();
         $logitem->created_at = Carbon::now();

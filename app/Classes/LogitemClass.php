@@ -11,7 +11,7 @@ class LogitemClass
     public function iudRecord($logitemtype, $datatable, $record, $before, ?string $after = NULL): void
     {
         $logitem = new Logitems();
-        $logitem->logitemtype_id = $logitemtype;
+        $logitem->logitemtype = $logitemtype;
         $logitem->user_id = myUser::user()->id;
         $logitem->datatable = $datatable;
         $logitem->record = $record;
