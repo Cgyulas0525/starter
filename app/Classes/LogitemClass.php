@@ -18,6 +18,7 @@ class LogitemClass
         $logitem->before = $before;
         $logitem->after = $after;
         $logitem->eventdatetime = now();
+        $logitem->remoteaddress = (\Request::getClientIp() == '::1') ? '127.0.0.1' : \Request::getClientIp();
         $logitem->created_at = now();
         $logitem->save();
     }
