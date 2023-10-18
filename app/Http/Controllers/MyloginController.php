@@ -41,7 +41,7 @@ class MyloginController extends Controller
         session(['userId' => $user->id]);
 
         $lis = new LogItemService();
-        $lis->newLogItem(LogTypeEnum::INSERT->value, $user->id);
+        $lis->newLogItem(LogTypeEnum::LOGIN->value, $user->id);
 
         return view('home');
     }
@@ -49,7 +49,7 @@ class MyloginController extends Controller
     public static function myLogout() {
 
         $lis = new LogItemService();
-        $lis->newLogItem(1, myUser::user()->id);
+        $lis->newLogItem(LogTypeEnum::LOGOUT->value, myUser::user()->id);
 
         Session::flush();
         Auth::logout();

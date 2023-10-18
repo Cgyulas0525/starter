@@ -24,7 +24,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 191);
             $table->rememberToken();
-            $table->string('image_url', 191)->nullable();
+            $table->string('image_url', 191)->nullable()->default('upload/noAviableImage.jpg');
             $table->string('usertype', 25)->index('idx_usertype')->default('felhasználó');
             $table->string('commit', 500)->nullable();
             $table->timestamps();

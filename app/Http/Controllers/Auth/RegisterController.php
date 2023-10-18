@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\LogTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Services\LogItemService;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+
+use myUser;
 
 class RegisterController extends Controller
 {
@@ -64,10 +68,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => md5($data['password']),
         ]);
+
+        session(['userId' => $user->id]);
+
+        $lis = new LogItemService();
+        $lis->newLogItem(LogTypeEnum::LOGIN->value, $user->id);
+
+        return $user;
     }
 }

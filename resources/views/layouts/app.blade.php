@@ -86,7 +86,7 @@
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown user-menu">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                    <img src={{ URL::asset(myUser::user()->image_url) }}
+                    <img src={{ URL::asset( myUser::user()->image_url) }}
                          class="user-image img-circle" alt="User Image">
                     <span class="d-none d-md-inline">{{ myUser::user()->name }}</span>
                 </a>

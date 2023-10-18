@@ -99,8 +99,15 @@ class UsersController extends AppBaseController
             $input['image_url'] = $imageUrl->pictureUpload();
         }
 
-        $users = $this->usersRepository->create($input);
-        $this->logitem->iudRecord(LogTypeEnum::INSERT->value, $users->getTable(), $users->id, $users->toJson());
+        DB::beginTransaction();
+        try {
+            $users = $this->usersRepository->create($input);
+            $this->logitem->iudRecord(LogTypeEnum::INSERT->value, $users->getTable(), $users->id, $users->toJson());
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw new \Exception($e->getMessage);
+        }
 
         return redirect(route('users.index'));
     }
